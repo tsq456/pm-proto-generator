@@ -1,131 +1,55 @@
 ---
 name: proto-spec-generator
 description: >-
-  在写静态原型之前，将用户需求拆清（角色×场景→页候选→P0）后再建 sitemap 与各页 proto-spec（对接 proto-spec-runtime）。
-  截图或模糊需求须先按统一确认稿格式，一轮确认功能定位、结构项与关键业务字典，再写入 Spec。
-  分步骤构建/增量增补 sitemap；产出可被 pm-proto-generator 消费的 Spec 与 PRD 骨架。
-  在用户提到需求拆解、sitemap、页面地图、proto-spec 生成、增量需求补页、
-  截图/模糊需求先澄清，或「先出规格再画原型」时使用。
+  接收上游模块、页面 Spec 与相关 IA 文档包，核对来源和实现依据，建立本地映射，
+  派生 sitemap 与逐页 proto-spec，交给 pm-proto-generator 实现静态原型。
+  用于上游文档转逐页说明、批量接收页面规格或新版 Spec 增量适配；
+  不负责从模糊需求规划业务，不替上游确认产品决策。
 disable-model-invocation: true
 ---
 
 # Proto Spec Generator
 
-## 定位
+## 职责
 
-本技能在 **写业务 HTML 原型之前** 承接需求：
+**读取上游文档包 → 生成逐页 Spec → 交接主技能开发原型。**
 
-1. **模糊输入先澄清**功能定位、结构项与关键业务字典（[fuzzy-clarify](references/fuzzy-clarify.md)），再拆清角色×场景 → 页候选 / P0（[req-breakdown](references/req-breakdown.md)）
-2. 分步骤确认信息架构 → **`sitemap.yaml`**
-3. 按页产出 **`proto-spec/<page-id>.md`**（供 `kits/proto-spec-runtime` 渲染）
-4. 可选包级 PRD 骨架；**不**在本技能内铺全量高保真页（交给 `pm-proto-generator`）
+输入是用户提供的文件或粘贴正文；Notion 等链接可作来源记录，不自动同步远端内容。链接指向的必要正文未包含在文档包时，列为缺失输入，不凭链接标题推断需求。上游原稿是业务依据；本地逐页说明是带来源的派生材料，不另建产品审批。
 
-与 Runtime 的契约：默认每页 `proto-spec/<page-id>.md`（frontmatter + 正文）+ 包根 `changelog.yaml`，协议见仓库 `references/proto-spec/`。
+只做接收核对、技术映射和逐页转换。不重新澄清产品目标、拆业务模块、设计导航或创造权限与状态规则。仅有模糊需求时反馈所需上游材料，不启动旧需求生成流程。
 
-## 何时用 / 何时不用
+## 工作流
 
-| 用 | 不用 |
+1. **读取文档包**：识别索引与唯一正文，读取本批页面 Spec、模块规则、相关 IA 及直接依赖。按批保留原稿；只读取影响本批的内容，不审查整个项目。使用 [接收记录](references/intake.md)。
+2. **核对实现依据**：记录版本、确认依据和完整/增量范围；检查缺失、冲突、上游“需检查”影响及占位替换关系。按 [接收放行规则](../../references/proto-spec/review-gate.md)区分就绪与阻塞，不凭 confirmed 标签放行，不重复确认已有明确授权。
+3. **建立本地映射**：复用现有页面、字段、状态与具名业务数据映射；缺技术标识时自行分配并记录，不退回产品补代码字段。按 [sitemap 与映射](references/sitemap.md)将已确认页面关系转换为本地路由，不改变业务结构。
+4. **逐页生成 Spec**：使用 [逐页模板](../../references/proto-spec/spec-template.md)，一页一份 Markdown，抽屉/弹窗/Tab 归宿主。保留来源、权限、字段、操作结果、固定业务数据与验收；共享规则引用同一来源。阻塞内容保持草稿，不伪装成已定规则。
+5. **交接主技能**：执行 [交接检查](references/handoff.md)，报告就绪页面、依赖闭环和阻塞页面。用户只要逐页 Spec 时到此结束；用户已要求原型时继续调用主技能，无需为格式转换再索取确认。
+
+## 按任务读取
+
+| 情况 | 必读资料 |
 | --- | --- |
-| 新项目从 0 拆需求、定 sitemap、出 Spec | 已有 confirmed Spec，只改某一控件样式 |
-| 增量需求：在**已有 sitemap** 上判断新页挂哪 | 用户只要改一句文案、不改结构 |
-| 为后续 `pm-proto-generator` 准备输入 | 代替 Runtime 改 JS/CSS |
+| 首次接收、来源/批次/版本记录 | [intake.md](references/intake.md) |
+| 判断是否可实现、冲突反馈 | [review-gate.md](../../references/proto-spec/review-gate.md) |
+| 页面、数据与技术标识映射 | [sitemap.md](references/sitemap.md) |
+| 写逐页说明 | [协议](../../references/proto-spec/README.md)、[模板](../../references/proto-spec/spec-template.md) |
+| 新版文档、受影响页、历史包 | [updates.md](references/updates.md) |
+| 转入页面实现 | [handoff.md](references/handoff.md) |
 
-与主技能任务分支对应：本技能覆盖主技能的 **C. 只写 Spec**，以及 **A/B** 中「尚无 sitemap/Spec」的前置段。
+## 产物与边界
 
-## 强制阅读（按需）
+包根保留 `docs/upstream/<batch>/` 原稿快照与一份 `docs/spec-intake.md` 接收记录；派生 `sitemap.yaml` 和 `proto-spec/<page-id>.md`。记录中集中维护来源版本、映射、范围、冲突、演示数据要求和占位替换，不另造业务 PRD。
 
-| 任务 | 打开 |
-| --- | --- |
-| **向用户提交确认材料**（澄清 / 增量 / Spec 评审） | [references/confirmation-format.md](references/confirmation-format.md) |
-| 全流程阶段门闩 | [references/phases.md](references/phases.md) |
-| **模糊需求**（截图/口述；写 Spec 前一轮确认） | [references/fuzzy-clarify.md](references/fuzzy-clarify.md) |
-| **需求拆清**（角色×场景→页候选→P0）再进菜单 | [references/req-breakdown.md](references/req-breakdown.md) |
-| sitemap  schema / **page.id 命名** / 增量遍历 | [references/sitemap.md](references/sitemap.md) |
-| 菜单规划表 → L1/L2/L3 → pages[]（含拟定 page-id） | [references/menu-plan.md](references/menu-plan.md) |
-| 单页 Spec 写法（**新项目唯一必读模板**） | 仓库 `references/proto-spec/README.md` + `spec-template.md` |
-| 交互节写法参考（写入同一 md，勿另建文件） | 仓库 `references/proto-spec/interaction-template.md`（章节范例） |
-| 更新记录 | 仓库 `references/proto-spec/changelog-guide.md` |
-| 交给原型技能 | [references/handoff.md](references/handoff.md) |
+- 只生成 Spec 时仅创建所需文档目录；不运行全包初始化、不复制 kits、不生成 HTML 或运行数据 JSON。
+- 无业务歧义的技术命名、数据关联键和可唯一推导的路径可自动适配。对象同名但归属不明、状态含义或失败结果不明确属于业务缺口。
+- 上游缺字段键、内部 ID 或英文枚举不是阻塞理由；中文业务语义必须足以唯一确定。
+- 原型运行数据由主技能按固定业务场景落地，本技能只确定统一映射与数据要求。
+- 已有授权和旧 `docs/spec-review.md` 可作为历史依据复用，不迁移旧包、不补造确认记录。
+- 业务变更须有新版上游依据；不把直接业务修改请求当作重新规划需求的入口。
 
-**旧四分册**（business/fields/flow/interaction 分文件）仅在维护旧包时按需打开 `references/proto-spec/README.md`「旧模板」；**禁止**把四模板当作新项目必读。
+## 完成标准
 
-禁止通读无关工程；禁止把 FZZQ / Axure 的 `page-help`、`admin.css` 等资产名照搬进本仓库包（本栈用 `ob-static` + `proto-spec-runtime`）。
+来源可追溯；页面和浮层归属明确；技术映射稳定；逐页说明保留业务含义与验收；没有私自新增产品决策；就绪部分无阻塞依赖；草稿部分列出具体缺口及责任归属。
 
-## 执行总流程（门闩）
-
-```text
-Phase 0 立项（代号、端、新/增量）   → 人确认：范围类未决点
-Phase 1 包骨架 + sitemap 空壳      → 工具检查 kits/路径；不占人确认门闩
-Phase 2 PRD 骨架章节               → 人过目背景/角色（可粗；材料已齐可跳过口头确认）
-Phase 2.5 需求拆清（短表）         → 模糊输入先 fuzzy-clarify；再角色×场景 + 首批 P0 页
-Phase 3 菜单规划表 → sitemap 填满  → 明确范围；有阻塞歧义先确认，否则继续准备 Spec
-Phase 4（可选）设计/流程说明 md
-Phase 5 本批核心流程 proto-spec   → 【硬门闩】完整材料经人工确认后，才可交接实现本批页面
-Phase 6 其余页 Spec（可 draft）    → 分批重复 Phase 5，不阻塞已确认批次实现
-Phase 7 发版前清单
-Phase 8 交付说明 → 提示启用 pm-proto-generator（查缺补齐，勿重复 init）
-```
-
-**输入是截图或模糊需求时，先走 [fuzzy-clarify](references/fuzzy-clarify.md)，人同意结构草稿后才写 Spec。**  
-**先完成 Phase 2.5（或复用等价材料），再规划 sitemap；可合并准备评审材料，不逐阶段强制确认。**  
-**未通过本批 Spec 人工确认：禁止生成该批业务 HTML / Mock；仅 sitemap confirmed 不足以放行。澄清稿本身也不是实现授权。**  
-实现前必读仓库 [确认规则](../../references/proto-spec/review-gate.md)，记录范围、版本与确认依据。  
-细节与检查项见 [phases.md](references/phases.md)、[fuzzy-clarify.md](references/fuzzy-clarify.md)、[req-breakdown.md](references/req-breakdown.md)。
-
-## 增量需求（MUST）
-
-1. 定位包根，**先读现有** `sitemap.yaml`（无则问人路径）。
-2. 新需求若是截图或模糊描述，先按 [fuzzy-clarify.md](references/fuzzy-clarify.md) 只澄清本轮变更的结构项；再按 [req-breakdown.md](references/req-breakdown.md) 补角色×场景行 → 候选页 / 拟定 page-id（可很短）。
-3. 按 [sitemap.md](references/sitemap.md) **遍历** groups/pages：同名/同职责页？挂到哪条 L2？新建 L2 还是 children？
-4. 输出「增补建议表」，可与受影响页 Spec 一并评审（拟挂载路径、**page-id=`{entity}-{pageType}`**、页型、影响面）。
-5. 准备 sitemap 变更草案与**新增/变更页** Spec，按本批确认规则评审；通过后记录确认再交接实现。已有具体授权直接复用；`changelog.yaml` 按 guide 追加。  
-6. 若包内已有原型页：在交接或同轮中明确 **导航/index 须与新 sitemap 对齐**（见 `pm-proto-generator`「路由与导航 MUST」）。
-
-**page.id**：Phase 2.5 / Phase 3 / 增量建议表阶段就必须按 [sitemap.md](references/sitemap.md) 定稿（例：`tenant-list`、`tenant-detail`）；禁止拖到画 HTML 再命名。
-
-## 产出目录（本仓库约定）
-
-```text
-prototypes/<slug>/                 # 或用户指定目录
-  sitemap.yaml                     # 站点地图（本技能主产物之一）
-  changelog.yaml                   # 有实质变更即维护
-  docs/
-    prd.md                         # Phase 2 骨架；可打开的 prd.html 由 pm-proto-generator 落地
-    req-breakdown.md               # 可选：Phase 2.5 确认稿
-    menu-plan.md                   # 菜单栏目规划表（确认稿）
-  proto-spec/
-    <page-id>.md                   # frontmatter = 页 meta；正文 = 页面说明（默认唯一文件）
-```
-
-HTML 业务页、FAB mount 由后续 `pm-proto-generator` 完成；本技能可在 Spec 旁备注建议 `layout`（见 `references/layouts/`）。
-
-**初始化：** 仅当目标目录尚无 `kits/` 时执行 `init_prototype.py`。已有包则复用，禁止覆盖式重跑。
-
-## 单页 Spec 生成顺序
-
-与仓库协议一致：写 **`proto-spec/<page-id>.md`**（见 `references/proto-spec/spec-template.md` + `README.md`）。  
-顺序概要：页面概述 → 功能范围（含**产品要求 / 原型覆盖**）→ 角色与权限 → 页面结构 → 字段说明（按用途拆分）→ 业务规则（含适用的状态流转）→ 交互说明（关键操作逐项写全）→ 验收要点 → 待确认事项；技术演示机制可置于末尾。  
-**新需求：Spec 驱动后续原型**；补说明与差异裁决见 proto-spec `README.md`。  
-默认**不要**再建每页子目录或四分册。
-
-## 与人协作
-
-- 提交确认材料前必读 [confirmation-format.md](references/confirmation-format.md)，统一章节、表头、依据标签、问题编号与回复方式；功能定位、结构、关键字典同轮呈现，不增加固定审批轮次。
-
-- 材料不齐先问：产品名/代号、端（PC/后台/移动）、角色、是否已有 sitemap、首批优先页。模糊业务输入不在这里逐条问，走 [fuzzy-clarify.md](references/fuzzy-clarify.md) 一轮（最多 6～8 个结构问题）。
-- Phase 2 后：模糊输入先确认结构草稿，再按 [req-breakdown.md](references/req-breakdown.md) 出角色×场景与 P0 页，然后进 Phase 3。
-- **人工确认只用于未决的：结构项、范围、关键业务规则、核心页方案 / Spec。** 已确认材料直接复用；目录是否存在、`kits/` 是否就位用工具/脚本检查，**不占确认门闩**。禁止把结构项拆成多轮逐条确认。
-- 阶段结束可给短进度摘要（变更了什么）；仅当本批实现确认尚未取得或存在阻塞未决点时才停下来确认，禁止「每一 Phase 都强制口头确认」拖慢。
-- 禁止臆造业务规则；未知产品问题写「待产品确认：…」；原型未做写「原型覆盖：未演示」，二者勿混用。
-
-## 自检
-
-- [ ] 确认稿符合 confirmation-format；先有理解与建议，再集中列待决问题，未把澄清确认当作实现确认
-- [ ] 截图或模糊需求已按 fuzzy-clarify 确认功能定位、结构项与关键业务字典后再写 Spec；未同意只留对话草稿
-- [ ] Phase 2.5：已有角色×场景表 + 首批 P0 页，作为本批评审材料（已有确认可复用）
-- [ ] sitemap 仅含明细子页面；模块名未当作 pages[] 条目
-- [ ] 每个 `page.id` 符合 `{entity}-{pageType}`（如 `tenant-list`）；与 `proto-spec/<id>.md` 文件名 / frontmatter `id` 一致
-- [ ] 增量已遍历旧 sitemap 并写明挂载点
-- [ ] 每页有 `proto-spec/<page-id>.md`；字段分表、关键交互完整度、产品/演示已分开（见 proto-spec README）
-- [ ] 已记录本批 Spec 的范围/版本/人工确认依据；未确认批次仅交付草稿，不放行业务页实现
-- [ ] 交接说明已指向 `pm-proto-generator`（见 handoff）；并写明已有产物，避免对方重复 init
+运行 `python3 <技能仓库>/scripts/check_page_prd_sync.py <包根> --stage spec` 检查文档对应关系。该检查不能代替来源和业务一致性核对。
