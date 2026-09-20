@@ -101,7 +101,7 @@ scope: 业务表单用 Modal / Drawer / 整页承载；不含 ProtoSpec Runtime 
 | 整页表单 | 独立 page；`layout: form-page`；pageType 多为 `create` / `edit` / `form` | 独立 `proto-spec/<page-id>.md` |
 | 档案编辑 | 宿主多为 `*-detail`；默认抽屉，不另发明 pageType | 仅用户明确要求弹窗时见 biz-page/profile-edit-modal |
 
-menu-plan 中的 layout 名：`form-in-modal` · `form-in-drawer` · `form-page`。
+派生 sitemap 中的 layout 名：`form-in-modal` · `form-in-drawer` · `form-page`。
 
 ---
 

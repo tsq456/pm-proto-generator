@@ -5,7 +5,6 @@ description: >-
   派生 sitemap 与逐页 proto-spec，交给 pm-proto-generator 实现静态原型。
   用于上游文档转逐页说明、批量接收页面规格或新版 Spec 增量适配；
   不负责从模糊需求规划业务，不替上游确认产品决策。
-disable-model-invocation: true
 ---
 
 # Proto Spec Generator

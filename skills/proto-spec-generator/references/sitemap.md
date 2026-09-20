@@ -25,7 +25,6 @@
 | `groups` | 已确认的导航分组，id/name/level/children；不自动给每个页面建菜单 |
 | `pages` | id/name/groupId/layout/status/version/path/children |
 | `hideInNav` / `hideInPrdPageList` | 延续 Runtime 现有展示能力，不用于掩盖未实现入口 |
-| `defaultPages` | 多应用壳层的 L1 默认 page-id 映射 |
 
 状态保持 Runtime 现有值：`planned`（范围外或待安排）、`draft`/`reviewing`（派生草稿或受阻）、`confirmed`（来源确认有效且派生核对通过）、`deprecated`（上游明确废弃）。状态不代表 HTML 已完成；实际覆盖由逐页说明记录。子页面可继承父项 groupId。
 

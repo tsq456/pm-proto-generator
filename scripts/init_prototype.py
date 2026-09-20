@@ -5,7 +5,7 @@ Usage:
   python3 scripts/init_prototype.py <destination> --name <slug>
   python3 scripts/init_prototype.py prototypes/my-app
 
-Destination must be empty or not exist. Kits are copied from the skill repo
+Existing files are preserved; only missing files are added. Kits are copied from the skill repo
 root kits/ into <dest>/kits/ — no CSS build step.
 """
 
@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import shutil
+from html import escape
 import sys
 from datetime import date
 from pathlib import Path
@@ -30,22 +31,30 @@ def die(msg: str, code: int = 1) -> None:
 def copy_kits(dest: Path) -> None:
     if not KITS_SRC.is_dir():
         die(f"kits source not found: {KITS_SRC}")
-    for name in ("ob-static", "proto-spec-runtime", "proto-mock"):
+    names = ("ob-static", "proto-spec-runtime", "proto-mock")
+    for name in names:
+        if not (KITS_SRC / name).is_dir():
+            die(f"missing kit: {KITS_SRC / name}")
+    for name in names:
         src = KITS_SRC / name
-        if not src.is_dir():
-            die(f"missing kit: {src}")
-        target = dest / "kits" / name
-        if target.exists():
-            shutil.rmtree(target)
-        shutil.copytree(src, target, ignore=shutil.ignore_patterns(".DS_Store"))
+        for source in src.rglob("*"):
+            if not source.is_file() or source.name == ".DS_Store":
+                continue
+            target = dest / "kits" / name / source.relative_to(src)
+            if not target.exists():
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
 
 
 def write_text(path: Path, content: str) -> None:
+    if path.exists():
+        return
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
 
 
 def scaffold(dest: Path, slug: str) -> None:
+    slug = escape(slug)
     today = date.today().isoformat()
     write_text(
         dest / "changelog.yaml",
@@ -66,7 +75,7 @@ pages: {{}}
     )
 
     if SITEMAP_TMPL.is_file():
-        shutil.copy2(SITEMAP_TMPL, dest / "sitemap.yaml")
+        write_text(dest / "sitemap.yaml", SITEMAP_TMPL.read_text(encoding="utf-8"))
     else:
         write_text(
             dest / "sitemap.yaml",
@@ -96,7 +105,7 @@ pages: []
 <body>
   <div class="proto-doc proto-doc--fluid">
     <div class="proto-doc__nav">
-      <span>包已初始化；sitemap 确认后由 Runtime 聚合 Spec</span>
+      <span>页面说明由 Runtime 按 sitemap 聚合</span>
     </div>
     <article>
       <div class="prd-hub__title-row">
@@ -141,13 +150,6 @@ pages: []
 """,
     )
 
-    write_text(dest / "docs" / "menu-plan.md", "# 菜单栏目规划表\n\n（Phase 3 填写；先完成 req-breakdown）\n")
-    write_text(
-        dest / "docs" / "req-breakdown.md",
-        "# 需求拆清\n\n"
-        "（Phase 2.5：问题/方案 → 角色×场景 → 首批 P0 页；确认后再写菜单规划表）\n",
-    )
-    write_text(dest / "docs" / "prd.md", f"# {slug} PRD 骨架\n\n（Phase 2 填写）\n")
     (dest / "proto-spec").mkdir(parents=True, exist_ok=True)
     (dest / "pages").mkdir(parents=True, exist_ok=True)
     write_text(dest / "proto-spec" / ".gitkeep", "")
@@ -156,18 +158,20 @@ pages: []
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Init self-contained prototype package")
-    parser.add_argument("destination", type=Path, help="Package directory (empty or new)")
+    parser.add_argument("destination", type=Path, help="Package directory (existing files preserved)")
     parser.add_argument("--name", help="Display / slug name (default: destination folder name)")
     args = parser.parse_args()
 
     dest = args.destination.expanduser().resolve()
     slug = args.name or dest.name
 
-    if dest.exists():
-        if any(dest.iterdir()):
-            die(f"destination not empty: {dest}")
-    else:
-        dest.mkdir(parents=True)
+    if dest == ROOT or dest == KITS_SRC or KITS_SRC in dest.parents:
+        die("destination must not be the skill root or source kits")
+    if dest.exists() and not dest.is_dir():
+        die(f"destination is not a directory: {dest}")
+    if dest.exists() and any(p.is_symlink() for p in dest.rglob("*")):
+        die("destination contains symlinks; use a package with local resources")
+    dest.mkdir(parents=True, exist_ok=True)
 
     copy_kits(dest)
     scaffold(dest, slug)
