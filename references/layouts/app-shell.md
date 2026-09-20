@@ -1,5 +1,7 @@
 # 应用壳层（App Shell · 单应用）
 
+> 本文为上游未指定时的 kit 默认表现。已确认页面 Spec 的布局、列序、字段、交互与能力边界优先；不据此新增业务能力。
+
 对齐官方：`ob-design template app-basic-layout` · `@oceanbase/ui` BasicLayout + PageContainer。
 
 **组件级细则**：[chrome](../components/chrome.md)（侧栏可展开菜单、顶栏用户区、sitemap 同步）。  

@@ -1,5 +1,7 @@
 # 组件级规范（P0）
 
+> 本文为上游未指定时的 kit 默认表现。已确认页面 Spec 的布局、列序、字段、交互与能力边界优先；不据此新增业务能力。
+
 在 `layouts/` 选型之后，按本目录补齐**间距 / 分区 / 状态 / 禁止项**。类名一律 `ob-*`，Token 来自 `kits/ob-static/tokens.css`。
 
 表单先定载体（弹窗 / 抽屉 / 整页）：[form-carrier.md](../form-carrier.md)。

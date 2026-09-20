@@ -1,5 +1,7 @@
 # 整页表单 / 分步向导
 
+> 本文为上游未指定时的 kit 默认表现。已确认页面 Spec 的布局、列序、字段、交互与能力边界优先；不据此新增业务能力。
+
 官方 CLI 无独立模板；对齐 PageContainer + Form，复杂配置/发布场景常用。
 
 **组件级细则**：[form-page](../components/form-page.md)（分区、底栏、校验状态）；发布类组合见 [biz-page/sectioned-form](../components/biz-page/sectioned-form.md)；复杂控件见 `references/controls/`。

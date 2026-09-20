@@ -1,5 +1,7 @@
 # 状态机详情（Status Detail）
 
+> 本文为上游未指定时的 kit 默认表现。已确认页面 Spec 的布局、列序、字段、交互与能力边界优先；不据此新增业务能力。
+
 按**状态切换顶栏操作**，多卡展示主体信息 + 环节材料 + 全程日志。适用于订单、工单、审批履约等。
 
 依赖：[detail-page](../detail-page.md) · [overlay-ui](../overlay-ui.md) · [data-table](../data-table.md)

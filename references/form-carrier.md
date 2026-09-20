@@ -1,4 +1,6 @@
 ---
+
+> 已确认上游 Spec 优先，本文提供未指定部分的默认规则。明确占位不补提交或 CRUD。
 title: 表单载体选型（机读）
 audience: AI / PM / 原型实现
 scope: 业务表单用 Modal / Drawer / 整页承载；不含 ProtoSpec Runtime 旁路抽屉

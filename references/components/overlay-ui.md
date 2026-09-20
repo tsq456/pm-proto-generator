@@ -1,5 +1,7 @@
 # 弹窗与抽屉（Overlay UI）
 
+> 本文为上游未指定时的 kit 默认表现。已确认页面 Spec 的布局、列序、字段、交互与能力边界优先；不据此新增业务能力。
+
 骨架见 [form-in-modal](../layouts/form-in-modal.md)、[form-in-drawer](../layouts/form-in-drawer.md)。开合用 `.is-open` + 少量原生 JS。
 
 **何时用 Modal / Drawer / 整页？** 选型见 [form-carrier.md](../form-carrier.md)（本文件只写怎么画）。

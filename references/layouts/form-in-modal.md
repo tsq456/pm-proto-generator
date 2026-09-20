@@ -1,5 +1,7 @@
 # 弹窗表单（Form in Modal）
 
+> 本文为上游未指定时的 kit 默认表现。已确认页面 Spec 的布局、列序、字段、交互与能力边界优先；不据此新增业务能力。
+
 对齐官方：`ob-design template form-in-modal` · Form + Modal。
 
 **组件级细则**：[overlay-ui](../components/overlay-ui.md)（遮罩、尺寸、按钮、禁止 alert）。

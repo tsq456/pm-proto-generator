@@ -1,5 +1,7 @@
 # 整页表单（Form Page）
 
+> 本文为上游未指定时的 kit 默认表现。已确认页面 Spec 的布局、列序、字段、交互与能力边界优先；不据此新增业务能力。
+
 骨架见 [form-page layout](../layouts/form-page.md)。弹窗/抽屉表单见 [overlay-ui](./overlay-ui.md)。
 
 **是否该用整页？** 先读 [form-carrier.md](../form-carrier.md)；≤8 字段优先 Modal/Drawer。

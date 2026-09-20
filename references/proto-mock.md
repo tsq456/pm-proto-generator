@@ -1,5 +1,7 @@
 # ProtoMock（原型 Mock 数据与可写交互）
 
+> 已确认上游 Spec 优先，本文提供未指定部分的默认规则。明确占位不补提交或 CRUD。
+
 静态 HTML 原型的 **mock 数据层**：跨页增删改查，变更写入 `localStorage`，刷新/跳转后仍保留。
 
 ## 何时用
@@ -78,7 +80,7 @@ await ProtoMock.bootstrap({
 ### 详情页
 
 1. `id = ProtoMock.queryParam('id')`，`get` 后填充 `.ob-desc`。
-2. 编辑保存走 `update`，返回列表带同一 id。
+2. 编辑保存走 `update`；详情 Drawer 默认关闭后留在当前页，返回关系以上游 Spec 为准，同一对象 ID 保持稳定。
 
 ### 空态
 

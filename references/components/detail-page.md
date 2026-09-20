@@ -1,5 +1,7 @@
 # 详情页（Detail Page）
 
+> 本文为上游未指定时的 kit 默认表现。已确认页面 Spec 的布局、列序、字段、交互与能力边界优先；不据此新增业务能力。
+
 骨架见 [detail-descriptions](../layouts/detail-descriptions.md)。字段用 `.ob-desc`（表格式），流程用 `.ob-steps`。
 
 ## 何时使用

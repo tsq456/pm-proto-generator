@@ -1,5 +1,7 @@
 # 工作台壳层（Chrome）
 
+> 本文为上游未指定时的 kit 默认表现。已确认页面 Spec 的布局、列序、字段、交互与能力边界优先；不据此新增业务能力。
+
 对齐 `ob-app` / `ob-layout` / `ob-sider` / `ob-header` /（多应用）`ob-topnav`。  
 骨架：单应用 [app-shell](../layouts/app-shell.md) · 多应用 [app-shell-multi](../layouts/app-shell-multi.md)。
 

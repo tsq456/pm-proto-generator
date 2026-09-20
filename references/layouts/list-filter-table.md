@@ -1,5 +1,7 @@
 # 列表页：筛选 + 表格 + 分页
 
+> 本文为上游未指定时的 kit 默认表现。已确认页面 Spec 的布局、列序、字段、交互与能力边界优先；不据此新增业务能力。
+
 对齐官方：`ob-design template list-filter-table` · Filter.ResponsiveGroup + Card + Table(innerBordered)。
 
 **组件级细则（间距 / 分区 / 状态 / 禁止）**：

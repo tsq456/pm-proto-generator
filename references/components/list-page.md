@@ -1,5 +1,7 @@
 # 列表页三区布局（List Page）
 
+> 本文为上游未指定时的 kit 默认表现。已确认页面 Spec 的布局、列序、字段、交互与能力边界优先；不据此新增业务能力。
+
 骨架见 [list-filter-table](../layouts/list-filter-table.md)。筛选 / 表格 / 分页细则见同目录对应文件。
 
 ## 何时使用

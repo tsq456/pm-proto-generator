@@ -1,5 +1,7 @@
 # 分区镜像详情（Sectioned Detail）
 
+> 本文为上游未指定时的 kit 默认表现。已确认页面 Spec 的布局、列序、字段、交互与能力边界优先；不据此新增业务能力。
+
 与 [sectioned-form](./sectioned-form.md) **分区同名、字段对齐**的只读详情，便于研发对照。
 
 依赖：[detail-page](../detail-page.md) · [overlay-ui](../overlay-ui.md)

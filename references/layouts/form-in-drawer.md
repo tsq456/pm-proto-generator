@@ -1,5 +1,7 @@
 # 抽屉表单 / 抽屉详情
 
+> 本文为上游未指定时的 kit 默认表现。已确认页面 Spec 的布局、列序、字段、交互与能力边界优先；不据此新增业务能力。
+
 对齐官方组合：Form + Drawer、Descriptions + Drawer（见 oceanbase-design `09-combo`）。
 
 **组件级细则**：[overlay-ui](../components/overlay-ui.md)（Drawer 尺寸、只读无脚、与 Modal 选型）。

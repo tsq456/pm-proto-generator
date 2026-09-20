@@ -1,4 +1,6 @@
 ---
+
+> 已确认上游 Spec 优先，本文提供未指定部分的默认规则。明确占位不补提交或 CRUD。
 title: 界面文案规范（机读）
 source: Ant Design 文案规范 https://ant.design/docs/spec/copywriting-cn
 audience: AI / PM / 原型实现

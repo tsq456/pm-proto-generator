@@ -1,5 +1,7 @@
 # 档案编辑
 
+> 本文为上游未指定时的 kit 默认表现。已确认页面 Spec 的布局、列序、字段、交互与能力边界优先；不据此新增业务能力。
+
 只读档案页上改基本信息，**默认右侧抽屉**，不跳独立编辑页。仅当用户明确要求「编辑放弹窗」时，才用宽 Modal。
 
 依赖：[detail-page](../detail-page.md) · [form-in-drawer](../../layouts/form-in-drawer.md) · [form-carrier](../../form-carrier.md)  

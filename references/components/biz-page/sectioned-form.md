@@ -1,5 +1,7 @@
 # 分区发布表单（Sectioned Form）
 
+> 本文为上游未指定时的 kit 默认表现。已确认页面 Spec 的布局、列序、字段、交互与能力边界优先；不据此新增业务能力。
+
 整页**多分区**新建/编辑（商品、策略、服务、配置等），可选流程步骤 + 底栏提交。
 
 依赖：[form-page](../form-page.md) · [overlay-ui](../overlay-ui.md) · `references/controls/`
