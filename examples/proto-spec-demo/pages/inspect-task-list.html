@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>巡检任务列表</title>
+  <link rel="stylesheet" href="../kits/ob-static/tokens.css" />
+  <link rel="stylesheet" href="../kits/ob-static/components.css" />
+  <link rel="stylesheet" href="../kits/proto-spec-runtime/proto-spec.css" />
+</head>
+<body>
+  <div class="ob-app">
+    <div class="ob-layout">
+      <aside class="ob-sider">
+        <div class="ob-sider__brand">
+          <span class="ob-sider__brand-mark">OB</span>
+          <span>园区运维</span>
+        </div>
+        <ul class="ob-menu">
+          <li class="ob-menu__section">巡检管理</li>
+          <li class="ob-menu__item"><a href="inspect-plan-list.html"><span>巡检计划</span></a></li>
+          <li class="ob-menu__item is-active"><a href="inspect-task-list.html"><span>巡检任务</span></a></li>
+          <li class="ob-menu__section">文档</li>
+          <li class="ob-menu__item"><a href="../docs/prd.html"><span>PRD 汇总</span></a></li>
+          <li class="ob-menu__item"><a href="../index.html"><span>包入口</span></a></li>
+        </ul>
+      </aside>
+      <div class="ob-main">
+        <header class="ob-header">
+          <nav class="ob-page-tabs" aria-label="已打开页面"></nav>
+          <div class="ob-header__right"><span class="ob-avatar">执</span></div>
+        </header>
+        <main class="ob-content">
+          <div class="ob-page-title">
+            <div>
+              <h1>巡检任务列表</h1>
+            </div>
+            <div class="ob-page-title__actions">
+              <a class="ob-btn ob-btn--default" href="inspect-plan-list.html">返回计划</a>
+            </div>
+          </div>
+          <div class="ob-stack">
+            <section class="ob-card">
+              <div class="ob-card__body">
+                <div class="ob-filter">
+                  <input class="ob-input" placeholder="搜索任务" style="max-width:220px" />
+                  <div class="ob-filter-item">
+                    <button type="button" class="ob-filter-trigger">
+                      <span data-filter-label>状态</span>
+                      <span class="ob-filter-trigger__caret" aria-hidden="true"></span>
+                    </button>
+                    <div class="ob-filter-panel" role="listbox">
+                      <div class="ob-filter-panel__title">状态</div>
+                      <div class="ob-filter-panel__list">
+                        <button type="button" class="ob-filter-panel__item is-active" data-label="状态">全部</button>
+                        <button type="button" class="ob-filter-panel__item" data-label="待执行">待执行</button>
+                        <button type="button" class="ob-filter-panel__item" data-label="已完成">已完成</button>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="ob-filter__spacer"></span>
+                  <button type="button" class="ob-btn ob-btn--primary">查询</button>
+                  <button type="button" class="ob-btn ob-btn--default">重置</button>
+                </div>
+              </div>
+            </section>
+            <section class="ob-card">
+              <div class="ob-card__body ob-card__body--flush">
+                <div class="ob-table-wrap">
+                  <table class="ob-table">
+                    <thead>
+                      <tr>
+                        <th>任务名称</th>
+                        <th>所属计划</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>园区周巡检 · 第12周</td>
+                        <td><a class="ob-link" href="inspect-plan-detail.html">园区周巡检</a></td>
+                        <td><span class="ob-tag ob-tag--info">待执行</span></td>
+                        <td class="ob-table__actions"><button type="button" class="ob-link">开始</button></td>
+                      </tr>
+                      <tr>
+                        <td>园区周巡检 · 第11周</td>
+                        <td><a class="ob-link" href="inspect-plan-detail.html">园区周巡检</a></td>
+                        <td><span class="ob-status ob-status--running"><span class="ob-status__dot"></span>已完成</span></td>
+                        <td class="ob-table__actions"><button type="button" class="ob-link">查看</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="ob-table-footer">
+                  <span>共 2 条（示例）</span>
+                  <div class="ob-pagination"><button type="button" class="is-active">1</button></div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script src="../kits/ob-static/filter-dropdown.js"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: false, theme: 'neutral' });
+    window.mermaid = mermaid;
+  </script>
+  <script src="../kits/proto-spec-runtime/proto-spec.js"></script>
+  <script>
+    ProtoSpecRuntime.mount({
+      specBase: new URL('../proto-spec/', location.href).href,
+      pageId: 'inspect-task-list',
+      workspaceRoot: (function () {
+        try {
+          return localStorage.getItem('proto-spec.workspaceRoot') || undefined;
+        } catch (e) {
+          return undefined;
+        }
+      })(),
+      changelogUrl: new URL('../changelog.yaml', location.href).href,
+      sitemapUrl: new URL('../sitemap.yaml', location.href).href,
+      prdUrl: new URL('../docs/prd.html', location.href).href,
+      anchor: 'right-bottom',
+      fabLabel: '原型说明',
+    });
+  </script>
+</body>
+</html>

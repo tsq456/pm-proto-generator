@@ -1,0 +1,2932 @@
+version: "1.0.0"
+updatedAt: 2026-09-18
+source:
+  name: Heroicons
+  version: "2.2.0"
+  url: https://heroicons.com/
+  repo: https://github.com/tailwindlabs/heroicons
+  license: MIT
+  licenseFile: LICENSE.heroicons.txt
+basePath: heroicons/
+variants:
+  - size: 24
+    style: outline
+    dir: 24/outline/
+  - size: 24
+    style: solid
+    dir: 24/solid/
+  - size: 20
+    style: solid
+    dir: 20/solid/
+  - size: 16
+    style: solid
+    dir: 16/solid/
+icons:
+  - id: academic-cap
+    name: Academic Cap
+    doc: docs/academic-cap.md
+    keywords: [academic-cap, academic, cap]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/academic-cap.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/academic-cap.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/academic-cap.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/academic-cap.svg }
+  - id: adjustments-horizontal
+    name: Adjustments Horizontal
+    doc: docs/adjustments-horizontal.md
+    keywords: [adjustments-horizontal, adjustments, horizontal]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/adjustments-horizontal.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/adjustments-horizontal.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/adjustments-horizontal.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/adjustments-horizontal.svg }
+  - id: adjustments-vertical
+    name: Adjustments Vertical
+    doc: docs/adjustments-vertical.md
+    keywords: [adjustments-vertical, adjustments, vertical]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/adjustments-vertical.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/adjustments-vertical.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/adjustments-vertical.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/adjustments-vertical.svg }
+  - id: archive-box
+    name: Archive Box
+    doc: docs/archive-box.md
+    keywords: [archive-box, archive, box]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/archive-box.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/archive-box.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/archive-box.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/archive-box.svg }
+  - id: archive-box-arrow-down
+    name: Archive Box Arrow Down
+    doc: docs/archive-box-arrow-down.md
+    keywords: [archive-box-arrow-down, archive, box, arrow, down, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/archive-box-arrow-down.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/archive-box-arrow-down.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/archive-box-arrow-down.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/archive-box-arrow-down.svg }
+  - id: archive-box-x-mark
+    name: Archive Box X Mark
+    doc: docs/archive-box-x-mark.md
+    keywords: [archive-box-x-mark, archive, box, mark, close, clear, cancel]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/archive-box-x-mark.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/archive-box-x-mark.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/archive-box-x-mark.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/archive-box-x-mark.svg }
+  - id: arrow-down
+    name: Arrow Down
+    doc: docs/arrow-down.md
+    keywords: [arrow-down, arrow, down, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-down.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-down.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-down.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-down.svg }
+  - id: arrow-down-circle
+    name: Arrow Down Circle
+    doc: docs/arrow-down-circle.md
+    keywords: [arrow-down-circle, arrow, down, circle, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-down-circle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-down-circle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-down-circle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-down-circle.svg }
+  - id: arrow-down-left
+    name: Arrow Down Left
+    doc: docs/arrow-down-left.md
+    keywords: [arrow-down-left, arrow, down, left, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-down-left.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-down-left.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-down-left.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-down-left.svg }
+  - id: arrow-down-on-square
+    name: Arrow Down On Square
+    doc: docs/arrow-down-on-square.md
+    keywords: [arrow-down-on-square, arrow, down, square, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-down-on-square.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-down-on-square.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-down-on-square.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-down-on-square.svg }
+  - id: arrow-down-on-square-stack
+    name: Arrow Down On Square Stack
+    doc: docs/arrow-down-on-square-stack.md
+    keywords: [arrow-down-on-square-stack, arrow, down, square, stack, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-down-on-square-stack.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-down-on-square-stack.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-down-on-square-stack.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-down-on-square-stack.svg }
+  - id: arrow-down-right
+    name: Arrow Down Right
+    doc: docs/arrow-down-right.md
+    keywords: [arrow-down-right, arrow, down, right, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-down-right.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-down-right.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-down-right.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-down-right.svg }
+  - id: arrow-down-tray
+    name: Arrow Down Tray
+    doc: docs/arrow-down-tray.md
+    keywords: [arrow-down-tray, arrow, down, tray, navigation, direction, download]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-down-tray.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-down-tray.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-down-tray.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-down-tray.svg }
+  - id: arrow-left
+    name: Arrow Left
+    doc: docs/arrow-left.md
+    keywords: [arrow-left, arrow, left, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-left.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-left.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-left.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-left.svg }
+  - id: arrow-left-circle
+    name: Arrow Left Circle
+    doc: docs/arrow-left-circle.md
+    keywords: [arrow-left-circle, arrow, left, circle, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-left-circle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-left-circle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-left-circle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-left-circle.svg }
+  - id: arrow-left-end-on-rectangle
+    name: Arrow Left End On Rectangle
+    doc: docs/arrow-left-end-on-rectangle.md
+    keywords: [arrow-left-end-on-rectangle, arrow, left, end, rectangle, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-left-end-on-rectangle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-left-end-on-rectangle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-left-end-on-rectangle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-left-end-on-rectangle.svg }
+  - id: arrow-left-on-rectangle
+    name: Arrow Left On Rectangle
+    doc: docs/arrow-left-on-rectangle.md
+    keywords: [arrow-left-on-rectangle, arrow, left, rectangle, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-left-on-rectangle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-left-on-rectangle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-left-on-rectangle.svg }
+  - id: arrow-left-start-on-rectangle
+    name: Arrow Left Start On Rectangle
+    doc: docs/arrow-left-start-on-rectangle.md
+    keywords: [arrow-left-start-on-rectangle, arrow, left, start, rectangle, navigation, direction, favorite, rating]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-left-start-on-rectangle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-left-start-on-rectangle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-left-start-on-rectangle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-left-start-on-rectangle.svg }
+  - id: arrow-long-down
+    name: Arrow Long Down
+    doc: docs/arrow-long-down.md
+    keywords: [arrow-long-down, arrow, long, down, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-long-down.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-long-down.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-long-down.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-long-down.svg }
+  - id: arrow-long-left
+    name: Arrow Long Left
+    doc: docs/arrow-long-left.md
+    keywords: [arrow-long-left, arrow, long, left, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-long-left.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-long-left.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-long-left.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-long-left.svg }
+  - id: arrow-long-right
+    name: Arrow Long Right
+    doc: docs/arrow-long-right.md
+    keywords: [arrow-long-right, arrow, long, right, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-long-right.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-long-right.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-long-right.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-long-right.svg }
+  - id: arrow-long-up
+    name: Arrow Long Up
+    doc: docs/arrow-long-up.md
+    keywords: [arrow-long-up, arrow, long, up, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-long-up.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-long-up.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-long-up.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-long-up.svg }
+  - id: arrow-path
+    name: Arrow Path
+    doc: docs/arrow-path.md
+    keywords: [arrow-path, arrow, path, navigation, direction, refresh, reload, sync, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-path.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-path.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-path.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-path.svg }
+  - id: arrow-path-rounded-square
+    name: Arrow Path Rounded Square
+    doc: docs/arrow-path-rounded-square.md
+    keywords: [arrow-path-rounded-square, arrow, path, rounded, square, navigation, direction, refresh, reload, sync, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-path-rounded-square.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-path-rounded-square.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-path-rounded-square.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-path-rounded-square.svg }
+  - id: arrow-right
+    name: Arrow Right
+    doc: docs/arrow-right.md
+    keywords: [arrow-right, arrow, right, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-right.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-right.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-right.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-right.svg }
+  - id: arrow-right-circle
+    name: Arrow Right Circle
+    doc: docs/arrow-right-circle.md
+    keywords: [arrow-right-circle, arrow, right, circle, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-right-circle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-right-circle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-right-circle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-right-circle.svg }
+  - id: arrow-right-end-on-rectangle
+    name: Arrow Right End On Rectangle
+    doc: docs/arrow-right-end-on-rectangle.md
+    keywords: [arrow-right-end-on-rectangle, arrow, right, end, rectangle, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-right-end-on-rectangle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-right-end-on-rectangle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-right-end-on-rectangle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-right-end-on-rectangle.svg }
+  - id: arrow-right-on-rectangle
+    name: Arrow Right On Rectangle
+    doc: docs/arrow-right-on-rectangle.md
+    keywords: [arrow-right-on-rectangle, arrow, right, rectangle, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-right-on-rectangle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-right-on-rectangle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-right-on-rectangle.svg }
+  - id: arrow-right-start-on-rectangle
+    name: Arrow Right Start On Rectangle
+    doc: docs/arrow-right-start-on-rectangle.md
+    keywords: [arrow-right-start-on-rectangle, arrow, right, start, rectangle, navigation, direction, favorite, rating]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-right-start-on-rectangle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-right-start-on-rectangle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-right-start-on-rectangle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-right-start-on-rectangle.svg }
+  - id: arrow-small-down
+    name: Arrow Small Down
+    doc: docs/arrow-small-down.md
+    keywords: [arrow-small-down, arrow, small, down, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-small-down.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-small-down.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-small-down.svg }
+  - id: arrow-small-left
+    name: Arrow Small Left
+    doc: docs/arrow-small-left.md
+    keywords: [arrow-small-left, arrow, small, left, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-small-left.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-small-left.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-small-left.svg }
+  - id: arrow-small-right
+    name: Arrow Small Right
+    doc: docs/arrow-small-right.md
+    keywords: [arrow-small-right, arrow, small, right, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-small-right.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-small-right.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-small-right.svg }
+  - id: arrow-small-up
+    name: Arrow Small Up
+    doc: docs/arrow-small-up.md
+    keywords: [arrow-small-up, arrow, small, up, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-small-up.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-small-up.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-small-up.svg }
+  - id: arrow-top-right-on-square
+    name: Arrow Top Right On Square
+    doc: docs/arrow-top-right-on-square.md
+    keywords: [arrow-top-right-on-square, arrow, top, right, square, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-top-right-on-square.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-top-right-on-square.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-top-right-on-square.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-top-right-on-square.svg }
+  - id: arrow-trending-down
+    name: Arrow Trending Down
+    doc: docs/arrow-trending-down.md
+    keywords: [arrow-trending-down, arrow, trending, down, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-trending-down.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-trending-down.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-trending-down.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-trending-down.svg }
+  - id: arrow-trending-up
+    name: Arrow Trending Up
+    doc: docs/arrow-trending-up.md
+    keywords: [arrow-trending-up, arrow, trending, up, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-trending-up.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-trending-up.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-trending-up.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-trending-up.svg }
+  - id: arrow-turn-down-left
+    name: Arrow Turn Down Left
+    doc: docs/arrow-turn-down-left.md
+    keywords: [arrow-turn-down-left, arrow, turn, down, left, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-turn-down-left.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-turn-down-left.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-turn-down-left.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-turn-down-left.svg }
+  - id: arrow-turn-down-right
+    name: Arrow Turn Down Right
+    doc: docs/arrow-turn-down-right.md
+    keywords: [arrow-turn-down-right, arrow, turn, down, right, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-turn-down-right.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-turn-down-right.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-turn-down-right.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-turn-down-right.svg }
+  - id: arrow-turn-left-down
+    name: Arrow Turn Left Down
+    doc: docs/arrow-turn-left-down.md
+    keywords: [arrow-turn-left-down, arrow, turn, left, down, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-turn-left-down.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-turn-left-down.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-turn-left-down.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-turn-left-down.svg }
+  - id: arrow-turn-left-up
+    name: Arrow Turn Left Up
+    doc: docs/arrow-turn-left-up.md
+    keywords: [arrow-turn-left-up, arrow, turn, left, up, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-turn-left-up.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-turn-left-up.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-turn-left-up.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-turn-left-up.svg }
+  - id: arrow-turn-right-down
+    name: Arrow Turn Right Down
+    doc: docs/arrow-turn-right-down.md
+    keywords: [arrow-turn-right-down, arrow, turn, right, down, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-turn-right-down.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-turn-right-down.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-turn-right-down.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-turn-right-down.svg }
+  - id: arrow-turn-right-up
+    name: Arrow Turn Right Up
+    doc: docs/arrow-turn-right-up.md
+    keywords: [arrow-turn-right-up, arrow, turn, right, up, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-turn-right-up.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-turn-right-up.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-turn-right-up.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-turn-right-up.svg }
+  - id: arrow-turn-up-left
+    name: Arrow Turn Up Left
+    doc: docs/arrow-turn-up-left.md
+    keywords: [arrow-turn-up-left, arrow, turn, up, left, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-turn-up-left.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-turn-up-left.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-turn-up-left.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-turn-up-left.svg }
+  - id: arrow-turn-up-right
+    name: Arrow Turn Up Right
+    doc: docs/arrow-turn-up-right.md
+    keywords: [arrow-turn-up-right, arrow, turn, up, right, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-turn-up-right.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-turn-up-right.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-turn-up-right.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-turn-up-right.svg }
+  - id: arrow-up
+    name: Arrow Up
+    doc: docs/arrow-up.md
+    keywords: [arrow-up, arrow, up, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-up.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-up.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-up.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-up.svg }
+  - id: arrow-up-circle
+    name: Arrow Up Circle
+    doc: docs/arrow-up-circle.md
+    keywords: [arrow-up-circle, arrow, up, circle, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-up-circle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-up-circle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-up-circle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-up-circle.svg }
+  - id: arrow-up-left
+    name: Arrow Up Left
+    doc: docs/arrow-up-left.md
+    keywords: [arrow-up-left, arrow, up, left, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-up-left.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-up-left.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-up-left.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-up-left.svg }
+  - id: arrow-up-on-square
+    name: Arrow Up On Square
+    doc: docs/arrow-up-on-square.md
+    keywords: [arrow-up-on-square, arrow, up, square, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-up-on-square.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-up-on-square.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-up-on-square.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-up-on-square.svg }
+  - id: arrow-up-on-square-stack
+    name: Arrow Up On Square Stack
+    doc: docs/arrow-up-on-square-stack.md
+    keywords: [arrow-up-on-square-stack, arrow, up, square, stack, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-up-on-square-stack.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-up-on-square-stack.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-up-on-square-stack.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-up-on-square-stack.svg }
+  - id: arrow-up-right
+    name: Arrow Up Right
+    doc: docs/arrow-up-right.md
+    keywords: [arrow-up-right, arrow, up, right, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-up-right.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-up-right.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-up-right.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-up-right.svg }
+  - id: arrow-up-tray
+    name: Arrow Up Tray
+    doc: docs/arrow-up-tray.md
+    keywords: [arrow-up-tray, arrow, up, tray, navigation, direction, upload]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-up-tray.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-up-tray.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-up-tray.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-up-tray.svg }
+  - id: arrow-uturn-down
+    name: Arrow Uturn Down
+    doc: docs/arrow-uturn-down.md
+    keywords: [arrow-uturn-down, arrow, uturn, down, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-uturn-down.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-uturn-down.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-uturn-down.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-uturn-down.svg }
+  - id: arrow-uturn-left
+    name: Arrow Uturn Left
+    doc: docs/arrow-uturn-left.md
+    keywords: [arrow-uturn-left, arrow, uturn, left, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-uturn-left.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-uturn-left.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-uturn-left.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-uturn-left.svg }
+  - id: arrow-uturn-right
+    name: Arrow Uturn Right
+    doc: docs/arrow-uturn-right.md
+    keywords: [arrow-uturn-right, arrow, uturn, right, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-uturn-right.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-uturn-right.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-uturn-right.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-uturn-right.svg }
+  - id: arrow-uturn-up
+    name: Arrow Uturn Up
+    doc: docs/arrow-uturn-up.md
+    keywords: [arrow-uturn-up, arrow, uturn, up, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrow-uturn-up.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrow-uturn-up.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrow-uturn-up.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrow-uturn-up.svg }
+  - id: arrows-pointing-in
+    name: Arrows Pointing In
+    doc: docs/arrows-pointing-in.md
+    keywords: [arrows-pointing-in, arrows, pointing, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrows-pointing-in.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrows-pointing-in.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrows-pointing-in.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrows-pointing-in.svg }
+  - id: arrows-pointing-out
+    name: Arrows Pointing Out
+    doc: docs/arrows-pointing-out.md
+    keywords: [arrows-pointing-out, arrows, pointing, out, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrows-pointing-out.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrows-pointing-out.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrows-pointing-out.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrows-pointing-out.svg }
+  - id: arrows-right-left
+    name: Arrows Right Left
+    doc: docs/arrows-right-left.md
+    keywords: [arrows-right-left, arrows, right, left, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrows-right-left.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrows-right-left.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrows-right-left.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrows-right-left.svg }
+  - id: arrows-up-down
+    name: Arrows Up Down
+    doc: docs/arrows-up-down.md
+    keywords: [arrows-up-down, arrows, up, down, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/arrows-up-down.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/arrows-up-down.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/arrows-up-down.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/arrows-up-down.svg }
+  - id: at-symbol
+    name: At Symbol
+    doc: docs/at-symbol.md
+    keywords: [at-symbol, at, symbol, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/at-symbol.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/at-symbol.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/at-symbol.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/at-symbol.svg }
+  - id: backspace
+    name: Backspace
+    doc: docs/backspace.md
+    keywords: [backspace]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/backspace.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/backspace.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/backspace.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/backspace.svg }
+  - id: backward
+    name: Backward
+    doc: docs/backward.md
+    keywords: [backward]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/backward.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/backward.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/backward.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/backward.svg }
+  - id: banknotes
+    name: Banknotes
+    doc: docs/banknotes.md
+    keywords: [banknotes]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/banknotes.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/banknotes.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/banknotes.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/banknotes.svg }
+  - id: bars-2
+    name: Bars 2
+    doc: docs/bars-2.md
+    keywords: [bars-2, bars, menu, hamburger]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bars-2.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bars-2.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bars-2.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bars-2.svg }
+  - id: bars-3
+    name: Bars 3
+    doc: docs/bars-3.md
+    keywords: [bars-3, bars, menu, hamburger]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bars-3.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bars-3.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bars-3.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bars-3.svg }
+  - id: bars-3-bottom-left
+    name: Bars 3 Bottom Left
+    doc: docs/bars-3-bottom-left.md
+    keywords: [bars-3-bottom-left, bars, bottom, left, menu, hamburger]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bars-3-bottom-left.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bars-3-bottom-left.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bars-3-bottom-left.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bars-3-bottom-left.svg }
+  - id: bars-3-bottom-right
+    name: Bars 3 Bottom Right
+    doc: docs/bars-3-bottom-right.md
+    keywords: [bars-3-bottom-right, bars, bottom, right, menu, hamburger]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bars-3-bottom-right.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bars-3-bottom-right.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bars-3-bottom-right.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bars-3-bottom-right.svg }
+  - id: bars-3-center-left
+    name: Bars 3 Center Left
+    doc: docs/bars-3-center-left.md
+    keywords: [bars-3-center-left, bars, center, left, menu, hamburger]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bars-3-center-left.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bars-3-center-left.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bars-3-center-left.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bars-3-center-left.svg }
+  - id: bars-4
+    name: Bars 4
+    doc: docs/bars-4.md
+    keywords: [bars-4, bars, menu, hamburger]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bars-4.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bars-4.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bars-4.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bars-4.svg }
+  - id: bars-arrow-down
+    name: Bars Arrow Down
+    doc: docs/bars-arrow-down.md
+    keywords: [bars-arrow-down, bars, arrow, down, navigation, direction, menu, hamburger]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bars-arrow-down.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bars-arrow-down.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bars-arrow-down.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bars-arrow-down.svg }
+  - id: bars-arrow-up
+    name: Bars Arrow Up
+    doc: docs/bars-arrow-up.md
+    keywords: [bars-arrow-up, bars, arrow, up, navigation, direction, menu, hamburger]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bars-arrow-up.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bars-arrow-up.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bars-arrow-up.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bars-arrow-up.svg }
+  - id: battery-0
+    name: Battery 0
+    doc: docs/battery-0.md
+    keywords: [battery-0, battery, power, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/battery-0.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/battery-0.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/battery-0.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/battery-0.svg }
+  - id: battery-100
+    name: Battery 100
+    doc: docs/battery-100.md
+    keywords: [battery-100, battery, 100, power, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/battery-100.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/battery-100.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/battery-100.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/battery-100.svg }
+  - id: battery-50
+    name: Battery 50
+    doc: docs/battery-50.md
+    keywords: [battery-50, battery, 50, power, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/battery-50.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/battery-50.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/battery-50.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/battery-50.svg }
+  - id: beaker
+    name: Beaker
+    doc: docs/beaker.md
+    keywords: [beaker]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/beaker.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/beaker.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/beaker.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/beaker.svg }
+  - id: bell
+    name: Bell
+    doc: docs/bell.md
+    keywords: [bell, notification]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bell.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bell.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bell.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bell.svg }
+  - id: bell-alert
+    name: Bell Alert
+    doc: docs/bell-alert.md
+    keywords: [bell-alert, bell, alert, notification]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bell-alert.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bell-alert.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bell-alert.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bell-alert.svg }
+  - id: bell-slash
+    name: Bell Slash
+    doc: docs/bell-slash.md
+    keywords: [bell-slash, bell, slash, notification]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bell-slash.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bell-slash.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bell-slash.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bell-slash.svg }
+  - id: bell-snooze
+    name: Bell Snooze
+    doc: docs/bell-snooze.md
+    keywords: [bell-snooze, bell, snooze, notification]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bell-snooze.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bell-snooze.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bell-snooze.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bell-snooze.svg }
+  - id: bold
+    name: Bold
+    doc: docs/bold.md
+    keywords: [bold]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bold.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bold.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bold.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bold.svg }
+  - id: bolt
+    name: Bolt
+    doc: docs/bolt.md
+    keywords: [bolt]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bolt.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bolt.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bolt.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bolt.svg }
+  - id: bolt-slash
+    name: Bolt Slash
+    doc: docs/bolt-slash.md
+    keywords: [bolt-slash, bolt, slash]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bolt-slash.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bolt-slash.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bolt-slash.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bolt-slash.svg }
+  - id: book-open
+    name: Book Open
+    doc: docs/book-open.md
+    keywords: [book-open, book, open]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/book-open.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/book-open.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/book-open.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/book-open.svg }
+  - id: bookmark
+    name: Bookmark
+    doc: docs/bookmark.md
+    keywords: [bookmark, save]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bookmark.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bookmark.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bookmark.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bookmark.svg }
+  - id: bookmark-slash
+    name: Bookmark Slash
+    doc: docs/bookmark-slash.md
+    keywords: [bookmark-slash, bookmark, slash, save]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bookmark-slash.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bookmark-slash.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bookmark-slash.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bookmark-slash.svg }
+  - id: bookmark-square
+    name: Bookmark Square
+    doc: docs/bookmark-square.md
+    keywords: [bookmark-square, bookmark, square, save]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bookmark-square.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bookmark-square.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bookmark-square.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bookmark-square.svg }
+  - id: briefcase
+    name: Briefcase
+    doc: docs/briefcase.md
+    keywords: [briefcase]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/briefcase.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/briefcase.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/briefcase.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/briefcase.svg }
+  - id: bug-ant
+    name: Bug Ant
+    doc: docs/bug-ant.md
+    keywords: [bug-ant, bug, ant]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/bug-ant.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/bug-ant.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/bug-ant.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/bug-ant.svg }
+  - id: building-library
+    name: Building Library
+    doc: docs/building-library.md
+    keywords: [building-library, building, library, office, property]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/building-library.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/building-library.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/building-library.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/building-library.svg }
+  - id: building-office
+    name: Building Office
+    doc: docs/building-office.md
+    keywords: [building-office, building, office, property]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/building-office.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/building-office.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/building-office.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/building-office.svg }
+  - id: building-office-2
+    name: Building Office 2
+    doc: docs/building-office-2.md
+    keywords: [building-office-2, building, office, property]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/building-office-2.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/building-office-2.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/building-office-2.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/building-office-2.svg }
+  - id: building-storefront
+    name: Building Storefront
+    doc: docs/building-storefront.md
+    keywords: [building-storefront, building, storefront, office, property]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/building-storefront.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/building-storefront.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/building-storefront.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/building-storefront.svg }
+  - id: cake
+    name: Cake
+    doc: docs/cake.md
+    keywords: [cake]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/cake.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/cake.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/cake.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/cake.svg }
+  - id: calculator
+    name: Calculator
+    doc: docs/calculator.md
+    keywords: [calculator, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/calculator.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/calculator.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/calculator.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/calculator.svg }
+  - id: calendar
+    name: Calendar
+    doc: docs/calendar.md
+    keywords: [calendar, date, schedule]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/calendar.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/calendar.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/calendar.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/calendar.svg }
+  - id: calendar-date-range
+    name: Calendar Date Range
+    doc: docs/calendar-date-range.md
+    keywords: [calendar-date-range, calendar, date, range, schedule, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/calendar-date-range.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/calendar-date-range.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/calendar-date-range.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/calendar-date-range.svg }
+  - id: calendar-days
+    name: Calendar Days
+    doc: docs/calendar-days.md
+    keywords: [calendar-days, calendar, days, date, schedule]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/calendar-days.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/calendar-days.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/calendar-days.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/calendar-days.svg }
+  - id: camera
+    name: Camera
+    doc: docs/camera.md
+    keywords: [camera]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/camera.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/camera.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/camera.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/camera.svg }
+  - id: chart-bar
+    name: Chart Bar
+    doc: docs/chart-bar.md
+    keywords: [chart-bar, chart, bar, analytics, stats]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chart-bar.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chart-bar.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chart-bar.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chart-bar.svg }
+  - id: chart-bar-square
+    name: Chart Bar Square
+    doc: docs/chart-bar-square.md
+    keywords: [chart-bar-square, chart, bar, square, analytics, stats]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chart-bar-square.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chart-bar-square.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chart-bar-square.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chart-bar-square.svg }
+  - id: chart-pie
+    name: Chart Pie
+    doc: docs/chart-pie.md
+    keywords: [chart-pie, chart, pie, analytics, stats]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chart-pie.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chart-pie.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chart-pie.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chart-pie.svg }
+  - id: chat-bubble-bottom-center
+    name: Chat Bubble Bottom Center
+    doc: docs/chat-bubble-bottom-center.md
+    keywords: [chat-bubble-bottom-center, chat, bubble, bottom, center, message, comment, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chat-bubble-bottom-center.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chat-bubble-bottom-center.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chat-bubble-bottom-center.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chat-bubble-bottom-center.svg }
+  - id: chat-bubble-bottom-center-text
+    name: Chat Bubble Bottom Center Text
+    doc: docs/chat-bubble-bottom-center-text.md
+    keywords: [chat-bubble-bottom-center-text, chat, bubble, bottom, center, text, message, comment, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chat-bubble-bottom-center-text.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chat-bubble-bottom-center-text.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chat-bubble-bottom-center-text.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chat-bubble-bottom-center-text.svg }
+  - id: chat-bubble-left
+    name: Chat Bubble Left
+    doc: docs/chat-bubble-left.md
+    keywords: [chat-bubble-left, chat, bubble, left, message, comment, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chat-bubble-left.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chat-bubble-left.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chat-bubble-left.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chat-bubble-left.svg }
+  - id: chat-bubble-left-ellipsis
+    name: Chat Bubble Left Ellipsis
+    doc: docs/chat-bubble-left-ellipsis.md
+    keywords: [chat-bubble-left-ellipsis, chat, bubble, left, ellipsis, more, overflow, message, comment, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chat-bubble-left-ellipsis.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chat-bubble-left-ellipsis.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chat-bubble-left-ellipsis.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chat-bubble-left-ellipsis.svg }
+  - id: chat-bubble-left-right
+    name: Chat Bubble Left Right
+    doc: docs/chat-bubble-left-right.md
+    keywords: [chat-bubble-left-right, chat, bubble, left, right, message, comment, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chat-bubble-left-right.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chat-bubble-left-right.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chat-bubble-left-right.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chat-bubble-left-right.svg }
+  - id: chat-bubble-oval-left
+    name: Chat Bubble Oval Left
+    doc: docs/chat-bubble-oval-left.md
+    keywords: [chat-bubble-oval-left, chat, bubble, oval, left, message, comment, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chat-bubble-oval-left.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chat-bubble-oval-left.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chat-bubble-oval-left.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chat-bubble-oval-left.svg }
+  - id: chat-bubble-oval-left-ellipsis
+    name: Chat Bubble Oval Left Ellipsis
+    doc: docs/chat-bubble-oval-left-ellipsis.md
+    keywords: [chat-bubble-oval-left-ellipsis, chat, bubble, oval, left, ellipsis, more, overflow, message, comment, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chat-bubble-oval-left-ellipsis.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chat-bubble-oval-left-ellipsis.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chat-bubble-oval-left-ellipsis.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chat-bubble-oval-left-ellipsis.svg }
+  - id: check
+    name: Check
+    doc: docs/check.md
+    keywords: [check, success, done, ok]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/check.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/check.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/check.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/check.svg }
+  - id: check-badge
+    name: Check Badge
+    doc: docs/check-badge.md
+    keywords: [check-badge, check, badge, success, done, ok]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/check-badge.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/check-badge.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/check-badge.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/check-badge.svg }
+  - id: check-circle
+    name: Check Circle
+    doc: docs/check-circle.md
+    keywords: [check-circle, check, circle, success, done, ok]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/check-circle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/check-circle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/check-circle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/check-circle.svg }
+  - id: chevron-double-down
+    name: Chevron Double Down
+    doc: docs/chevron-double-down.md
+    keywords: [chevron-double-down, chevron, double, down, arrow, caret, expand, collapse, menu]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chevron-double-down.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chevron-double-down.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chevron-double-down.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chevron-double-down.svg }
+  - id: chevron-double-left
+    name: Chevron Double Left
+    doc: docs/chevron-double-left.md
+    keywords: [chevron-double-left, chevron, double, left, arrow, caret, expand, collapse, menu]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chevron-double-left.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chevron-double-left.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chevron-double-left.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chevron-double-left.svg }
+  - id: chevron-double-right
+    name: Chevron Double Right
+    doc: docs/chevron-double-right.md
+    keywords: [chevron-double-right, chevron, double, right, arrow, caret, expand, collapse, menu]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chevron-double-right.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chevron-double-right.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chevron-double-right.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chevron-double-right.svg }
+  - id: chevron-double-up
+    name: Chevron Double Up
+    doc: docs/chevron-double-up.md
+    keywords: [chevron-double-up, chevron, double, up, arrow, caret, expand, collapse, menu]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chevron-double-up.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chevron-double-up.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chevron-double-up.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chevron-double-up.svg }
+  - id: chevron-down
+    name: Chevron Down
+    doc: docs/chevron-down.md
+    keywords: [chevron-down, chevron, down, arrow, caret, expand, collapse, menu]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chevron-down.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chevron-down.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chevron-down.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chevron-down.svg }
+  - id: chevron-left
+    name: Chevron Left
+    doc: docs/chevron-left.md
+    keywords: [chevron-left, chevron, left, arrow, caret, expand, collapse, menu]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chevron-left.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chevron-left.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chevron-left.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chevron-left.svg }
+  - id: chevron-right
+    name: Chevron Right
+    doc: docs/chevron-right.md
+    keywords: [chevron-right, chevron, right, arrow, caret, expand, collapse, menu]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chevron-right.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chevron-right.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chevron-right.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chevron-right.svg }
+  - id: chevron-up
+    name: Chevron Up
+    doc: docs/chevron-up.md
+    keywords: [chevron-up, chevron, up, arrow, caret, expand, collapse, menu]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chevron-up.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chevron-up.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chevron-up.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chevron-up.svg }
+  - id: chevron-up-down
+    name: Chevron Up Down
+    doc: docs/chevron-up-down.md
+    keywords: [chevron-up-down, chevron, up, down, arrow, caret, expand, collapse, menu]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/chevron-up-down.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/chevron-up-down.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/chevron-up-down.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/chevron-up-down.svg }
+  - id: circle-stack
+    name: Circle Stack
+    doc: docs/circle-stack.md
+    keywords: [circle-stack, circle, stack]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/circle-stack.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/circle-stack.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/circle-stack.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/circle-stack.svg }
+  - id: clipboard
+    name: Clipboard
+    doc: docs/clipboard.md
+    keywords: [clipboard]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/clipboard.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/clipboard.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/clipboard.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/clipboard.svg }
+  - id: clipboard-document
+    name: Clipboard Document
+    doc: docs/clipboard-document.md
+    keywords: [clipboard-document, clipboard, document, file, page]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/clipboard-document.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/clipboard-document.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/clipboard-document.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/clipboard-document.svg }
+  - id: clipboard-document-check
+    name: Clipboard Document Check
+    doc: docs/clipboard-document-check.md
+    keywords: [clipboard-document-check, clipboard, document, check, success, done, ok, file, page]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/clipboard-document-check.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/clipboard-document-check.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/clipboard-document-check.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/clipboard-document-check.svg }
+  - id: clipboard-document-list
+    name: Clipboard Document List
+    doc: docs/clipboard-document-list.md
+    keywords: [clipboard-document-list, clipboard, document, list, file, page]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/clipboard-document-list.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/clipboard-document-list.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/clipboard-document-list.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/clipboard-document-list.svg }
+  - id: clock
+    name: Clock
+    doc: docs/clock.md
+    keywords: [clock, time, secure, private]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/clock.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/clock.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/clock.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/clock.svg }
+  - id: cloud
+    name: Cloud
+    doc: docs/cloud.md
+    keywords: [cloud, upload, download, sync]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/cloud.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/cloud.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/cloud.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/cloud.svg }
+  - id: cloud-arrow-down
+    name: Cloud Arrow Down
+    doc: docs/cloud-arrow-down.md
+    keywords: [cloud-arrow-down, cloud, arrow, down, navigation, direction, upload, download, sync]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/cloud-arrow-down.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/cloud-arrow-down.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/cloud-arrow-down.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/cloud-arrow-down.svg }
+  - id: cloud-arrow-up
+    name: Cloud Arrow Up
+    doc: docs/cloud-arrow-up.md
+    keywords: [cloud-arrow-up, cloud, arrow, up, navigation, direction, upload, download, sync]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/cloud-arrow-up.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/cloud-arrow-up.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/cloud-arrow-up.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/cloud-arrow-up.svg }
+  - id: code-bracket
+    name: Code Bracket
+    doc: docs/code-bracket.md
+    keywords: [code-bracket, code, bracket]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/code-bracket.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/code-bracket.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/code-bracket.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/code-bracket.svg }
+  - id: code-bracket-square
+    name: Code Bracket Square
+    doc: docs/code-bracket-square.md
+    keywords: [code-bracket-square, code, bracket, square]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/code-bracket-square.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/code-bracket-square.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/code-bracket-square.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/code-bracket-square.svg }
+  - id: cog
+    name: Cog
+    doc: docs/cog.md
+    keywords: [cog, settings, config]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/cog.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/cog.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/cog.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/cog.svg }
+  - id: cog-6-tooth
+    name: Cog 6 Tooth
+    doc: docs/cog-6-tooth.md
+    keywords: [cog-6-tooth, cog, tooth, settings, config]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/cog-6-tooth.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/cog-6-tooth.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/cog-6-tooth.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/cog-6-tooth.svg }
+  - id: cog-8-tooth
+    name: Cog 8 Tooth
+    doc: docs/cog-8-tooth.md
+    keywords: [cog-8-tooth, cog, tooth, settings, config]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/cog-8-tooth.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/cog-8-tooth.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/cog-8-tooth.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/cog-8-tooth.svg }
+  - id: command-line
+    name: Command Line
+    doc: docs/command-line.md
+    keywords: [command-line, command, line]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/command-line.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/command-line.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/command-line.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/command-line.svg }
+  - id: computer-desktop
+    name: Computer Desktop
+    doc: docs/computer-desktop.md
+    keywords: [computer-desktop, computer, desktop]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/computer-desktop.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/computer-desktop.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/computer-desktop.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/computer-desktop.svg }
+  - id: cpu-chip
+    name: Cpu Chip
+    doc: docs/cpu-chip.md
+    keywords: [cpu-chip, cpu, chip, device]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/cpu-chip.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/cpu-chip.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/cpu-chip.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/cpu-chip.svg }
+  - id: credit-card
+    name: Credit Card
+    doc: docs/credit-card.md
+    keywords: [credit-card, credit, card]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/credit-card.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/credit-card.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/credit-card.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/credit-card.svg }
+  - id: cube
+    name: Cube
+    doc: docs/cube.md
+    keywords: [cube]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/cube.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/cube.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/cube.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/cube.svg }
+  - id: cube-transparent
+    name: Cube Transparent
+    doc: docs/cube-transparent.md
+    keywords: [cube-transparent, cube, transparent]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/cube-transparent.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/cube-transparent.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/cube-transparent.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/cube-transparent.svg }
+  - id: currency-bangladeshi
+    name: Currency Bangladeshi
+    doc: docs/currency-bangladeshi.md
+    keywords: [currency-bangladeshi, currency, bangladeshi, money, price]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/currency-bangladeshi.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/currency-bangladeshi.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/currency-bangladeshi.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/currency-bangladeshi.svg }
+  - id: currency-dollar
+    name: Currency Dollar
+    doc: docs/currency-dollar.md
+    keywords: [currency-dollar, currency, dollar, money, price]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/currency-dollar.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/currency-dollar.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/currency-dollar.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/currency-dollar.svg }
+  - id: currency-euro
+    name: Currency Euro
+    doc: docs/currency-euro.md
+    keywords: [currency-euro, currency, euro, money, price]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/currency-euro.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/currency-euro.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/currency-euro.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/currency-euro.svg }
+  - id: currency-pound
+    name: Currency Pound
+    doc: docs/currency-pound.md
+    keywords: [currency-pound, currency, pound, money, price]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/currency-pound.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/currency-pound.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/currency-pound.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/currency-pound.svg }
+  - id: currency-rupee
+    name: Currency Rupee
+    doc: docs/currency-rupee.md
+    keywords: [currency-rupee, currency, rupee, money, price]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/currency-rupee.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/currency-rupee.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/currency-rupee.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/currency-rupee.svg }
+  - id: currency-yen
+    name: Currency Yen
+    doc: docs/currency-yen.md
+    keywords: [currency-yen, currency, yen, money, price]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/currency-yen.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/currency-yen.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/currency-yen.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/currency-yen.svg }
+  - id: cursor-arrow-rays
+    name: Cursor Arrow Rays
+    doc: docs/cursor-arrow-rays.md
+    keywords: [cursor-arrow-rays, cursor, arrow, rays, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/cursor-arrow-rays.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/cursor-arrow-rays.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/cursor-arrow-rays.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/cursor-arrow-rays.svg }
+  - id: cursor-arrow-ripple
+    name: Cursor Arrow Ripple
+    doc: docs/cursor-arrow-ripple.md
+    keywords: [cursor-arrow-ripple, cursor, arrow, ripple, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/cursor-arrow-ripple.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/cursor-arrow-ripple.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/cursor-arrow-ripple.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/cursor-arrow-ripple.svg }
+  - id: device-phone-mobile
+    name: Device Phone Mobile
+    doc: docs/device-phone-mobile.md
+    keywords: [device-phone-mobile, device, phone, mobile, call, tel]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/device-phone-mobile.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/device-phone-mobile.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/device-phone-mobile.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/device-phone-mobile.svg }
+  - id: device-tablet
+    name: Device Tablet
+    doc: docs/device-tablet.md
+    keywords: [device-tablet, device, tablet, list, data]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/device-tablet.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/device-tablet.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/device-tablet.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/device-tablet.svg }
+  - id: divide
+    name: Divide
+    doc: docs/divide.md
+    keywords: [divide]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/divide.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/divide.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/divide.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/divide.svg }
+  - id: document
+    name: Document
+    doc: docs/document.md
+    keywords: [document, file, page]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/document.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/document.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/document.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/document.svg }
+  - id: document-arrow-down
+    name: Document Arrow Down
+    doc: docs/document-arrow-down.md
+    keywords: [document-arrow-down, document, arrow, down, file, page, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/document-arrow-down.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/document-arrow-down.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/document-arrow-down.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/document-arrow-down.svg }
+  - id: document-arrow-up
+    name: Document Arrow Up
+    doc: docs/document-arrow-up.md
+    keywords: [document-arrow-up, document, arrow, up, file, page, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/document-arrow-up.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/document-arrow-up.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/document-arrow-up.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/document-arrow-up.svg }
+  - id: document-chart-bar
+    name: Document Chart Bar
+    doc: docs/document-chart-bar.md
+    keywords: [document-chart-bar, document, chart, bar, file, page, analytics, stats]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/document-chart-bar.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/document-chart-bar.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/document-chart-bar.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/document-chart-bar.svg }
+  - id: document-check
+    name: Document Check
+    doc: docs/document-check.md
+    keywords: [document-check, document, check, success, done, ok, file, page]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/document-check.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/document-check.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/document-check.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/document-check.svg }
+  - id: document-currency-bangladeshi
+    name: Document Currency Bangladeshi
+    doc: docs/document-currency-bangladeshi.md
+    keywords: [document-currency-bangladeshi, document, currency, bangladeshi, file, page, money, price]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/document-currency-bangladeshi.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/document-currency-bangladeshi.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/document-currency-bangladeshi.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/document-currency-bangladeshi.svg }
+  - id: document-currency-dollar
+    name: Document Currency Dollar
+    doc: docs/document-currency-dollar.md
+    keywords: [document-currency-dollar, document, currency, dollar, file, page, money, price]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/document-currency-dollar.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/document-currency-dollar.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/document-currency-dollar.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/document-currency-dollar.svg }
+  - id: document-currency-euro
+    name: Document Currency Euro
+    doc: docs/document-currency-euro.md
+    keywords: [document-currency-euro, document, currency, euro, file, page, money, price]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/document-currency-euro.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/document-currency-euro.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/document-currency-euro.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/document-currency-euro.svg }
+  - id: document-currency-pound
+    name: Document Currency Pound
+    doc: docs/document-currency-pound.md
+    keywords: [document-currency-pound, document, currency, pound, file, page, money, price]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/document-currency-pound.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/document-currency-pound.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/document-currency-pound.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/document-currency-pound.svg }
+  - id: document-currency-rupee
+    name: Document Currency Rupee
+    doc: docs/document-currency-rupee.md
+    keywords: [document-currency-rupee, document, currency, rupee, file, page, money, price]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/document-currency-rupee.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/document-currency-rupee.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/document-currency-rupee.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/document-currency-rupee.svg }
+  - id: document-currency-yen
+    name: Document Currency Yen
+    doc: docs/document-currency-yen.md
+    keywords: [document-currency-yen, document, currency, yen, file, page, money, price]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/document-currency-yen.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/document-currency-yen.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/document-currency-yen.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/document-currency-yen.svg }
+  - id: document-duplicate
+    name: Document Duplicate
+    doc: docs/document-duplicate.md
+    keywords: [document-duplicate, document, duplicate, file, page, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/document-duplicate.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/document-duplicate.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/document-duplicate.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/document-duplicate.svg }
+  - id: document-magnifying-glass
+    name: Document Magnifying Glass
+    doc: docs/document-magnifying-glass.md
+    keywords: [document-magnifying-glass, document, magnifying, glass, search, find, file, page]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/document-magnifying-glass.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/document-magnifying-glass.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/document-magnifying-glass.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/document-magnifying-glass.svg }
+  - id: document-minus
+    name: Document Minus
+    doc: docs/document-minus.md
+    keywords: [document-minus, document, minus, file, page]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/document-minus.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/document-minus.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/document-minus.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/document-minus.svg }
+  - id: document-plus
+    name: Document Plus
+    doc: docs/document-plus.md
+    keywords: [document-plus, document, plus, add, create, new, file, page]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/document-plus.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/document-plus.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/document-plus.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/document-plus.svg }
+  - id: document-text
+    name: Document Text
+    doc: docs/document-text.md
+    keywords: [document-text, document, text, file, page]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/document-text.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/document-text.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/document-text.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/document-text.svg }
+  - id: ellipsis-horizontal
+    name: Ellipsis Horizontal
+    doc: docs/ellipsis-horizontal.md
+    keywords: [ellipsis-horizontal, ellipsis, horizontal, more, overflow]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/ellipsis-horizontal.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/ellipsis-horizontal.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/ellipsis-horizontal.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/ellipsis-horizontal.svg }
+  - id: ellipsis-horizontal-circle
+    name: Ellipsis Horizontal Circle
+    doc: docs/ellipsis-horizontal-circle.md
+    keywords: [ellipsis-horizontal-circle, ellipsis, horizontal, circle, more, overflow]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/ellipsis-horizontal-circle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/ellipsis-horizontal-circle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/ellipsis-horizontal-circle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/ellipsis-horizontal-circle.svg }
+  - id: ellipsis-vertical
+    name: Ellipsis Vertical
+    doc: docs/ellipsis-vertical.md
+    keywords: [ellipsis-vertical, ellipsis, vertical, more, overflow]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/ellipsis-vertical.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/ellipsis-vertical.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/ellipsis-vertical.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/ellipsis-vertical.svg }
+  - id: envelope
+    name: Envelope
+    doc: docs/envelope.md
+    keywords: [envelope, email, mail]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/envelope.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/envelope.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/envelope.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/envelope.svg }
+  - id: envelope-open
+    name: Envelope Open
+    doc: docs/envelope-open.md
+    keywords: [envelope-open, envelope, open, email, mail]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/envelope-open.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/envelope-open.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/envelope-open.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/envelope-open.svg }
+  - id: equals
+    name: Equals
+    doc: docs/equals.md
+    keywords: [equals]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/equals.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/equals.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/equals.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/equals.svg }
+  - id: exclamation-circle
+    name: Exclamation Circle
+    doc: docs/exclamation-circle.md
+    keywords: [exclamation-circle, exclamation, circle, warning, alert, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/exclamation-circle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/exclamation-circle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/exclamation-circle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/exclamation-circle.svg }
+  - id: exclamation-triangle
+    name: Exclamation Triangle
+    doc: docs/exclamation-triangle.md
+    keywords: [exclamation-triangle, exclamation, triangle, warning, alert, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/exclamation-triangle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/exclamation-triangle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/exclamation-triangle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/exclamation-triangle.svg }
+  - id: eye
+    name: Eye
+    doc: docs/eye.md
+    keywords: [eye, view, visible]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/eye.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/eye.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/eye.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/eye.svg }
+  - id: eye-dropper
+    name: Eye Dropper
+    doc: docs/eye-dropper.md
+    keywords: [eye-dropper, eye, dropper, view, visible]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/eye-dropper.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/eye-dropper.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/eye-dropper.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/eye-dropper.svg }
+  - id: eye-slash
+    name: Eye Slash
+    doc: docs/eye-slash.md
+    keywords: [eye-slash, eye, slash, view, visible]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/eye-slash.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/eye-slash.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/eye-slash.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/eye-slash.svg }
+  - id: face-frown
+    name: Face Frown
+    doc: docs/face-frown.md
+    keywords: [face-frown, face, frown]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/face-frown.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/face-frown.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/face-frown.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/face-frown.svg }
+  - id: face-smile
+    name: Face Smile
+    doc: docs/face-smile.md
+    keywords: [face-smile, face, smile]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/face-smile.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/face-smile.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/face-smile.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/face-smile.svg }
+  - id: film
+    name: Film
+    doc: docs/film.md
+    keywords: [film]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/film.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/film.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/film.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/film.svg }
+  - id: finger-print
+    name: Finger Print
+    doc: docs/finger-print.md
+    keywords: [finger-print, finger, print]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/finger-print.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/finger-print.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/finger-print.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/finger-print.svg }
+  - id: fire
+    name: Fire
+    doc: docs/fire.md
+    keywords: [fire]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/fire.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/fire.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/fire.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/fire.svg }
+  - id: flag
+    name: Flag
+    doc: docs/flag.md
+    keywords: [flag, mark, report]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/flag.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/flag.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/flag.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/flag.svg }
+  - id: folder
+    name: Folder
+    doc: docs/folder.md
+    keywords: [folder, directory]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/folder.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/folder.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/folder.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/folder.svg }
+  - id: folder-arrow-down
+    name: Folder Arrow Down
+    doc: docs/folder-arrow-down.md
+    keywords: [folder-arrow-down, folder, arrow, down, directory, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/folder-arrow-down.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/folder-arrow-down.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/folder-arrow-down.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/folder-arrow-down.svg }
+  - id: folder-minus
+    name: Folder Minus
+    doc: docs/folder-minus.md
+    keywords: [folder-minus, folder, minus, directory]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/folder-minus.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/folder-minus.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/folder-minus.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/folder-minus.svg }
+  - id: folder-open
+    name: Folder Open
+    doc: docs/folder-open.md
+    keywords: [folder-open, folder, open, directory]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/folder-open.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/folder-open.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/folder-open.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/folder-open.svg }
+  - id: folder-plus
+    name: Folder Plus
+    doc: docs/folder-plus.md
+    keywords: [folder-plus, folder, plus, add, create, new, directory]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/folder-plus.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/folder-plus.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/folder-plus.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/folder-plus.svg }
+  - id: forward
+    name: Forward
+    doc: docs/forward.md
+    keywords: [forward]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/forward.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/forward.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/forward.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/forward.svg }
+  - id: funnel
+    name: Funnel
+    doc: docs/funnel.md
+    keywords: [funnel, filter]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/funnel.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/funnel.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/funnel.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/funnel.svg }
+  - id: gif
+    name: Gif
+    doc: docs/gif.md
+    keywords: [gif]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/gif.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/gif.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/gif.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/gif.svg }
+  - id: gift
+    name: Gift
+    doc: docs/gift.md
+    keywords: [gift]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/gift.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/gift.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/gift.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/gift.svg }
+  - id: gift-top
+    name: Gift Top
+    doc: docs/gift-top.md
+    keywords: [gift-top, gift, top]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/gift-top.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/gift-top.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/gift-top.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/gift-top.svg }
+  - id: globe-alt
+    name: Globe Alt
+    doc: docs/globe-alt.md
+    keywords: [globe-alt, globe, alt, web, world]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/globe-alt.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/globe-alt.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/globe-alt.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/globe-alt.svg }
+  - id: globe-americas
+    name: Globe Americas
+    doc: docs/globe-americas.md
+    keywords: [globe-americas, globe, americas, web, world]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/globe-americas.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/globe-americas.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/globe-americas.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/globe-americas.svg }
+  - id: globe-asia-australia
+    name: Globe Asia Australia
+    doc: docs/globe-asia-australia.md
+    keywords: [globe-asia-australia, globe, asia, australia, web, world]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/globe-asia-australia.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/globe-asia-australia.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/globe-asia-australia.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/globe-asia-australia.svg }
+  - id: globe-europe-africa
+    name: Globe Europe Africa
+    doc: docs/globe-europe-africa.md
+    keywords: [globe-europe-africa, globe, europe, africa, web, world]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/globe-europe-africa.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/globe-europe-africa.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/globe-europe-africa.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/globe-europe-africa.svg }
+  - id: h1
+    name: H1
+    doc: docs/h1.md
+    keywords: [h1]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/h1.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/h1.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/h1.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/h1.svg }
+  - id: h2
+    name: H2
+    doc: docs/h2.md
+    keywords: [h2]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/h2.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/h2.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/h2.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/h2.svg }
+  - id: h3
+    name: H3
+    doc: docs/h3.md
+    keywords: [h3]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/h3.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/h3.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/h3.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/h3.svg }
+  - id: hand-raised
+    name: Hand Raised
+    doc: docs/hand-raised.md
+    keywords: [hand-raised, hand, raised]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/hand-raised.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/hand-raised.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/hand-raised.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/hand-raised.svg }
+  - id: hand-thumb-down
+    name: Hand Thumb Down
+    doc: docs/hand-thumb-down.md
+    keywords: [hand-thumb-down, hand, thumb, down]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/hand-thumb-down.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/hand-thumb-down.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/hand-thumb-down.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/hand-thumb-down.svg }
+  - id: hand-thumb-up
+    name: Hand Thumb Up
+    doc: docs/hand-thumb-up.md
+    keywords: [hand-thumb-up, hand, thumb, up]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/hand-thumb-up.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/hand-thumb-up.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/hand-thumb-up.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/hand-thumb-up.svg }
+  - id: hashtag
+    name: Hashtag
+    doc: docs/hashtag.md
+    keywords: [hashtag, label, tag]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/hashtag.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/hashtag.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/hashtag.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/hashtag.svg }
+  - id: heart
+    name: Heart
+    doc: docs/heart.md
+    keywords: [heart, like]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/heart.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/heart.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/heart.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/heart.svg }
+  - id: home
+    name: Home
+    doc: docs/home.md
+    keywords: [home, dashboard, index]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/home.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/home.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/home.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/home.svg }
+  - id: home-modern
+    name: Home Modern
+    doc: docs/home-modern.md
+    keywords: [home-modern, home, modern, dashboard, index]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/home-modern.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/home-modern.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/home-modern.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/home-modern.svg }
+  - id: identification
+    name: Identification
+    doc: docs/identification.md
+    keywords: [identification, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/identification.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/identification.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/identification.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/identification.svg }
+  - id: inbox
+    name: Inbox
+    doc: docs/inbox.md
+    keywords: [inbox]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/inbox.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/inbox.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/inbox.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/inbox.svg }
+  - id: inbox-arrow-down
+    name: Inbox Arrow Down
+    doc: docs/inbox-arrow-down.md
+    keywords: [inbox-arrow-down, inbox, arrow, down, navigation, direction]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/inbox-arrow-down.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/inbox-arrow-down.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/inbox-arrow-down.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/inbox-arrow-down.svg }
+  - id: inbox-stack
+    name: Inbox Stack
+    doc: docs/inbox-stack.md
+    keywords: [inbox-stack, inbox, stack]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/inbox-stack.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/inbox-stack.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/inbox-stack.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/inbox-stack.svg }
+  - id: information-circle
+    name: Information Circle
+    doc: docs/information-circle.md
+    keywords: [information-circle, information, circle, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/information-circle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/information-circle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/information-circle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/information-circle.svg }
+  - id: italic
+    name: Italic
+    doc: docs/italic.md
+    keywords: [italic]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/italic.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/italic.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/italic.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/italic.svg }
+  - id: key
+    name: Key
+    doc: docs/key.md
+    keywords: [key, access, credential]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/key.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/key.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/key.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/key.svg }
+  - id: language
+    name: Language
+    doc: docs/language.md
+    keywords: [language, i18n, locale]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/language.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/language.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/language.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/language.svg }
+  - id: lifebuoy
+    name: Lifebuoy
+    doc: docs/lifebuoy.md
+    keywords: [lifebuoy]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/lifebuoy.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/lifebuoy.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/lifebuoy.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/lifebuoy.svg }
+  - id: light-bulb
+    name: Light Bulb
+    doc: docs/light-bulb.md
+    keywords: [light-bulb, light, bulb]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/light-bulb.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/light-bulb.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/light-bulb.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/light-bulb.svg }
+  - id: link
+    name: Link
+    doc: docs/link.md
+    keywords: [link, url, href]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/link.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/link.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/link.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/link.svg }
+  - id: link-slash
+    name: Link Slash
+    doc: docs/link-slash.md
+    keywords: [link-slash, link, slash, url, href]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/link-slash.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/link-slash.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/link-slash.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/link-slash.svg }
+  - id: list-bullet
+    name: List Bullet
+    doc: docs/list-bullet.md
+    keywords: [list-bullet, list, bullet]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/list-bullet.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/list-bullet.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/list-bullet.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/list-bullet.svg }
+  - id: lock-closed
+    name: Lock Closed
+    doc: docs/lock-closed.md
+    keywords: [lock-closed, lock, closed, secure, private]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/lock-closed.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/lock-closed.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/lock-closed.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/lock-closed.svg }
+  - id: lock-open
+    name: Lock Open
+    doc: docs/lock-open.md
+    keywords: [lock-open, lock, open, secure, private]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/lock-open.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/lock-open.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/lock-open.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/lock-open.svg }
+  - id: magnifying-glass
+    name: Magnifying Glass
+    doc: docs/magnifying-glass.md
+    keywords: [magnifying-glass, magnifying, glass, search, find]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/magnifying-glass.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/magnifying-glass.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/magnifying-glass.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/magnifying-glass.svg }
+  - id: magnifying-glass-circle
+    name: Magnifying Glass Circle
+    doc: docs/magnifying-glass-circle.md
+    keywords: [magnifying-glass-circle, magnifying, glass, circle, search, find]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/magnifying-glass-circle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/magnifying-glass-circle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/magnifying-glass-circle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/magnifying-glass-circle.svg }
+  - id: magnifying-glass-minus
+    name: Magnifying Glass Minus
+    doc: docs/magnifying-glass-minus.md
+    keywords: [magnifying-glass-minus, magnifying, glass, minus, search, find]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/magnifying-glass-minus.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/magnifying-glass-minus.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/magnifying-glass-minus.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/magnifying-glass-minus.svg }
+  - id: magnifying-glass-plus
+    name: Magnifying Glass Plus
+    doc: docs/magnifying-glass-plus.md
+    keywords: [magnifying-glass-plus, magnifying, glass, plus, search, find, add, create, new]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/magnifying-glass-plus.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/magnifying-glass-plus.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/magnifying-glass-plus.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/magnifying-glass-plus.svg }
+  - id: map
+    name: Map
+    doc: docs/map.md
+    keywords: [map, location, geo]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/map.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/map.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/map.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/map.svg }
+  - id: map-pin
+    name: Map Pin
+    doc: docs/map-pin.md
+    keywords: [map-pin, map, pin, location, geo, address]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/map-pin.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/map-pin.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/map-pin.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/map-pin.svg }
+  - id: megaphone
+    name: Megaphone
+    doc: docs/megaphone.md
+    keywords: [megaphone, call, tel]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/megaphone.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/megaphone.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/megaphone.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/megaphone.svg }
+  - id: microphone
+    name: Microphone
+    doc: docs/microphone.md
+    keywords: [microphone, call, tel]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/microphone.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/microphone.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/microphone.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/microphone.svg }
+  - id: minus
+    name: Minus
+    doc: docs/minus.md
+    keywords: [minus]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/minus.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/minus.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/minus.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/minus.svg }
+  - id: minus-circle
+    name: Minus Circle
+    doc: docs/minus-circle.md
+    keywords: [minus-circle, minus, circle]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/minus-circle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/minus-circle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/minus-circle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/minus-circle.svg }
+  - id: minus-small
+    name: Minus Small
+    doc: docs/minus-small.md
+    keywords: [minus-small, minus, small]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/minus-small.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/minus-small.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/minus-small.svg }
+  - id: moon
+    name: Moon
+    doc: docs/moon.md
+    keywords: [moon, dark]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/moon.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/moon.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/moon.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/moon.svg }
+  - id: musical-note
+    name: Musical Note
+    doc: docs/musical-note.md
+    keywords: [musical-note, musical, note]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/musical-note.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/musical-note.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/musical-note.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/musical-note.svg }
+  - id: newspaper
+    name: Newspaper
+    doc: docs/newspaper.md
+    keywords: [newspaper]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/newspaper.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/newspaper.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/newspaper.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/newspaper.svg }
+  - id: no-symbol
+    name: No Symbol
+    doc: docs/no-symbol.md
+    keywords: [no-symbol, no, symbol]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/no-symbol.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/no-symbol.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/no-symbol.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/no-symbol.svg }
+  - id: numbered-list
+    name: Numbered List
+    doc: docs/numbered-list.md
+    keywords: [numbered-list, numbered, list]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/numbered-list.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/numbered-list.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/numbered-list.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/numbered-list.svg }
+  - id: paint-brush
+    name: Paint Brush
+    doc: docs/paint-brush.md
+    keywords: [paint-brush, paint, brush]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/paint-brush.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/paint-brush.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/paint-brush.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/paint-brush.svg }
+  - id: paper-airplane
+    name: Paper Airplane
+    doc: docs/paper-airplane.md
+    keywords: [paper-airplane, paper, airplane]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/paper-airplane.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/paper-airplane.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/paper-airplane.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/paper-airplane.svg }
+  - id: paper-clip
+    name: Paper Clip
+    doc: docs/paper-clip.md
+    keywords: [paper-clip, paper, clip, attachment, attach]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/paper-clip.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/paper-clip.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/paper-clip.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/paper-clip.svg }
+  - id: pause
+    name: Pause
+    doc: docs/pause.md
+    keywords: [pause]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/pause.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/pause.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/pause.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/pause.svg }
+  - id: pause-circle
+    name: Pause Circle
+    doc: docs/pause-circle.md
+    keywords: [pause-circle, pause, circle]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/pause-circle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/pause-circle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/pause-circle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/pause-circle.svg }
+  - id: pencil
+    name: Pencil
+    doc: docs/pencil.md
+    keywords: [pencil, edit, write]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/pencil.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/pencil.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/pencil.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/pencil.svg }
+  - id: pencil-square
+    name: Pencil Square
+    doc: docs/pencil-square.md
+    keywords: [pencil-square, pencil, square, edit, write]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/pencil-square.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/pencil-square.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/pencil-square.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/pencil-square.svg }
+  - id: percent-badge
+    name: Percent Badge
+    doc: docs/percent-badge.md
+    keywords: [percent-badge, percent, badge]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/percent-badge.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/percent-badge.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/percent-badge.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/percent-badge.svg }
+  - id: phone
+    name: Phone
+    doc: docs/phone.md
+    keywords: [phone, call, tel]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/phone.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/phone.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/phone.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/phone.svg }
+  - id: phone-arrow-down-left
+    name: Phone Arrow Down Left
+    doc: docs/phone-arrow-down-left.md
+    keywords: [phone-arrow-down-left, phone, arrow, down, left, navigation, direction, call, tel]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/phone-arrow-down-left.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/phone-arrow-down-left.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/phone-arrow-down-left.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/phone-arrow-down-left.svg }
+  - id: phone-arrow-up-right
+    name: Phone Arrow Up Right
+    doc: docs/phone-arrow-up-right.md
+    keywords: [phone-arrow-up-right, phone, arrow, up, right, navigation, direction, call, tel]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/phone-arrow-up-right.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/phone-arrow-up-right.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/phone-arrow-up-right.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/phone-arrow-up-right.svg }
+  - id: phone-x-mark
+    name: Phone X Mark
+    doc: docs/phone-x-mark.md
+    keywords: [phone-x-mark, phone, mark, close, clear, cancel, call, tel]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/phone-x-mark.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/phone-x-mark.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/phone-x-mark.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/phone-x-mark.svg }
+  - id: photo
+    name: Photo
+    doc: docs/photo.md
+    keywords: [photo, image, picture]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/photo.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/photo.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/photo.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/photo.svg }
+  - id: play
+    name: Play
+    doc: docs/play.md
+    keywords: [play]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/play.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/play.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/play.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/play.svg }
+  - id: play-circle
+    name: Play Circle
+    doc: docs/play-circle.md
+    keywords: [play-circle, play, circle]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/play-circle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/play-circle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/play-circle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/play-circle.svg }
+  - id: play-pause
+    name: Play Pause
+    doc: docs/play-pause.md
+    keywords: [play-pause, play, pause]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/play-pause.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/play-pause.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/play-pause.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/play-pause.svg }
+  - id: plus
+    name: Plus
+    doc: docs/plus.md
+    keywords: [plus, add, create, new]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/plus.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/plus.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/plus.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/plus.svg }
+  - id: plus-circle
+    name: Plus Circle
+    doc: docs/plus-circle.md
+    keywords: [plus-circle, plus, circle, add, create, new]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/plus-circle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/plus-circle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/plus-circle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/plus-circle.svg }
+  - id: plus-small
+    name: Plus Small
+    doc: docs/plus-small.md
+    keywords: [plus-small, plus, small, add, create, new]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/plus-small.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/plus-small.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/plus-small.svg }
+  - id: power
+    name: Power
+    doc: docs/power.md
+    keywords: [power]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/power.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/power.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/power.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/power.svg }
+  - id: presentation-chart-bar
+    name: Presentation Chart Bar
+    doc: docs/presentation-chart-bar.md
+    keywords: [presentation-chart-bar, presentation, chart, bar, analytics, stats, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/presentation-chart-bar.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/presentation-chart-bar.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/presentation-chart-bar.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/presentation-chart-bar.svg }
+  - id: presentation-chart-line
+    name: Presentation Chart Line
+    doc: docs/presentation-chart-line.md
+    keywords: [presentation-chart-line, presentation, chart, line, analytics, stats, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/presentation-chart-line.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/presentation-chart-line.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/presentation-chart-line.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/presentation-chart-line.svg }
+  - id: printer
+    name: Printer
+    doc: docs/printer.md
+    keywords: [printer, print]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/printer.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/printer.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/printer.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/printer.svg }
+  - id: puzzle-piece
+    name: Puzzle Piece
+    doc: docs/puzzle-piece.md
+    keywords: [puzzle-piece, puzzle, piece]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/puzzle-piece.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/puzzle-piece.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/puzzle-piece.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/puzzle-piece.svg }
+  - id: qr-code
+    name: Qr Code
+    doc: docs/qr-code.md
+    keywords: [qr-code, qr, code, scan]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/qr-code.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/qr-code.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/qr-code.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/qr-code.svg }
+  - id: question-mark-circle
+    name: Question Mark Circle
+    doc: docs/question-mark-circle.md
+    keywords: [question-mark-circle, question, mark, circle]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/question-mark-circle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/question-mark-circle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/question-mark-circle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/question-mark-circle.svg }
+  - id: queue-list
+    name: Queue List
+    doc: docs/queue-list.md
+    keywords: [queue-list, queue, list]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/queue-list.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/queue-list.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/queue-list.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/queue-list.svg }
+  - id: radio
+    name: Radio
+    doc: docs/radio.md
+    keywords: [radio]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/radio.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/radio.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/radio.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/radio.svg }
+  - id: receipt-percent
+    name: Receipt Percent
+    doc: docs/receipt-percent.md
+    keywords: [receipt-percent, receipt, percent]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/receipt-percent.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/receipt-percent.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/receipt-percent.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/receipt-percent.svg }
+  - id: receipt-refund
+    name: Receipt Refund
+    doc: docs/receipt-refund.md
+    keywords: [receipt-refund, receipt, refund]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/receipt-refund.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/receipt-refund.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/receipt-refund.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/receipt-refund.svg }
+  - id: rectangle-group
+    name: Rectangle Group
+    doc: docs/rectangle-group.md
+    keywords: [rectangle-group, rectangle, group]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/rectangle-group.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/rectangle-group.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/rectangle-group.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/rectangle-group.svg }
+  - id: rectangle-stack
+    name: Rectangle Stack
+    doc: docs/rectangle-stack.md
+    keywords: [rectangle-stack, rectangle, stack]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/rectangle-stack.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/rectangle-stack.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/rectangle-stack.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/rectangle-stack.svg }
+  - id: rocket-launch
+    name: Rocket Launch
+    doc: docs/rocket-launch.md
+    keywords: [rocket-launch, rocket, launch]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/rocket-launch.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/rocket-launch.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/rocket-launch.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/rocket-launch.svg }
+  - id: rss
+    name: Rss
+    doc: docs/rss.md
+    keywords: [rss]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/rss.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/rss.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/rss.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/rss.svg }
+  - id: scale
+    name: Scale
+    doc: docs/scale.md
+    keywords: [scale]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/scale.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/scale.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/scale.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/scale.svg }
+  - id: scissors
+    name: Scissors
+    doc: docs/scissors.md
+    keywords: [scissors]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/scissors.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/scissors.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/scissors.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/scissors.svg }
+  - id: server
+    name: Server
+    doc: docs/server.md
+    keywords: [server, infra]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/server.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/server.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/server.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/server.svg }
+  - id: server-stack
+    name: Server Stack
+    doc: docs/server-stack.md
+    keywords: [server-stack, server, stack, infra]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/server-stack.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/server-stack.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/server-stack.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/server-stack.svg }
+  - id: share
+    name: Share
+    doc: docs/share.md
+    keywords: [share, export]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/share.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/share.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/share.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/share.svg }
+  - id: shield-check
+    name: Shield Check
+    doc: docs/shield-check.md
+    keywords: [shield-check, shield, check, success, done, ok, security, guard]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/shield-check.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/shield-check.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/shield-check.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/shield-check.svg }
+  - id: shield-exclamation
+    name: Shield Exclamation
+    doc: docs/shield-exclamation.md
+    keywords: [shield-exclamation, shield, exclamation, warning, alert, security, guard, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/shield-exclamation.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/shield-exclamation.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/shield-exclamation.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/shield-exclamation.svg }
+  - id: shopping-bag
+    name: Shopping Bag
+    doc: docs/shopping-bag.md
+    keywords: [shopping-bag, shopping, bag]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/shopping-bag.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/shopping-bag.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/shopping-bag.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/shopping-bag.svg }
+  - id: shopping-cart
+    name: Shopping Cart
+    doc: docs/shopping-cart.md
+    keywords: [shopping-cart, shopping, cart]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/shopping-cart.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/shopping-cart.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/shopping-cart.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/shopping-cart.svg }
+  - id: signal
+    name: Signal
+    doc: docs/signal.md
+    keywords: [signal, status, strength]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/signal.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/signal.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/signal.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/signal.svg }
+  - id: signal-slash
+    name: Signal Slash
+    doc: docs/signal-slash.md
+    keywords: [signal-slash, signal, slash, status, strength]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/signal-slash.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/signal-slash.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/signal-slash.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/signal-slash.svg }
+  - id: slash
+    name: Slash
+    doc: docs/slash.md
+    keywords: [slash]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/slash.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/slash.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/slash.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/slash.svg }
+  - id: sparkles
+    name: Sparkles
+    doc: docs/sparkles.md
+    keywords: [sparkles, ai, new]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/sparkles.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/sparkles.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/sparkles.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/sparkles.svg }
+  - id: speaker-wave
+    name: Speaker Wave
+    doc: docs/speaker-wave.md
+    keywords: [speaker-wave, speaker, wave]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/speaker-wave.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/speaker-wave.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/speaker-wave.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/speaker-wave.svg }
+  - id: speaker-x-mark
+    name: Speaker X Mark
+    doc: docs/speaker-x-mark.md
+    keywords: [speaker-x-mark, speaker, mark, close, clear, cancel]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/speaker-x-mark.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/speaker-x-mark.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/speaker-x-mark.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/speaker-x-mark.svg }
+  - id: square-2-stack
+    name: Square 2 Stack
+    doc: docs/square-2-stack.md
+    keywords: [square-2-stack, square, stack]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/square-2-stack.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/square-2-stack.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/square-2-stack.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/square-2-stack.svg }
+  - id: square-3-stack-3d
+    name: Square 3 Stack 3d
+    doc: docs/square-3-stack-3d.md
+    keywords: [square-3-stack-3d, square, stack, 3d]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/square-3-stack-3d.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/square-3-stack-3d.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/square-3-stack-3d.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/square-3-stack-3d.svg }
+  - id: squares-2x2
+    name: Squares 2x2
+    doc: docs/squares-2x2.md
+    keywords: [squares-2x2, squares, 2x2, grid, apps]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/squares-2x2.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/squares-2x2.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/squares-2x2.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/squares-2x2.svg }
+  - id: squares-plus
+    name: Squares Plus
+    doc: docs/squares-plus.md
+    keywords: [squares-plus, squares, plus, add, create, new, grid, apps]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/squares-plus.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/squares-plus.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/squares-plus.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/squares-plus.svg }
+  - id: star
+    name: Star
+    doc: docs/star.md
+    keywords: [star, favorite, rating]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/star.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/star.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/star.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/star.svg }
+  - id: stop
+    name: Stop
+    doc: docs/stop.md
+    keywords: [stop]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/stop.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/stop.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/stop.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/stop.svg }
+  - id: stop-circle
+    name: Stop Circle
+    doc: docs/stop-circle.md
+    keywords: [stop-circle, stop, circle]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/stop-circle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/stop-circle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/stop-circle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/stop-circle.svg }
+  - id: strikethrough
+    name: Strikethrough
+    doc: docs/strikethrough.md
+    keywords: [strikethrough]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/strikethrough.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/strikethrough.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/strikethrough.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/strikethrough.svg }
+  - id: sun
+    name: Sun
+    doc: docs/sun.md
+    keywords: [sun, light]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/sun.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/sun.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/sun.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/sun.svg }
+  - id: swatch
+    name: Swatch
+    doc: docs/swatch.md
+    keywords: [swatch, mention]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/swatch.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/swatch.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/swatch.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/swatch.svg }
+  - id: table-cells
+    name: Table Cells
+    doc: docs/table-cells.md
+    keywords: [table-cells, table, cells, list, data]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/table-cells.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/table-cells.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/table-cells.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/table-cells.svg }
+  - id: tag
+    name: Tag
+    doc: docs/tag.md
+    keywords: [tag, label]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/tag.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/tag.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/tag.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/tag.svg }
+  - id: ticket
+    name: Ticket
+    doc: docs/ticket.md
+    keywords: [ticket, pass, coupon]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/ticket.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/ticket.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/ticket.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/ticket.svg }
+  - id: trash
+    name: Trash
+    doc: docs/trash.md
+    keywords: [trash, delete, remove]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/trash.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/trash.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/trash.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/trash.svg }
+  - id: trophy
+    name: Trophy
+    doc: docs/trophy.md
+    keywords: [trophy]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/trophy.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/trophy.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/trophy.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/trophy.svg }
+  - id: truck
+    name: Truck
+    doc: docs/truck.md
+    keywords: [truck, logistics, delivery]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/truck.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/truck.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/truck.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/truck.svg }
+  - id: tv
+    name: Tv
+    doc: docs/tv.md
+    keywords: [tv]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/tv.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/tv.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/tv.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/tv.svg }
+  - id: underline
+    name: Underline
+    doc: docs/underline.md
+    keywords: [underline]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/underline.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/underline.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/underline.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/underline.svg }
+  - id: user
+    name: User
+    doc: docs/user.md
+    keywords: [user, account, profile, avatar]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/user.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/user.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/user.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/user.svg }
+  - id: user-circle
+    name: User Circle
+    doc: docs/user-circle.md
+    keywords: [user-circle, user, circle, account, profile, avatar]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/user-circle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/user-circle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/user-circle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/user-circle.svg }
+  - id: user-group
+    name: User Group
+    doc: docs/user-group.md
+    keywords: [user-group, user, group, account, profile, avatar]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/user-group.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/user-group.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/user-group.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/user-group.svg }
+  - id: user-minus
+    name: User Minus
+    doc: docs/user-minus.md
+    keywords: [user-minus, user, minus, account, profile, avatar]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/user-minus.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/user-minus.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/user-minus.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/user-minus.svg }
+  - id: user-plus
+    name: User Plus
+    doc: docs/user-plus.md
+    keywords: [user-plus, user, plus, add, create, new, account, profile, avatar]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/user-plus.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/user-plus.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/user-plus.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/user-plus.svg }
+  - id: users
+    name: Users
+    doc: docs/users.md
+    keywords: [users, account, profile, avatar]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/users.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/users.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/users.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/users.svg }
+  - id: variable
+    name: Variable
+    doc: docs/variable.md
+    keywords: [variable]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/variable.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/variable.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/variable.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/variable.svg }
+  - id: video-camera
+    name: Video Camera
+    doc: docs/video-camera.md
+    keywords: [video-camera, video, camera]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/video-camera.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/video-camera.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/video-camera.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/video-camera.svg }
+  - id: video-camera-slash
+    name: Video Camera Slash
+    doc: docs/video-camera-slash.md
+    keywords: [video-camera-slash, video, camera, slash]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/video-camera-slash.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/video-camera-slash.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/video-camera-slash.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/video-camera-slash.svg }
+  - id: view-columns
+    name: View Columns
+    doc: docs/view-columns.md
+    keywords: [view-columns, view, columns]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/view-columns.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/view-columns.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/view-columns.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/view-columns.svg }
+  - id: viewfinder-circle
+    name: Viewfinder Circle
+    doc: docs/viewfinder-circle.md
+    keywords: [viewfinder-circle, viewfinder, circle]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/viewfinder-circle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/viewfinder-circle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/viewfinder-circle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/viewfinder-circle.svg }
+  - id: wallet
+    name: Wallet
+    doc: docs/wallet.md
+    keywords: [wallet]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/wallet.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/wallet.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/wallet.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/wallet.svg }
+  - id: wifi
+    name: Wifi
+    doc: docs/wifi.md
+    keywords: [wifi, network]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/wifi.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/wifi.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/wifi.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/wifi.svg }
+  - id: window
+    name: Window
+    doc: docs/window.md
+    keywords: [window]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/window.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/window.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/window.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/window.svg }
+  - id: wrench
+    name: Wrench
+    doc: docs/wrench.md
+    keywords: [wrench, tool, maintenance]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/wrench.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/wrench.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/wrench.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/wrench.svg }
+  - id: wrench-screwdriver
+    name: Wrench Screwdriver
+    doc: docs/wrench-screwdriver.md
+    keywords: [wrench-screwdriver, wrench, screwdriver, tool, maintenance]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/wrench-screwdriver.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/wrench-screwdriver.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/wrench-screwdriver.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/wrench-screwdriver.svg }
+  - id: x-circle
+    name: X Circle
+    doc: docs/x-circle.md
+    keywords: [x-circle, circle]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/x-circle.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/x-circle.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/x-circle.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/x-circle.svg }
+  - id: x-mark
+    name: X Mark
+    doc: docs/x-mark.md
+    keywords: [x-mark, mark, close, clear, cancel]
+    files:
+      - { size: 24, style: outline, path: heroicons/24/outline/x-mark.svg }
+      - { size: 24, style: solid, path: heroicons/24/solid/x-mark.svg }
+      - { size: 20, style: solid, path: heroicons/20/solid/x-mark.svg }
+      - { size: 16, style: solid, path: heroicons/16/solid/x-mark.svg }

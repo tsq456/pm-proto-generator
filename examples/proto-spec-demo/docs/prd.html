@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PRD 汇总 — 园区巡检</title>
+  <link rel="stylesheet" href="../kits/ob-static/tokens.css" />
+  <link rel="stylesheet" href="../kits/ob-static/components.css" />
+  <link rel="stylesheet" href="../kits/ob-static/prototype.css" />
+  <link rel="stylesheet" href="../kits/proto-spec-runtime/proto-spec.css" />
+</head>
+<body>
+  <div class="proto-doc">
+    <div class="proto-doc__nav">
+      <a class="ob-link" href="../index.html">← 返回包入口</a>
+      ·
+      <a class="ob-link" href="../pages/inspect-plan-list.html">巡检计划</a>
+    </div>
+    <article>
+      <h1>PRD 汇总</h1>
+      <p class="meta">由 sitemap 聚合各页 proto-spec / business.md · 支持检索</p>
+      <div id="prdHub"></div>
+    </article>
+  </div>
+  <script src="../kits/proto-spec-runtime/proto-spec.js"></script>
+  <script>
+    ProtoSpecRuntime.mountPrdHub({
+      root: '#prdHub',
+      sitemapUrl: new URL('../sitemap.yaml', location.href).href,
+      specBase: new URL('../proto-spec/', location.href).href,
+      packageBase: new URL('../', location.href).href,
+      packagePrdUrl: new URL('./prd-intro.md', location.href).href,
+    });
+  </script>
+</body>
+</html>

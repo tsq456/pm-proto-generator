@@ -1,0 +1,305 @@
+/**
+ * Prototype chrome: annotations, PRD viewer, package index.
+ * Not part of OceanBase Design — for PM handoff only.
+ */
+
+:root {
+  --proto-accent: #c2410c;
+  --proto-accent-soft: #fff7ed;
+  --proto-accent-border: #fdba74;
+}
+
+/* ---- package home ---- */
+.proto-shell {
+  min-height: 100%;
+  background:
+    radial-gradient(1200px 500px at 10% -10%, #dbeafe 0%, transparent 55%),
+    radial-gradient(900px 400px at 100% 0%, #e0e7ff 0%, transparent 50%),
+    var(--ob-color-bg-secondary);
+}
+
+.proto-hero {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 56px 24px 32px;
+}
+
+.proto-hero__eyebrow {
+  margin: 0 0 8px;
+  font: var(--ob-font-caption);
+  color: var(--ob-color-text-link);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.proto-hero h1 {
+  margin: 0 0 12px;
+  font: 600 32px/1.25 var(--ob-font-family-default);
+  color: var(--ob-color-text-default);
+}
+
+.proto-hero p {
+  margin: 0;
+  max-width: 62ch;
+  font: var(--ob-font-body1);
+  color: var(--ob-color-text-label);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.proto-grid {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px 56px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 720px) {
+  .proto-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.proto-tile {
+  display: block;
+  padding: 20px;
+  background: var(--ob-color-bg-default);
+  border: 1px solid var(--ob-color-border-container);
+  border-radius: var(--ob-radius-lg);
+  color: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.proto-tile:hover {
+  border-color: var(--ob-blue-3);
+  box-shadow: var(--ob-shadow-2);
+  color: inherit;
+}
+
+.proto-tile__kicker {
+  font: var(--ob-font-caption);
+  color: var(--ob-color-text-description);
+  margin-bottom: 6px;
+}
+
+.proto-tile h2 {
+  margin: 0 0 8px;
+  font: var(--ob-font-h3);
+}
+
+.proto-tile p {
+  margin: 0;
+  font: var(--ob-font-body1);
+  color: var(--ob-color-text-label);
+}
+
+/* ---- annotation layer ---- */
+.proto-anno {
+  position: relative;
+}
+
+.proto-anno__badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  z-index: 5;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--proto-accent);
+  color: #fff;
+  font: 600 11px/22px var(--ob-font-family-default);
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(194, 65, 12, 0.35);
+  cursor: help;
+}
+
+.proto-anno[data-anno]:hover::after,
+.proto-anno[data-anno]:focus-within::after {
+  content: attr(data-anno);
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  top: calc(100% + 8px);
+  width: min(280px, 70vw);
+  padding: 10px 12px;
+  background: #1f2937;
+  color: #f9fafb;
+  border-radius: 8px;
+  font: 400 12px/1.5 var(--ob-font-family-default);
+  box-shadow: var(--ob-shadow-2);
+  pointer-events: none;
+}
+
+/* ---- floating interaction panel ---- */
+.proto-rail {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: min(320px, calc(100vw - 32px));
+  max-height: min(50vh, 420px);
+  overflow: auto;
+  background: var(--ob-color-bg-default);
+  border: 1px solid var(--proto-accent-border);
+  border-radius: var(--ob-radius-lg);
+  box-shadow: var(--ob-shadow-2);
+  z-index: 50;
+}
+
+.proto-rail__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--proto-accent-soft);
+  border-bottom: 1px solid var(--proto-accent-border);
+  font: var(--ob-font-h4);
+  color: var(--proto-accent);
+  position: sticky;
+  top: 0;
+}
+
+.proto-rail__body {
+  padding: 12px;
+  font: var(--ob-font-body2);
+  color: var(--ob-color-text-label);
+}
+
+.proto-rail ol {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.proto-rail li + li {
+  margin-top: 8px;
+}
+
+.proto-rail strong {
+  color: var(--ob-color-text-default);
+}
+
+.proto-toggle {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 51;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--proto-accent-border);
+  background: var(--proto-accent);
+  color: #fff;
+  font: var(--ob-font-body1);
+  cursor: pointer;
+  box-shadow: var(--ob-shadow-2);
+}
+
+.proto-rail.is-collapsed {
+  display: none;
+}
+
+/* ---- docs (PRD markdown-ish HTML) ---- */
+.proto-doc {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 40px 24px 72px;
+}
+
+/* PRD 汇总等：与视口等宽 */
+.proto-doc--fluid {
+  max-width: none;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 20px 24px 48px;
+}
+
+.proto-doc--fluid article {
+  max-width: none;
+  padding: 24px 28px 32px;
+}
+
+.proto-doc__nav {
+  margin-bottom: 24px;
+}
+
+.proto-doc article {
+  background: var(--ob-color-bg-default);
+  border: 1px solid var(--ob-color-border-container);
+  border-radius: var(--ob-radius-lg);
+  padding: 32px 36px;
+}
+
+.proto-doc h1 {
+  margin: 0 0 8px;
+  font: 600 28px/1.3 var(--ob-font-family-default);
+}
+
+.proto-doc .meta {
+  color: var(--ob-color-text-description);
+  font: var(--ob-font-body2);
+  margin-bottom: 28px;
+}
+
+.proto-doc h2 {
+  margin: 28px 0 12px;
+  font: var(--ob-font-h2);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--ob-color-divider);
+}
+
+.proto-doc h3 {
+  margin: 20px 0 8px;
+  font: var(--ob-font-h3);
+}
+
+.proto-doc p,
+.proto-doc li {
+  font: var(--ob-font-body1);
+  color: var(--ob-color-text-label);
+  line-height: 1.7;
+}
+
+.proto-doc ul,
+.proto-doc ol {
+  padding-left: 22px;
+}
+
+.proto-doc table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0 20px;
+  font: var(--ob-font-body1);
+}
+
+.proto-doc th,
+.proto-doc td {
+  border: 1px solid var(--ob-color-border-container);
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.proto-doc th {
+  background: var(--ob-color-bg-primary);
+  color: var(--ob-color-text-label);
+}
+
+.proto-doc code {
+  font-family: var(--ob-font-family-code);
+  font-size: 12px;
+  background: var(--ob-gray-2);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.proto-doc .callout {
+  padding: 12px 14px;
+  border-left: 3px solid var(--ob-blue-4);
+  background: var(--ob-blue-1);
+  border-radius: 0 var(--ob-radius-sm) var(--ob-radius-sm) 0;
+  margin: 16px 0;
+}

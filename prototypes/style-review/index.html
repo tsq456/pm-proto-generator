@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>样式评审样例 — 入口</title>
+  <link rel="stylesheet" href="kits/ob-static/tokens.css" />
+  <link rel="stylesheet" href="kits/ob-static/components.css" />
+</head>
+<body>
+  <div class="ob-app">
+    <main class="ob-content" style="max-width:920px;margin:0 auto">
+      <div class="ob-page-title">
+        <div>
+          <h1>样式评审样例</h1>
+          <p class="ob-page-title__desc">典型页 + ProtoMock 可写交互。列表请试：新建 / 删除 / 启停。</p>
+        </div>
+      </div>
+
+      <div class="ob-stack">
+        <section class="ob-card">
+          <div class="ob-card__head"><div class="ob-card__title">怎么标注</div></div>
+          <div class="ob-card__body">
+            <ol style="margin:0;padding-left:1.2em;color:var(--ob-color-text-navigation)">
+              <li>打开下方任一页面</li>
+              <li>点左下角「标注模式」，再点击不满意的区域</li>
+              <li>写下问题（颜色、间距、字号、控件形态、壳层等）</li>
+              <li>各页标完后点「导出标注 JSON」，把文件发我；或直接在对话里描述</li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="ob-card">
+          <div class="ob-card__head"><div class="ob-card__title">典型页面</div></div>
+          <div class="ob-card__body">
+            <table class="ob-table">
+              <thead>
+                <tr><th>页型</th><th>页面</th><th>覆盖内容</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>多应用壳</td>
+                  <td><a class="ob-link" href="pages/shell-multi-preview.html">壳层预览</a></td>
+                  <td>顶栏 L1 应用切换 + 左侧 L2 + 内容区（app-shell-multi）</td>
+                </tr>
+                <tr>
+                  <td>列表</td>
+                  <td><a class="ob-link" href="pages/tenant-list.html">租户列表</a></td>
+                  <td>壳层、筛选、表格；ProtoMock 新建/删除/启停可演示</td>
+                </tr>
+                <tr>
+                  <td>详情</td>
+                  <td><a class="ob-link" href="pages/tenant-detail.html">租户详情</a></td>
+                  <td>多列描述、宽弹窗编辑；与列表共享 Mock 数据</td>
+                </tr>
+                <tr>
+                  <td>表单</td>
+                  <td><a class="ob-link" href="pages/backup-policy-form.html">新建备份策略</a></td>
+                  <td>分步条、分区表单、开关/单选、底栏</td>
+                </tr>
+                <tr>
+                  <td>概览</td>
+                  <td><a class="ob-link" href="pages/cluster-overview.html">集群概览</a></td>
+                  <td>KPI、图表占位、告警列表</td>
+                </tr>
+                <tr>
+                  <td>结果</td>
+                  <td><a class="ob-link" href="pages/create-result.html">创建结果</a></td>
+                  <td>成功结果态与操作按钮</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

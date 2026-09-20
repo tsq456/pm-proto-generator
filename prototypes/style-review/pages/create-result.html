@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>创建结果 · 样式评审</title>
+  <link rel="stylesheet" href="../kits/ob-static/tokens.css" />
+  <link rel="stylesheet" href="../kits/ob-static/components.css" />
+</head>
+<body>
+  <div class="ob-app">
+    <div class="ob-layout">
+      <aside class="ob-sider">
+        <div class="ob-sider__brand">
+          <span class="ob-sider__brand-mark">OB</span>
+          <span>云数据库控制台</span>
+        </div>
+        <ul class="ob-menu">
+          <li class="ob-menu__section">运维监控</li>
+          <li class="ob-menu__item"><a href="cluster-overview.html"><span>集群概览</span></a></li>
+          <li class="ob-menu__section">资源管理</li>
+          <li class="ob-menu__item"><a href="tenant-list.html"><span>租户列表</span></a></li>
+          <li class="ob-menu__item is-active"><a href="backup-policy-form.html"><span>新建备份策略</span></a></li>
+          <li class="ob-menu__section">评审</li>
+          <li class="ob-menu__item"><a href="../index.html"><span>评审入口</span></a></li>
+        </ul>
+      </aside>
+      <div class="ob-main">
+        <header class="ob-header">
+          <nav class="ob-page-tabs" aria-label="已打开页面"></nav>
+          <div class="ob-header__right"><span class="ob-avatar">管</span></div>
+        </header>
+        <main class="ob-content">
+          <section class="ob-card">
+            <div class="ob-card__body">
+              <div class="ob-result">
+                <p class="ob-tag ob-tag--success">成功</p>
+                <h2 class="ob-result__title">备份策略创建成功</h2>
+                <p class="ob-result__desc">策略「日备-生产库」已提交，将于次日 02:00 首次执行全量备份。</p>
+                <div class="ob-result__actions">
+                  <a class="ob-btn ob-btn--primary" href="tenant-detail.html">查看租户详情</a>
+                  <a class="ob-btn ob-btn--default" href="tenant-list.html">返回列表</a>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </div>
+  <script src="../review-annotator.js"></script>
+</body>
+</html>

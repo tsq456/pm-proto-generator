@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>新建备份策略 · 样式评审</title>
+  <link rel="stylesheet" href="../kits/ob-static/tokens.css" />
+  <link rel="stylesheet" href="../kits/ob-static/components.css" />
+</head>
+<body>
+  <div class="ob-app">
+    <div class="ob-layout">
+      <aside class="ob-sider">
+        <div class="ob-sider__brand">
+          <span class="ob-sider__brand-mark">OB</span>
+          <span>云数据库控制台</span>
+        </div>
+        <ul class="ob-menu">
+          <li class="ob-menu__section">运维监控</li>
+          <li class="ob-menu__item"><a href="cluster-overview.html"><span>集群概览</span></a></li>
+          <li class="ob-menu__section">资源管理</li>
+          <li class="ob-menu__item"><a href="tenant-list.html"><span>租户列表</span></a></li>
+          <li class="ob-menu__item is-active"><a href="backup-policy-form.html"><span>新建备份策略</span></a></li>
+          <li class="ob-menu__section">评审</li>
+          <li class="ob-menu__item"><a href="../index.html"><span>评审入口</span></a></li>
+        </ul>
+      </aside>
+      <div class="ob-main">
+        <header class="ob-header">
+          <nav class="ob-page-tabs" aria-label="已打开页面"></nav>
+          <div class="ob-header__right"><span class="ob-avatar">管</span></div>
+        </header>
+        <main class="ob-content">
+          <div class="ob-page-title">
+            <div>
+              <h1>新建备份策略</h1>
+            </div>
+          </div>
+
+          <ol class="ob-steps">
+            <li class="ob-steps__item is-done"><span class="ob-steps__num">1</span>基本信息</li>
+            <li class="ob-steps__item is-active"><span class="ob-steps__num">2</span>调度与保留</li>
+            <li class="ob-steps__item"><span class="ob-steps__num">3</span>确认提交</li>
+          </ol>
+
+          <div class="ob-stack">
+            <section class="ob-card">
+              <div class="ob-card__head"><div class="ob-card__title">基本信息</div></div>
+              <div class="ob-card__body">
+                <div class="ob-form-row--3">
+                  <div class="ob-field">
+                    <label class="ob-field__label"><span class="req">*</span>策略名称</label>
+                    <input class="ob-input" placeholder="例如：日备-生产库" value="日备-生产库" />
+                  </div>
+                  <div class="ob-field">
+                    <label class="ob-field__label"><span class="req">*</span>所属租户</label>
+                    <select class="ob-select">
+                      <option>请选择</option>
+                      <option selected>prod-tenant-01</option>
+                      <option>finance-core</option>
+                    </select>
+                  </div>
+                  <div class="ob-field">
+                    <label class="ob-field__label"><span class="req">*</span>备份类型</label>
+                    <div class="ob-radio-group" role="radiogroup">
+                      <label class="ob-radio">
+                        <input type="radio" class="ob-radio__input" name="btype" value="full" checked />
+                        <span class="ob-radio__dot" aria-hidden="true"></span>
+                        <span class="ob-radio__label">全量</span>
+                      </label>
+                      <label class="ob-radio">
+                        <input type="radio" class="ob-radio__input" name="btype" value="inc" />
+                        <span class="ob-radio__dot" aria-hidden="true"></span>
+                        <span class="ob-radio__label">增量</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="ob-form-row">
+                  <div class="ob-field">
+                    <label class="ob-field__label">启用策略</label>
+                    <label class="ob-switch-field">
+                      <button type="button" class="ob-switch is-checked" role="switch" aria-checked="true" data-ob-switch>
+                        <span class="ob-switch__handle" aria-hidden="true"></span>
+                      </button>
+                      <span class="ob-switch-field__text">开启自动调度</span>
+                    </label>
+                    <div class="ob-field__hint">关闭后仅保存草稿，不会自动调度</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="ob-card">
+              <div class="ob-card__head"><div class="ob-card__title">调度与保留</div></div>
+              <div class="ob-card__body">
+                <div class="ob-form-row--3">
+                  <div class="ob-field">
+                    <label class="ob-field__label"><span class="req">*</span>执行周期</label>
+                    <select class="ob-select">
+                      <option selected>每天</option>
+                      <option>每周</option>
+                      <option>每月</option>
+                    </select>
+                  </div>
+                  <div class="ob-field">
+                    <label class="ob-field__label"><span class="req">*</span>开始时间</label>
+                    <input class="ob-input" type="time" value="02:00" />
+                  </div>
+                  <div class="ob-field">
+                    <label class="ob-field__label"><span class="req">*</span>保留天数</label>
+                    <input class="ob-input" type="number" value="7" />
+                    <div class="ob-field__hint">超出保留期的备份将自动清理</div>
+                  </div>
+                </div>
+                <div class="ob-form-row">
+                  <div class="ob-field">
+                    <label class="ob-field__label">存储介质</label>
+                    <select class="ob-select">
+                      <option selected>对象存储</option>
+                      <option>本地盘</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="ob-field">
+                  <label class="ob-field__label">策略说明</label>
+                  <textarea class="ob-textarea" rows="3" placeholder="说明适用场景与注意事项">适用于生产库日常全量备份，失败时通知值班群。</textarea>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="ob-footer-bar">
+            <a class="ob-btn ob-btn--default" href="tenant-list.html">取消</a>
+            <button type="button" class="ob-btn ob-btn--default">上一步</button>
+            <a class="ob-btn ob-btn--primary" href="create-result.html">提交</a>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+  <script src="../kits/ob-static/controls.js"></script>
+  <script src="../review-annotator.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+# 由 proto-spec-generator 维护；schema 见 references/sitemap.md
+# page.id 必须为 {entity}-{pageType}，如 tenant-list / tenant-detail
+docVersion: "0.1.0"
+updatedAt: 2026-09-17
+scenario: multi-user # multi-user | multi-product
+status: draft # draft | reviewing | confirmed
+# 壳层：app-shell（单应用，默认）| app-shell-multi（顶栏 L1 应用 + 侧栏当前应用 L2）
+shell: app-shell
+
+groups:
+  - id: role-admin
+    level: L1
+    name: 管理员
+    children:
+      - id: mod-tenant
+        level: L2
+        name: 租户管理
+        children: []
+
+pages:
+  - id: tenant-list
+    name: 租户列表
+    groupId: mod-tenant
+    layout: list-filter-table
+    status: draft
+    version: "0.1.0"
+    path: pages/tenant-list.html
+    hideInPrdPageList: false
+    children:
+      - id: tenant-detail
+        name: 租户详情
+        layout: detail-descriptions
+        status: planned
+        version: "0.1.0"
+        path: pages/tenant-detail.html
+        hideInPrdPageList: false
+      - id: tenant-create
+        name: 新建租户
+        layout: form-page
+        status: planned
+        version: "0.1.0"
+        path: pages/tenant-create.html
+        hideInPrdPageList: false

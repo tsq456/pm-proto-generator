@@ -1,0 +1,43 @@
+version: 1
+updatedAt: 2026-09-17
+
+labels:
+  inspect-plan-list: 巡检计划列表
+  inspect-plan-detail: 巡检计划详情
+  inspect-task-list: 巡检任务列表
+
+package:
+  - date: 2026-09-17
+    summary: 包内 vendoring kits，可单独部署
+    items:
+      - 复制 kits/ob-static、kits/proto-spec-runtime 到包内
+      - HTML 改为引用包内 kits/（入口 kits/，pages/docs 用 ../kits/）
+  - date: 2026-09-17
+    summary: 示范包按 P0/P1 收敛约定
+    items:
+      - page-id 改为 {entity}-{pageType}；业务页迁入 pages/
+      - 补齐详情（档案弹窗编辑）与任务列表，形成跨页链路
+      - 修正 kits 相对路径
+
+pages:
+  inspect-plan-list:
+    - date: 2026-09-16
+      summary: 巡检计划列表页首版 Spec
+      items:
+        - 补齐业务目标、角色与 BR-001～003
+        - 字段 status / cycle 枚举与启停交互说明
+    - date: 2026-09-17
+      summary: 重命名为 inspect-plan-list 并对齐命名约定
+      items:
+        - 原 task-plan 迁移为本 id
+        - 异常分支改为表格；补充跨页交互
+  inspect-plan-detail:
+    - date: 2026-09-17
+      summary: 详情 + 宽弹窗编辑样例
+      items:
+        - 落地 profile-edit-modal 模式
+  inspect-task-list:
+    - date: 2026-09-17
+      summary: 任务列表页上线（跨页链路）
+      items:
+        - 自计划列表/详情可进入

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>集群概览 · 样式评审</title>
+  <link rel="stylesheet" href="../kits/ob-static/tokens.css" />
+  <link rel="stylesheet" href="../kits/ob-static/components.css" />
+</head>
+<body>
+  <div class="ob-app">
+    <div class="ob-layout">
+      <aside class="ob-sider">
+        <div class="ob-sider__brand">
+          <span class="ob-sider__brand-mark">OB</span>
+          <span>云数据库控制台</span>
+        </div>
+        <ul class="ob-menu">
+          <li class="ob-menu__section">运维监控</li>
+          <li class="ob-menu__item is-active"><a href="cluster-overview.html"><span>集群概览</span></a></li>
+          <li class="ob-menu__section">资源管理</li>
+          <li class="ob-menu__item"><a href="tenant-list.html"><span>租户列表</span></a></li>
+          <li class="ob-menu__item"><a href="backup-policy-form.html"><span>新建备份策略</span></a></li>
+          <li class="ob-menu__section">评审</li>
+          <li class="ob-menu__item"><a href="../index.html"><span>评审入口</span></a></li>
+        </ul>
+      </aside>
+      <div class="ob-main">
+        <header class="ob-header">
+          <nav class="ob-page-tabs" aria-label="已打开页面"></nav>
+          <div class="ob-header__right"><span class="ob-avatar">管</span></div>
+        </header>
+        <main class="ob-content">
+          <div class="ob-page-title">
+            <div>
+              <h1>集群概览</h1>
+            </div>
+            <div class="ob-page-title__actions">
+              <select class="ob-select" style="width:140px">
+                <option>近 7 日</option>
+                <option>近 30 日</option>
+              </select>
+              <button type="button" class="ob-btn ob-btn--default">刷新</button>
+            </div>
+          </div>
+
+          <div class="ob-stack">
+            <div class="ob-kpi-grid">
+              <div class="ob-kpi">
+                <p class="ob-kpi__label">租户数</p>
+                <p class="ob-kpi__value">128</p>
+                <p class="ob-kpi__hint">较昨日 +3</p>
+              </div>
+              <div class="ob-kpi">
+                <p class="ob-kpi__label">告警中</p>
+                <p class="ob-kpi__value">6</p>
+                <p class="ob-kpi__hint">P1：1</p>
+              </div>
+              <div class="ob-kpi">
+                <p class="ob-kpi__label">CPU 平均使用率</p>
+                <p class="ob-kpi__value">62%</p>
+                <p class="ob-kpi__hint">峰值 88%</p>
+              </div>
+              <div class="ob-kpi">
+                <p class="ob-kpi__label">备份成功率</p>
+                <p class="ob-kpi__value">99.2%</p>
+                <p class="ob-kpi__hint">近 7 日</p>
+              </div>
+            </div>
+
+            <div class="ob-chart-grid">
+              <section class="ob-card">
+                <div class="ob-card__head"><div class="ob-card__title">CPU 使用趋势</div></div>
+                <div class="ob-card__body">
+                  <div class="ob-chart-placeholder" aria-label="折线占位">
+                    <span class="ob-chart-placeholder__bar" style="height:40%"></span>
+                    <span class="ob-chart-placeholder__bar" style="height:55%"></span>
+                    <span class="ob-chart-placeholder__bar" style="height:48%"></span>
+                    <span class="ob-chart-placeholder__bar" style="height:70%"></span>
+                    <span class="ob-chart-placeholder__bar" style="height:62%"></span>
+                    <span class="ob-chart-placeholder__bar" style="height:80%"></span>
+                    <span class="ob-chart-placeholder__bar" style="height:58%"></span>
+                  </div>
+                </div>
+              </section>
+              <section class="ob-card">
+                <div class="ob-card__head"><div class="ob-card__title">告警分布</div></div>
+                <div class="ob-card__body">
+                  <div class="ob-chart-placeholder" aria-label="柱状占位">
+                    <span class="ob-chart-placeholder__bar" style="height:30%"></span>
+                    <span class="ob-chart-placeholder__bar" style="height:65%"></span>
+                    <span class="ob-chart-placeholder__bar" style="height:45%"></span>
+                    <span class="ob-chart-placeholder__bar" style="height:20%"></span>
+                    <span class="ob-chart-placeholder__bar" style="height:50%"></span>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <section class="ob-card">
+              <div class="ob-card__head">
+                <div class="ob-card__title">活跃告警</div>
+                <a class="ob-link" href="tenant-list.html">查看全部</a>
+              </div>
+              <div class="ob-card__body ob-card__body--flush">
+                <div class="ob-table-wrap">
+                  <table class="ob-table">
+                    <thead>
+                      <tr><th>级别</th><th>对象</th><th>摘要</th><th>持续时长</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><span class="ob-tag ob-tag--error">P1</span></td>
+                        <td>prod-tenant-01</td>
+                        <td>主备延迟超过阈值</td>
+                        <td>18 分钟</td>
+                      </tr>
+                      <tr>
+                        <td><span class="ob-tag ob-tag--warning">P2</span></td>
+                        <td>ob-prod-01</td>
+                        <td>磁盘使用率 85%</td>
+                        <td>2 小时</td>
+                      </tr>
+                      <tr>
+                        <td><span class="ob-tag ob-tag--warning">P2</span></td>
+                        <td>finance-core</td>
+                        <td>慢查询突增</td>
+                        <td>41 分钟</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+  <script src="../kits/ob-static/controls.js"></script>
+  <script src="../review-annotator.js"></script>
+</body>
+</html>

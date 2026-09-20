@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>租户详情 · 样式评审</title>
+  <link rel="stylesheet" href="../kits/ob-static/tokens.css" />
+  <link rel="stylesheet" href="../kits/ob-static/components.css" />
+</head>
+<body>
+  <div class="ob-app">
+    <div class="ob-layout">
+      <aside class="ob-sider">
+        <div class="ob-sider__brand">
+          <span class="ob-sider__brand-mark">OB</span>
+          <span>云数据库控制台</span>
+        </div>
+        <ul class="ob-menu">
+          <li class="ob-menu__section">运维监控</li>
+          <li class="ob-menu__item"><a href="cluster-overview.html"><span>集群概览</span></a></li>
+          <li class="ob-menu__section">资源管理</li>
+          <li class="ob-menu__item is-active"><a href="tenant-list.html"><span>租户列表</span></a></li>
+          <li class="ob-menu__item"><a href="backup-policy-form.html"><span>新建备份策略</span></a></li>
+          <li class="ob-menu__section">评审</li>
+          <li class="ob-menu__item"><a href="../index.html"><span>评审入口</span></a></li>
+        </ul>
+      </aside>
+      <div class="ob-main">
+        <header class="ob-header">
+          <nav class="ob-page-tabs" aria-label="已打开页面"></nav>
+          <div class="ob-header__right"><span class="ob-avatar">管</span></div>
+        </header>
+        <main class="ob-content">
+          <div class="ob-page-title">
+            <div>
+              <h1 id="pageTitle">租户详情</h1>
+            </div>
+            <div class="ob-page-title__actions">
+              <a class="ob-btn ob-btn--default" href="tenant-list.html">返回列表</a>
+              <button type="button" class="ob-btn ob-btn--default" id="btnToggleStatus">停用</button>
+              <button type="button" class="ob-btn ob-btn--primary" id="btnEdit">编辑信息</button>
+            </div>
+          </div>
+
+          <div class="ob-tabs" style="margin-bottom:16px">
+            <a href="#basic" class="is-active">基本信息</a>
+            <a href="#quota">配额</a>
+            <a href="#log">操作日志</a>
+          </div>
+
+          <div class="ob-stack">
+            <section class="ob-card" id="basic">
+              <div class="ob-card__head">
+                <div class="ob-card__title">基本信息</div>
+                <button type="button" class="ob-btn ob-btn--primary ob-btn--sm" id="btnEditCard">编辑</button>
+              </div>
+              <div class="ob-card__body">
+                <dl class="ob-desc">
+                  <div class="ob-desc__item">
+                    <dt>租户名</dt>
+                    <dd id="vName">—</dd>
+                  </div>
+                  <div class="ob-desc__item">
+                    <dt>租户模式</dt>
+                    <dd id="vMode">MySQL</dd>
+                  </div>
+                  <div class="ob-desc__item">
+                    <dt>所属集群</dt>
+                    <dd id="vCluster">—</dd>
+                  </div>
+                  <div class="ob-desc__item">
+                    <dt>字符集</dt>
+                    <dd>utf8mb4</dd>
+                  </div>
+                  <div class="ob-desc__item">
+                    <dt>创建时间</dt>
+                    <dd id="vCreated">—</dd>
+                  </div>
+                  <div class="ob-desc__item ob-desc__item--full">
+                    <dt>备注</dt>
+                    <dd id="vRemark">—</dd>
+                  </div>
+                </dl>
+              </div>
+            </section>
+
+            <section class="ob-card" id="quota">
+              <div class="ob-card__head"><div class="ob-card__title">配额</div></div>
+              <div class="ob-card__body">
+                <dl class="ob-desc">
+                  <div class="ob-desc__item">
+                    <dt>CPU</dt>
+                    <dd>16 C</dd>
+                  </div>
+                  <div class="ob-desc__item">
+                    <dt>内存</dt>
+                    <dd>64 GB</dd>
+                  </div>
+                  <div class="ob-desc__item">
+                    <dt>日志盘</dt>
+                    <dd>200 GB</dd>
+                  </div>
+                  <div class="ob-desc__item">
+                    <dt>数据盘</dt>
+                    <dd>2 TB</dd>
+                  </div>
+                  <div class="ob-desc__item">
+                    <dt>IOPS 上限</dt>
+                    <dd>20000</dd>
+                  </div>
+                  <div class="ob-desc__item">
+                    <dt>连接数上限</dt>
+                    <dd>4000</dd>
+                  </div>
+                </dl>
+              </div>
+            </section>
+
+            <section class="ob-card" id="log">
+              <div class="ob-card__head"><div class="ob-card__title">操作日志</div></div>
+              <div class="ob-card__body ob-card__body--flush">
+                <div class="ob-table-wrap">
+                  <table class="ob-table">
+                    <thead>
+                      <tr><th>时间</th><th>操作人</th><th>动作</th><th>结果</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>2026-09-10 11:22</td>
+                        <td>张管理员</td>
+                        <td>调整内存配额 48→64 GB</td>
+                        <td><span class="ob-tag ob-tag--success">成功</span></td>
+                      </tr>
+                      <tr>
+                        <td>2026-08-02 09:01</td>
+                        <td>李运维</td>
+                        <td>开启自动备份</td>
+                        <td><span class="ob-tag ob-tag--success">成功</span></td>
+                      </tr>
+                      <tr>
+                        <td>2026-03-01 10:00</td>
+                        <td>系统</td>
+                        <td>创建租户</td>
+                        <td><span class="ob-tag ob-tag--success">成功</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <div class="ob-mask" id="editMask">
+    <div class="ob-modal ob-modal--wide" id="editModal" role="dialog" aria-modal="true">
+      <div class="ob-modal__head">
+        <strong class="ob-modal__title">编辑信息</strong>
+        <button type="button" class="ob-modal__close" id="closeEdit" aria-label="关闭">×</button>
+      </div>
+      <div class="ob-modal__body" style="max-height:70vh;overflow:auto">
+        <div class="ob-form-grid-2">
+          <div class="ob-field">
+            <label class="ob-field__label"><span class="req">*</span>租户名</label>
+            <input class="ob-input" id="fName" />
+          </div>
+          <div class="ob-field">
+            <label class="ob-field__label"><span class="req">*</span>租户模式</label>
+            <select class="ob-select" id="fMode"><option>MySQL</option><option>Oracle</option></select>
+          </div>
+          <div class="ob-field ob-field--full">
+            <label class="ob-field__label">备注</label>
+            <textarea class="ob-textarea" id="fRemark" rows="3"></textarea>
+            <div class="ob-field__hint">所属集群与创建时间只读，不在弹窗内编辑</div>
+          </div>
+        </div>
+      </div>
+      <div class="ob-modal__foot">
+        <button type="button" class="ob-btn ob-btn--default" id="cancelEdit">取消</button>
+        <button type="button" class="ob-btn ob-btn--primary" id="saveEdit">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../kits/ob-static/controls.js"></script>
+  <script src="../kits/proto-mock/mock-store.js"></script>
+  <script>
+    const STATUS_HTML = {
+      running: '<span class="ob-status ob-status--running"><span class="ob-status__dot"></span>运行中</span>',
+      stopped: '<span class="ob-tag ob-tag--default">已停止</span>',
+      creating: '<span class="ob-status ob-status--creating"><span class="ob-status__dot"></span>创建中</span>',
+    };
+
+    let currentId = null;
+
+    function openEdit(open) {
+      document.getElementById('editMask').classList.toggle('is-open', open);
+      document.getElementById('editModal').classList.toggle('is-open', open);
+    }
+
+    function fill(row) {
+      if (!row) {
+        document.getElementById('pageTitle').textContent = '未找到租户';
+        return;
+      }
+      currentId = row.id;
+      document.getElementById('pageTitle').innerHTML =
+        ProtoMock.escape(row.name) + ' ' + (STATUS_HTML[row.status] || '');
+      document.getElementById('vName').textContent = row.name || '—';
+      document.getElementById('vMode').textContent = row.mode || 'MySQL';
+      document.getElementById('vCluster').textContent = row.cluster || '—';
+      document.getElementById('vCreated').textContent = row.createdAt || '—';
+      document.getElementById('vRemark').textContent = row.remark || '—';
+      document.getElementById('fName').value = row.name || '';
+      document.getElementById('fMode').value = row.mode || 'MySQL';
+      document.getElementById('fRemark').value = row.remark || '';
+      const btn = document.getElementById('btnToggleStatus');
+      btn.textContent = row.status === 'stopped' ? '启用' : '停用';
+      btn.disabled = row.status === 'creating';
+    }
+
+    document.getElementById('btnEdit').onclick = () => openEdit(true);
+    document.getElementById('btnEditCard').onclick = () => openEdit(true);
+    document.getElementById('closeEdit').onclick = () => openEdit(false);
+    document.getElementById('cancelEdit').onclick = () => openEdit(false);
+    document.getElementById('saveEdit').onclick = () => {
+      if (!currentId) return;
+      const name = (document.getElementById('fName').value || '').trim();
+      if (!name) return;
+      const updated = ProtoMock.update('tenant', currentId, {
+        name: name,
+        mode: document.getElementById('fMode').value,
+        remark: document.getElementById('fRemark').value,
+      });
+      fill(updated);
+      openEdit(false);
+    };
+    document.getElementById('btnToggleStatus').onclick = () => {
+      if (!currentId) return;
+      const row = ProtoMock.get('tenant', currentId);
+      if (!row || row.status === 'creating') return;
+      const next = row.status === 'stopped' ? 'running' : 'stopped';
+      fill(ProtoMock.update('tenant', currentId, { status: next }));
+    };
+
+    ProtoMock.bootstrap({
+      namespace: 'style-review',
+      entities: {
+        tenant: { idKey: 'id', seedUrl: '../mock-data/tenants.json' },
+      },
+    }).then(() => {
+      const id = ProtoMock.queryParam('id') || 't-001';
+      fill(ProtoMock.get('tenant', id));
+    });
+  </script>
+  <script src="../review-annotator.js"></script>
+</body>
+</html>

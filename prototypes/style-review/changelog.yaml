@@ -1,0 +1,19 @@
+version: 1
+updatedAt: "2026-09-17"
+
+labels: {}
+
+package:
+  - date: "2026-09-17"
+    summary: 补齐 ProtoMock 可写交互
+    items:
+      - 接入 kits/proto-mock；种子 mock-data/tenants.json
+      - 租户列表支持新建/删除/启停并跨页同步详情
+  - date: "2026-09-17"
+    summary: 初始化样式评审样例包
+    items:
+      - 复制 kits/ob-static、kits/proto-spec-runtime
+      - 五类典型页：列表 / 详情 / 表单 / 概览 / 结果
+      - 页内标注工具 review-annotator.js
+
+pages: {}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>园区运维原型 — 入口</title>
+  <link rel="stylesheet" href="kits/ob-static/tokens.css" />
+  <link rel="stylesheet" href="kits/ob-static/components.css" />
+</head>
+<body>
+  <div class="ob-app">
+    <main class="ob-content" style="max-width:880px;margin:0 auto">
+      <div class="ob-page-title">
+        <div>
+          <h1>园区运维 · 原型说明 Demo</h1>
+          <p>示范包：page-id 使用 <code>{entity}-{pageType}</code>；业务页在 <code>pages/</code>；须用 http(s) 打开。</p>
+        </div>
+      </div>
+      <div class="ob-stack">
+        <section class="ob-card">
+          <div class="ob-card__head"><div class="ob-card__title">业务页面</div></div>
+          <div class="ob-card__body">
+            <table class="ob-table">
+              <thead>
+                <tr><th>page-id</th><th>名称</th><th>说明</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>inspect-plan-list</code></td>
+                  <td><a class="ob-link" href="pages/inspect-plan-list.html">巡检计划列表</a></td>
+                  <td>列表三区 + Filter；跨页到详情/任务</td>
+                </tr>
+                <tr>
+                  <td><code>inspect-plan-detail</code></td>
+                  <td><a class="ob-link" href="pages/inspect-plan-detail.html">巡检计划详情</a></td>
+                  <td>biz-page：档案弹窗编辑（宽 Modal）</td>
+                </tr>
+                <tr>
+                  <td><code>inspect-task-list</code></td>
+                  <td><a class="ob-link" href="pages/inspect-task-list.html">巡检任务列表</a></td>
+                  <td>跨页链路终点</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="ob-card">
+          <div class="ob-card__head"><div class="ob-card__title">文档与 Spec</div></div>
+          <div class="ob-card__body">
+            <p><a class="ob-link" href="docs/prd.html">PRD 汇总</a>（sitemap 聚合 business.md）</p>
+            <p><a class="ob-link" href="sitemap.yaml">sitemap.yaml</a> · <a class="ob-link" href="changelog.yaml">changelog.yaml</a> · <code>proto-spec/&lt;page-id&gt;/</code></p>
+            <p class="ob-field__hint">kits 路径：入口 <code>kits/</code>；业务页 <code>../kits/</code>；docs <code>../kits/</code>。</p>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

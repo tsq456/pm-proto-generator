@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>租户列表 · 样式评审</title>
+  <link rel="stylesheet" href="../kits/ob-static/tokens.css" />
+  <link rel="stylesheet" href="../kits/ob-static/components.css" />
+</head>
+<body>
+  <div class="ob-app">
+    <div class="ob-layout">
+      <aside class="ob-sider">
+        <div class="ob-sider__brand">
+          <span class="ob-sider__brand-mark">OB</span>
+          <span>云数据库控制台</span>
+        </div>
+        <ul class="ob-menu">
+          <li class="ob-menu__section">运维监控</li>
+          <li class="ob-menu__item"><a href="cluster-overview.html"><span>集群概览</span></a></li>
+          <li class="ob-menu__section">资源管理</li>
+          <li class="ob-menu__item is-active"><a href="tenant-list.html"><span>租户列表</span></a></li>
+          <li class="ob-menu__item"><a href="backup-policy-form.html"><span>新建备份策略</span></a></li>
+          <li class="ob-menu__section">评审</li>
+          <li class="ob-menu__item"><a href="../index.html"><span>评审入口</span></a></li>
+        </ul>
+      </aside>
+      <div class="ob-main">
+        <header class="ob-header">
+          <nav class="ob-page-tabs" aria-label="已打开页面"></nav>
+          <div class="ob-header__right"><span class="ob-avatar">管</span></div>
+        </header>
+        <main class="ob-content">
+          <div id="flash" class="ob-alert" style="display:none;margin-bottom:16px"></div>
+          <div class="ob-page-title">
+            <div>
+              <h1>租户列表</h1>
+            </div>
+            <div class="ob-page-title__actions">
+              <button type="button" class="ob-btn ob-btn--primary" id="btnCreate">新建租户</button>
+            </div>
+          </div>
+          <div class="ob-stack">
+            <section class="ob-card">
+              <div class="ob-card__body">
+                <div class="ob-filter">
+                  <input class="ob-input" id="qKeyword" placeholder="搜索租户名" style="max-width:220px" />
+                  <div class="ob-filter-item" id="filterStatus">
+                    <button type="button" class="ob-filter-trigger">
+                      <span data-filter-label>状态</span>
+                      <span class="ob-filter-trigger__caret" aria-hidden="true"></span>
+                    </button>
+                    <div class="ob-filter-panel" role="listbox">
+                      <div class="ob-filter-panel__title">状态</div>
+                      <div class="ob-filter-panel__list">
+                        <button type="button" class="ob-filter-panel__item is-active" data-value="" data-label="状态">全部</button>
+                        <button type="button" class="ob-filter-panel__item" data-value="running" data-label="运行中">运行中</button>
+                        <button type="button" class="ob-filter-panel__item" data-value="stopped" data-label="已停止">已停止</button>
+                        <button type="button" class="ob-filter-panel__item" data-value="creating" data-label="创建中">创建中</button>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="ob-filter__spacer"></span>
+                  <button type="button" class="ob-btn ob-btn--primary" id="btnQuery">查询</button>
+                  <button type="button" class="ob-btn ob-btn--default" id="btnResetFilter">重置</button>
+                </div>
+              </div>
+            </section>
+            <section class="ob-card">
+              <div class="ob-card__body ob-card__body--flush">
+                <div class="ob-table-wrap">
+                  <table class="ob-table">
+                    <thead>
+                      <tr>
+                        <th>租户名</th>
+                        <th>状态</th>
+                        <th>所属集群</th>
+                        <th>CPU / 内存</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tenantTbody"></tbody>
+                  </table>
+                </div>
+                <div class="ob-table-footer">
+                  <span id="tenantCount">共 0 条</span>
+                  <div class="ob-pagination">
+                    <button type="button" class="is-active">1</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- 新建 -->
+  <div class="ob-mask" id="createMask">
+    <aside class="ob-drawer" id="createDrawer" aria-label="新建租户">
+      <div class="ob-drawer__head">
+        <div class="ob-drawer__title">新建租户</div>
+        <button type="button" class="ob-drawer__close" id="closeCreate" aria-label="关闭">×</button>
+      </div>
+      <div class="ob-drawer__body">
+        <div class="ob-field">
+          <label class="ob-field__label"><span class="req">*</span>租户名</label>
+          <input class="ob-input" id="fName" placeholder="请输入租户名" />
+        </div>
+        <div class="ob-field">
+          <label class="ob-field__label"><span class="req">*</span>所属集群</label>
+          <select class="ob-select" id="fCluster">
+            <option value="ob-prod-01">ob-prod-01</option>
+            <option value="ob-test-02">ob-test-02</option>
+          </select>
+        </div>
+        <div class="ob-field">
+          <label class="ob-field__label">CPU / 内存</label>
+          <input class="ob-input" id="fCpuMem" value="8 C / 32 GB" />
+        </div>
+      </div>
+      <div class="ob-drawer__foot">
+        <button type="button" class="ob-btn ob-btn--default" id="cancelCreate">取消</button>
+        <button type="button" class="ob-btn ob-btn--primary" id="submitCreate">确定</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- 删除确认 -->
+  <div class="ob-mask" id="delMask">
+    <div class="ob-modal" id="delModal" role="dialog" aria-modal="true">
+      <div class="ob-modal__head">
+        <strong class="ob-modal__title">删除租户</strong>
+        <button type="button" class="ob-modal__close" id="closeDel" aria-label="关闭">×</button>
+      </div>
+      <div class="ob-modal__body">
+        <p id="delText">确定删除该租户？此操作仅影响原型 Mock 数据。</p>
+      </div>
+      <div class="ob-modal__foot">
+        <button type="button" class="ob-btn ob-btn--default" id="cancelDel">取消</button>
+        <button type="button" class="ob-btn ob-btn--danger" id="confirmDel">删除</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../kits/ob-static/filter-dropdown.js"></script>
+  <script src="../kits/ob-static/controls.js"></script>
+  <script src="../kits/proto-mock/mock-store.js"></script>
+  <script src="../review-annotator.js"></script>
+  <script>
+    const STATUS_HTML = {
+      running: '<span class="ob-status ob-status--running"><span class="ob-status__dot"></span>运行中</span>',
+      stopped: '<span class="ob-tag ob-tag--default">已停止</span>',
+      creating: '<span class="ob-status ob-status--creating"><span class="ob-status__dot"></span>创建中</span>',
+    };
+
+    let filterStatus = '';
+    let appliedKw = '';
+    let pendingDeleteId = null;
+
+    function flash(msg) {
+      const el = document.getElementById('flash');
+      el.textContent = msg;
+      el.style.display = 'block';
+      clearTimeout(flash._t);
+      flash._t = setTimeout(() => { el.style.display = 'none'; }, 2500);
+    }
+
+    function openDrawer(open) {
+      document.getElementById('createMask').classList.toggle('is-open', open);
+      document.getElementById('createDrawer').classList.toggle('is-open', open);
+    }
+
+    function openDel(open) {
+      document.getElementById('delMask').classList.toggle('is-open', open);
+      document.getElementById('delModal').classList.toggle('is-open', open);
+    }
+
+    function filteredRows() {
+      const kw = appliedKw;
+      return ProtoMock.list('tenant').filter((r) => {
+        if (filterStatus && r.status !== filterStatus) return false;
+        if (kw && String(r.name).toLowerCase().indexOf(kw) < 0) return false;
+        return true;
+      });
+    }
+
+    function render() {
+      const rows = filteredRows();
+      const tbody = document.getElementById('tenantTbody');
+      document.getElementById('tenantCount').textContent = '共 ' + rows.length + ' 条';
+      if (!rows.length) {
+        tbody.innerHTML = '<tr><td colspan="6"><div class="ob-empty">暂无数据</div></td></tr>';
+        return;
+      }
+      tbody.innerHTML = rows.map((r) => {
+        const id = ProtoMock.escape(r.id);
+        const name = ProtoMock.escape(r.name);
+        const toggleLabel = r.status === 'stopped' ? '启用' : (r.status === 'creating' ? '取消' : '停用');
+        const toggleAction = r.status === 'stopped' ? 'start' : (r.status === 'creating' ? 'cancel' : 'stop');
+        return (
+          '<tr data-id="' + id + '">' +
+            '<td>' + name + '</td>' +
+            '<td>' + (STATUS_HTML[r.status] || ProtoMock.escape(r.status)) + '</td>' +
+            '<td>' + ProtoMock.escape(r.cluster) + '</td>' +
+            '<td>' + ProtoMock.escape(r.cpuMem) + '</td>' +
+            '<td>' + ProtoMock.escape(r.createdAt) + '</td>' +
+            '<td class="ob-table__actions">' +
+              '<a class="ob-link" href="tenant-detail.html?id=' + encodeURIComponent(r.id) + '">详情</a>' +
+              '<button type="button" class="ob-link" data-action="' + toggleAction + '">' + toggleLabel + '</button>' +
+              '<button type="button" class="ob-link" data-action="delete">删除</button>' +
+            '</td>' +
+          '</tr>'
+        );
+      }).join('');
+    }
+
+    document.getElementById('tenantTbody').addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      const tr = btn.closest('tr');
+      const id = tr && tr.getAttribute('data-id');
+      if (!id) return;
+      const action = btn.getAttribute('data-action');
+      if (action === 'delete') {
+        pendingDeleteId = id;
+        const row = ProtoMock.get('tenant', id);
+        document.getElementById('delText').textContent =
+          '确定删除租户「' + (row && row.name ? row.name : id) + '」？此操作仅影响原型 Mock 数据。';
+        openDel(true);
+        return;
+      }
+      if (action === 'stop') {
+        ProtoMock.update('tenant', id, { status: 'stopped' });
+        flash('已停用');
+        render();
+        return;
+      }
+      if (action === 'start') {
+        ProtoMock.update('tenant', id, { status: 'running' });
+        flash('已启用');
+        render();
+        return;
+      }
+      if (action === 'cancel') {
+        ProtoMock.remove('tenant', id);
+        flash('已取消创建');
+        render();
+      }
+    });
+
+    document.getElementById('btnCreate').onclick = () => {
+      document.getElementById('fName').value = '';
+      document.getElementById('fCpuMem').value = '8 C / 32 GB';
+      openDrawer(true);
+    };
+    document.getElementById('closeCreate').onclick = () => openDrawer(false);
+    document.getElementById('cancelCreate').onclick = () => openDrawer(false);
+    document.getElementById('submitCreate').onclick = () => {
+      const name = (document.getElementById('fName').value || '').trim();
+      if (!name) {
+        flash('请填写租户名');
+        return;
+      }
+      ProtoMock.create('tenant', {
+        name: name,
+        status: 'creating',
+        cluster: document.getElementById('fCluster').value,
+        cpuMem: document.getElementById('fCpuMem').value || '8 C / 32 GB',
+      });
+      openDrawer(false);
+      flash('已新建：' + name);
+      render();
+    };
+
+    document.getElementById('closeDel').onclick = () => openDel(false);
+    document.getElementById('cancelDel').onclick = () => openDel(false);
+    document.getElementById('confirmDel').onclick = () => {
+      if (pendingDeleteId) {
+        ProtoMock.remove('tenant', pendingDeleteId);
+        flash('已删除');
+        pendingDeleteId = null;
+        render();
+      }
+      openDel(false);
+    };
+
+    document.getElementById('btnQuery').onclick = function () {
+      appliedKw = (document.getElementById('qKeyword').value || '').trim().toLowerCase();
+      var active = document.querySelector('#filterStatus .ob-filter-panel__item.is-active');
+      filterStatus = active ? (active.getAttribute('data-value') || '') : '';
+      render();
+    };
+    document.getElementById('btnResetFilter').onclick = () => {
+      document.getElementById('qKeyword').value = '';
+      filterStatus = '';
+      appliedKw = '';
+      const items = document.querySelectorAll('#filterStatus .ob-filter-panel__item');
+      items.forEach((el, i) => el.classList.toggle('is-active', i === 0));
+      const label = document.querySelector('#filterStatus [data-filter-label]');
+      if (label) label.textContent = '状态';
+      render();
+    };
+
+    ProtoMock.bootstrap({
+      namespace: 'style-review',
+      entities: {
+        tenant: {
+          idKey: 'id',
+          seedUrl: '../mock-data/tenants.json',
+        },
+      },
+    }).then(render).catch((err) => {
+      console.error(err);
+      flash('Mock 数据加载失败，请用 http 静态服务打开本页');
+    });
+  </script>
+</body>
+</html>

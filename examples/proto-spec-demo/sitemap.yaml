@@ -1,0 +1,48 @@
+docVersion: "0.1.0"
+updatedAt: 2026-09-17
+scenario: multi-user
+status: draft
+
+groups:
+  - id: role-admin
+    level: L1
+    name: 管理员
+    children:
+      - id: mod-inspect
+        level: L2
+        name: 巡检管理
+        children: []
+  - id: role-worker
+    level: L1
+    name: 执行人员
+    children:
+      - id: mod-task
+        level: L2
+        name: 任务执行
+        children: []
+
+pages:
+  - id: inspect-plan-list
+    name: 巡检计划列表
+    groupId: mod-inspect
+    layout: list-filter-table
+    status: draft
+    version: "0.1.0"
+    path: pages/inspect-plan-list.html
+    hideInPrdPageList: false
+    children:
+      - id: inspect-plan-detail
+        name: 巡检计划详情
+        layout: detail-descriptions
+        status: draft
+        version: "0.1.0"
+        path: pages/inspect-plan-detail.html
+        hideInPrdPageList: false
+  - id: inspect-task-list
+    name: 巡检任务列表
+    groupId: mod-task
+    layout: list-filter-table
+    status: draft
+    version: "0.1.0"
+    path: pages/inspect-task-list.html
+    hideInPrdPageList: false

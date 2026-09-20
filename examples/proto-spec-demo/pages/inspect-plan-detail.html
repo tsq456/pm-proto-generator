@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>巡检计划详情</title>
+  <link rel="stylesheet" href="../kits/ob-static/tokens.css" />
+  <link rel="stylesheet" href="../kits/ob-static/components.css" />
+  <link rel="stylesheet" href="../kits/proto-spec-runtime/proto-spec.css" />
+</head>
+<body>
+  <div class="ob-app">
+    <div class="ob-layout">
+      <aside class="ob-sider">
+        <div class="ob-sider__brand">
+          <span class="ob-sider__brand-mark">OB</span>
+          <span>园区运维</span>
+        </div>
+        <ul class="ob-menu">
+          <li class="ob-menu__section">巡检管理</li>
+          <li class="ob-menu__item"><a href="inspect-plan-list.html"><span>巡检计划</span></a></li>
+          <li class="ob-menu__item"><a href="inspect-task-list.html"><span>巡检任务</span></a></li>
+          <li class="ob-menu__section">文档</li>
+          <li class="ob-menu__item"><a href="../docs/prd.html"><span>PRD 汇总</span></a></li>
+          <li class="ob-menu__item"><a href="../index.html"><span>包入口</span></a></li>
+        </ul>
+      </aside>
+      <div class="ob-main">
+        <header class="ob-header">
+          <nav class="ob-page-tabs" aria-label="已打开页面"></nav>
+          <div class="ob-header__right"><span class="ob-avatar">管</span></div>
+        </header>
+        <main class="ob-content">
+          <div id="saveAlert" class="ob-alert" style="display:none">已保存，只读区已更新</div>
+          <div class="ob-page-title">
+            <div>
+              <h1>园区周巡检 <span class="ob-status ob-status--running"><span class="ob-status__dot"></span>已启用</span></h1>
+            </div>
+            <div class="ob-page-title__actions">
+              <a class="ob-btn ob-btn--default" href="inspect-plan-list.html">返回</a>
+              <a class="ob-btn ob-btn--default" href="inspect-task-list.html">关联任务</a>
+            </div>
+          </div>
+          <div class="ob-stack">
+            <section class="ob-card">
+              <div class="ob-card__head">
+                <div class="ob-card__title">基本信息</div>
+                <button type="button" class="ob-btn ob-btn--primary ob-btn--sm" id="btnEdit">编辑信息</button>
+              </div>
+              <div class="ob-card__body">
+                <dl class="ob-desc">
+                  <div class="ob-desc__item">
+                    <dt>计划编码</dt>
+                    <dd id="v-code">PL-2026-001</dd>
+                  </div>
+                  <div class="ob-desc__item">
+                    <dt>计划名称</dt>
+                    <dd id="v-name">园区周巡检</dd>
+                  </div>
+                  <div class="ob-desc__item">
+                    <dt>执行周期</dt>
+                    <dd id="v-cycle">每周</dd>
+                  </div>
+                  <div class="ob-desc__item">
+                    <dt>创建人</dt>
+                    <dd>张管理员</dd>
+                  </div>
+                  <div class="ob-desc__item ob-desc__item--full">
+                    <dt>计划说明</dt>
+                    <dd id="v-remark">覆盖园区主干道与消防栓例行巡检</dd>
+                  </div>
+                </dl>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <div class="ob-mask" id="editMask">
+    <div class="ob-modal ob-modal--wide" id="editModal" role="dialog" aria-modal="true">
+      <div class="ob-modal__head">
+        <strong class="ob-modal__title">编辑信息</strong>
+        <button type="button" class="ob-modal__close" id="closeEdit" aria-label="关闭">×</button>
+      </div>
+      <div class="ob-modal__body" style="max-height:70vh;overflow:auto">
+        <div class="ob-form-grid-2">
+          <div class="ob-field">
+            <label class="ob-field__label"><span class="req">*</span>计划名称</label>
+            <input class="ob-input" id="f-name" value="园区周巡检" />
+          </div>
+          <div class="ob-field">
+            <label class="ob-field__label"><span class="req">*</span>执行周期</label>
+            <select class="ob-select" id="f-cycle">
+              <option>每天</option>
+              <option selected>每周</option>
+              <option>每月</option>
+            </select>
+          </div>
+          <div class="ob-field ob-field--full">
+            <label class="ob-field__label">计划说明</label>
+            <textarea class="ob-textarea" id="f-remark" rows="3">覆盖园区主干道与消防栓例行巡检</textarea>
+            <div class="ob-field__hint">主数据「计划编码」只读，不在弹窗内编辑</div>
+          </div>
+        </div>
+      </div>
+      <div class="ob-modal__foot">
+        <button type="button" class="ob-btn ob-btn--default" id="cancelEdit">取消</button>
+        <button type="button" class="ob-btn ob-btn--primary" id="saveEdit">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../kits/ob-static/controls.js"></script>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: false, theme: 'neutral' });
+    window.mermaid = mermaid;
+  </script>
+  <script src="../kits/proto-spec-runtime/proto-spec.js"></script>
+  <script>
+    function openEdit(open) {
+      document.getElementById('editMask').classList.toggle('is-open', open);
+      document.getElementById('editModal').classList.toggle('is-open', open);
+    }
+    document.getElementById('btnEdit').onclick = function () { openEdit(true); };
+    document.getElementById('closeEdit').onclick = function () { openEdit(false); };
+    document.getElementById('cancelEdit').onclick = function () { openEdit(false); };
+    document.getElementById('saveEdit').onclick = function () {
+      document.getElementById('v-name').textContent = document.getElementById('f-name').value;
+      document.getElementById('v-cycle').textContent = document.getElementById('f-cycle').value;
+      document.getElementById('v-remark').textContent = document.getElementById('f-remark').value;
+      document.getElementById('saveAlert').style.display = 'flex';
+      openEdit(false);
+    };
+
+    ProtoSpecRuntime.mount({
+      specBase: new URL('../proto-spec/', location.href).href,
+      pageId: 'inspect-plan-detail',
+      workspaceRoot: (function () {
+        try {
+          return localStorage.getItem('proto-spec.workspaceRoot') || undefined;
+        } catch (e) {
+          return undefined;
+        }
+      })(),
+      changelogUrl: new URL('../changelog.yaml', location.href).href,
+      sitemapUrl: new URL('../sitemap.yaml', location.href).href,
+      prdUrl: new URL('../docs/prd.html', location.href).href,
+      anchor: 'right-bottom',
+      fabLabel: '原型说明',
+    });
+  </script>
+</body>
+</html>
