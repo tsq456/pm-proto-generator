@@ -3,6 +3,8 @@
 > 给 AI / Skill：生成业务页或旁路工具栏时，**复杂控件必须按本目录选型**，禁止临时发明一套日期/级联/开关样式。  
 > 视觉与 class 落在 `kits/ob-static/components.css`；开合见 `kits/ob-static/controls.js`（与 `filter-dropdown.js` 并列引入）。
 
+已确认 Spec 的行为与能力边界优先；按 [逐页实现选型](../page-implementation.md)检查实际资源后决定复用或新增。下表中的简化/占位只是 kit 当前能力，不能代替本页要求。
+
 ## 优先级
 
 | 级 | 控件 | 分册 | 交付期望 |
@@ -25,15 +27,15 @@
 
 | 情况 | 做法 |
 | --- | --- |
-| 已有 P0/P1 分册能覆盖 | **必须**用本目录骨架 + `controls.js`，禁止另写一套样式/行为 |
+| 已有 P0/P1 分册能覆盖 | 必须复用现有骨架和行为；先核对其实际能力与本页例外，不另写重复实现 |
 | 按官方组件清单批量补齐（Steps/Transfer/Badge…） | **禁止**进 kit |
-| 高复杂度 / P2（富文本、AutoComplete、远程 Transfer、完整 Upload、虚拟大树等） | **默认不做 kit**：`.ob-empty` / 文案占位，Spec 注明正式用 `@oceanbase/design` |
-| 当前页演示刚需、交互浅（如三态 Segmented、本地勾选穿梭示意） | **允许薄补**：优先页内一小段 JS + 少量 `ob-*` CSS；若多页复用再升入 `components.css` / `controls.js`，并可选补一分册 |
+| 高复杂度 / P2（富文本、AutoComplete、远程 Transfer、完整 Upload、虚拟大树等） | 先核对本页要求与实际能力；不兼容则报告缺口，不擅自用占位替代。仅上游明确占位时使用占位 |
+| 当前页演示刚需、交互浅（如三态 Segmented、本地勾选穿梭示意） | **允许薄补**：优先页内少量 JS/CSS；有具体多页复用需求时提取包内共享资源。升级仓库 kit 须明确影响与回归范围 |
 | 薄补时 | 复用 Token 与现有 class 模式；不宣称与 React 像素级一致；不引入 npm/React |
 
 ## Spec 字段 type → 控件
 
-| `fields.yaml` type | 默认控件 | 备注 |
+| Spec 字段类型 | 默认控件 | 备注 |
 | --- | --- | --- |
 | `boolean` | Switch（设置项）或 Checkbox（表单多选语义） | 单独开关用 Switch |
 | `date` | DatePicker | 禁止裸 `input[type=date]` 冒充 OB |
@@ -68,7 +70,7 @@
 - [ ] 未使用原生 `input[type=date|time]` / 系统 checkbox 无 class 充当主视觉（可用原生 input 隐藏，外观必须是 `ob-*`）
 - [ ] P0/P1 控件 class 与对应分册骨架一致
 - [ ] 未按官方目录批量扩 kit；若有薄补，仅服务当前演示刚需且交互浅
-- [ ] 高复杂度控件为占位 + Spec，而非假完整实现
+- [ ] 复杂能力按本页要求核验；未满足的能力已报告，未擅自降为占位或声称完成
 - [ ] 筛选场景的日期/级联遵守 overflow MUST
 - [ ] Spec `type` 与上表映射一致
 - [ ] 要展示的图片来自 `kits/ob-static/photos/`，不超过 10 张，见 [photos.md](./photos.md)

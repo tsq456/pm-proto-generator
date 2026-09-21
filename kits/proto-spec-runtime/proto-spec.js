@@ -2402,6 +2402,264 @@
     return side + '-' + vert;
   }
 
+  var REVIEW_POS_KEY = 'proto-spec.reviewToolbar';
+  var REVIEW_GROUPS = ['role', 'status', 'scenario'];
+  var REVIEW_GROUP_LABEL = { role: '角色', status: '状态', scenario: '权限场景' };
+
+  function mountReviewToolbar(options) {
+    var perspectives = Array.isArray(options.demoPerspectives) ? options.demoPerspectives : [];
+    var active = options.demoPerspectiveActive;
+    var groups = { role: [], status: [], scenario: [] };
+    perspectives.forEach(function (item) {
+      if (!item) return;
+      var group = item.group != null ? String(item.group) : 'role';
+      if (!groups[group]) group = 'role';
+      groups[group].push(item);
+    });
+    var visible = REVIEW_GROUPS.filter(function (group) {
+      return groups[group].length > 0;
+    });
+    if (!visible.length) return;
+
+    function itemKey(item, field) {
+      return item && item[field] != null ? String(item[field]) : '';
+    }
+
+    function activeKey(group) {
+      if (active && typeof active === 'object') {
+        return active[group] == null ? '' : String(active[group]);
+      }
+      return active != null ? String(active) : '';
+    }
+
+    function matches(item, group) {
+      var key = activeKey(group);
+      if (!key) return false;
+      return key === itemKey(item, 'id') || key === itemKey(item, 'role') || key === itemKey(item, 'status');
+    }
+
+    function currentItem(group) {
+      var list = groups[group];
+      for (var i = 0; i < list.length; i++) {
+        if (matches(list[i], group)) return list[i];
+      }
+      return list[0];
+    }
+
+    var bar = el('div', {
+      className: 'ps-review',
+      id: 'psReviewToolbar',
+      role: 'toolbar',
+      'aria-label': '评审工具',
+    });
+    bar.appendChild(el('span', { className: 'ps-review__brand', text: '评审工具' }));
+
+    var openSlot = null;
+
+    function closeMenus() {
+      if (!openSlot) return;
+      openSlot.classList.remove('is-open');
+      var trigger = openSlot.querySelector('.ps-review__trigger');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      openSlot = null;
+    }
+
+    function alignMenu(slot) {
+      var menu = slot.querySelector('.ps-review__menu');
+      if (!menu) return;
+      menu.classList.remove('is-up');
+      menu.style.left = '0';
+      menu.style.right = 'auto';
+      var slotRect = slot.getBoundingClientRect();
+      var menuRect = menu.getBoundingClientRect();
+      var spaceBelow = window.innerHeight - slotRect.bottom;
+      if (spaceBelow < menuRect.height + 8 && slotRect.top > menuRect.height + 8) {
+        menu.classList.add('is-up');
+      }
+      menuRect = menu.getBoundingClientRect();
+      if (menuRect.right > window.innerWidth - 8) {
+        menu.style.left = 'auto';
+        menu.style.right = '0';
+      }
+      if (menu.getBoundingClientRect().left < 8) {
+        menu.style.left = '0';
+        menu.style.right = 'auto';
+      }
+    }
+
+    visible.forEach(function (group) {
+      bar.appendChild(el('span', { className: 'ps-review__sep', 'aria-hidden': 'true' }));
+      var list = groups[group];
+      var current = currentItem(group);
+      var currentLabel = current && current.label != null ? String(current.label) : '';
+      var slot = el('div', { className: 'ps-review__slot' });
+      if (list.length < 2) {
+        slot.classList.add('is-static');
+        slot.appendChild(
+          el('span', { className: 'ps-review__static' }, [
+            el('span', { className: 'ps-review__key', text: REVIEW_GROUP_LABEL[group] + ':' }),
+            el('span', { className: 'ps-review__val', text: currentLabel }),
+          ])
+        );
+        bar.appendChild(slot);
+        return;
+      }
+      var trigger = el('button', {
+        type: 'button',
+        className: 'ps-review__trigger',
+        title: (current && current.title) || REVIEW_GROUP_LABEL[group] + '：' + currentLabel,
+        'aria-haspopup': 'menu',
+        'aria-expanded': 'false',
+      });
+      trigger.appendChild(el('span', { className: 'ps-review__key', text: REVIEW_GROUP_LABEL[group] + ':' }));
+      trigger.appendChild(el('span', { className: 'ps-review__val', text: currentLabel }));
+      trigger.appendChild(el('span', { className: 'ps-review__caret', 'aria-hidden': 'true' }));
+      var menu = el('div', { className: 'ps-review__menu', role: 'menu' });
+      list.forEach(function (item) {
+        var label = item.label != null ? String(item.label) : itemKey(item, 'id');
+        var option = el('button', {
+          type: 'button',
+          className: 'ps-review__option' + (item === current ? ' is-active' : ''),
+          role: 'menuitem',
+          title: item.title || label,
+          text: label,
+        });
+        option.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          closeMenus();
+          if (typeof options.onDemoPerspective === 'function') options.onDemoPerspective(item);
+        });
+        menu.appendChild(option);
+      });
+      slot.appendChild(trigger);
+      slot.appendChild(menu);
+      bar.appendChild(slot);
+    });
+    document.body.appendChild(bar);
+
+    function place(x, y) {
+      var maxX = Math.max(0, window.innerWidth - bar.offsetWidth);
+      var maxY = Math.max(0, window.innerHeight - bar.offsetHeight);
+      var left = Math.max(0, Math.min(maxX, x));
+      var top = Math.max(0, Math.min(maxY, y));
+      bar.style.left = left + 'px';
+      bar.style.top = top + 'px';
+      bar.style.right = 'auto';
+      bar.style.bottom = 'auto';
+      return { left: left, top: top };
+    }
+
+    var stored = loadStorage(REVIEW_POS_KEY, '');
+    var initial = null;
+    if (stored) {
+      try {
+        initial = JSON.parse(stored);
+      } catch (e) {
+        initial = null;
+      }
+    }
+    if (initial && Number.isFinite(Number(initial.left)) && Number.isFinite(Number(initial.top))) {
+      place(Number(initial.left), Number(initial.top));
+    } else {
+      place(window.innerWidth - bar.offsetWidth - 16, 16);
+    }
+
+    var drag = { active: false, moved: false, pointerId: null, startX: 0, startY: 0, origLeft: 0, origTop: 0 };
+
+    bar.addEventListener('pointerdown', function (e) {
+      if (e.button != null && e.button !== 0) return;
+      if (e.target.closest && e.target.closest('.ps-review__menu, .ps-review__option')) return;
+      var rect = bar.getBoundingClientRect();
+      drag.active = true;
+      drag.moved = false;
+      drag.pointerId = e.pointerId;
+      drag.startX = e.clientX;
+      drag.startY = e.clientY;
+      drag.origLeft = rect.left;
+      drag.origTop = rect.top;
+    });
+    bar.addEventListener('pointermove', function (e) {
+      if (!drag.active || drag.pointerId !== e.pointerId) return;
+      var dx = e.clientX - drag.startX;
+      var dy = e.clientY - drag.startY;
+      if (!drag.moved && dx * dx + dy * dy > 36) {
+        drag.moved = true;
+        bar.classList.add('is-dragging');
+        closeMenus();
+        try {
+          bar.setPointerCapture(e.pointerId);
+        } catch (err) {}
+      }
+      if (drag.moved) place(drag.origLeft + dx, drag.origTop + dy);
+    });
+    function endDrag(e) {
+      if (!drag.active || (e && drag.pointerId != null && e.pointerId !== drag.pointerId)) return;
+      var moved = drag.moved;
+      var pointerId = drag.pointerId;
+      drag.active = false;
+      drag.moved = false;
+      drag.pointerId = null;
+      bar.classList.remove('is-dragging');
+      if (moved) {
+        var rect = bar.getBoundingClientRect();
+        saveStorage(REVIEW_POS_KEY, JSON.stringify(place(rect.left, rect.top)));
+        var swallow = function (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          bar.removeEventListener('click', swallow, true);
+        };
+        bar.addEventListener('click', swallow, true);
+        setTimeout(function () {
+          bar.removeEventListener('click', swallow, true);
+        }, 0);
+      }
+      if (pointerId != null) {
+        try {
+          bar.releasePointerCapture(pointerId);
+        } catch (err) {}
+      }
+    }
+    bar.addEventListener('pointerup', endDrag);
+    bar.addEventListener('pointercancel', endDrag);
+
+    bar.addEventListener('click', function (e) {
+      var option = e.target.closest && e.target.closest('.ps-review__option');
+      if (option && bar.contains(option)) return;
+      var trigger = e.target.closest && e.target.closest('.ps-review__trigger');
+      if (!trigger || !bar.contains(trigger)) return;
+      e.preventDefault();
+      e.stopPropagation();
+      var slot = trigger.parentNode;
+      var willOpen = slot !== openSlot;
+      closeMenus();
+      if (!willOpen) return;
+      slot.classList.add('is-open');
+      trigger.setAttribute('aria-expanded', 'true');
+      openSlot = slot;
+      alignMenu(slot);
+    });
+
+    document.addEventListener('pointerdown', function (e) {
+      if (bar.contains(e.target)) return;
+      closeMenus();
+    });
+    document.addEventListener(
+      'keydown',
+      function (e) {
+        if (e.key !== 'Escape' || !openSlot) return;
+        e.stopPropagation();
+        closeMenus();
+      },
+      true
+    );
+    window.addEventListener('resize', function () {
+      var rect = bar.getBoundingClientRect();
+      saveStorage(REVIEW_POS_KEY, JSON.stringify(place(rect.left, rect.top)));
+      if (openSlot) alignMenu(openSlot);
+    });
+  }
+
   function createRuntime(options) {
     options = options || {};
     var storedWidth = Number(loadStorage(STORAGE.width, ''));
@@ -2435,15 +2693,69 @@
     installQuickFind(options);
 
     var fabRoot = el('div', { className: 'ps-fab-root', id: 'psFabRoot' });
-    var fabMain = el('button', {
-      type: 'button',
-      className: 'ps-fab',
-      text: options.fabLabel || '原型说明',
-      title: '拖动可改位置；点击打开说明',
-    });
+    var fabMenu = el('div', { className: 'ps-fab-menu' });
+    var fabEdge = el('div', { className: 'ps-fab-edge', id: 'psFabEdge' });
+    var fabRevealTimer = null;
+    var fabOverFab = false;
+    var fabOverEdge = false;
+    var FAB_HOLD_KEY = 'proto-spec.fabHold';
+    var fabHoldUntil = 0;
+    try {
+      if (sessionStorage.getItem(FAB_HOLD_KEY) === '1') {
+        sessionStorage.removeItem(FAB_HOLD_KEY);
+        fabHoldUntil = Date.now() + 600;
+      }
+    } catch (e) {}
+
+    function rememberFabHold() {
+      try {
+        sessionStorage.setItem(FAB_HOLD_KEY, '1');
+      } catch (e) {}
+    }
+
+    function setFabRevealed(on) {
+      if (on) fabRoot.classList.add('is-revealed');
+      else if (!state.mode && !state.dragging) fabRoot.classList.remove('is-revealed');
+      applyFabHide(fabRoot);
+    }
+
+    function syncFabReveal() {
+      clearTimeout(fabRevealTimer);
+      if (Date.now() < fabHoldUntil || fabOverFab || fabOverEdge || state.mode || state.dragging) {
+        setFabRevealed(true);
+        return;
+      }
+      fabRevealTimer = setTimeout(function () {
+        if (!fabOverFab && !fabOverEdge && !state.mode && !state.dragging) {
+          setFabRevealed(false);
+        }
+      }, 120);
+    }
+
+    function placeFabEdge(anchor) {
+      var side = sideOfAnchor(anchor);
+      fabEdge.dataset.side = side;
+    }
+
+    mountReviewToolbar(options);
+
+    if (options.prdUrl) {
+      fabRoot.classList.add('has-prd');
+      var fabPrd = el('a', {
+        className: 'ps-fab-secondary',
+        href: options.prdUrl,
+        text: 'PRD 汇总',
+        title: '打开 PRD 汇总',
+      });
+      fabPrd.addEventListener('click', function (e) {
+        e.stopPropagation();
+      });
+      fabMenu.appendChild(fabPrd);
+    }
+
     var fabChangelog = el('button', {
       type: 'button',
-      className: 'ps-fab-secondary ps-fab-secondary--2',
+      className: 'ps-fab-secondary',
       text: '更新记录',
       title: '查看本页与全部项目更新记录',
       onClick: function (e) {
@@ -2454,7 +2766,7 @@
     });
     var fabNav = el('button', {
       type: 'button',
-      className: 'ps-fab-secondary ps-fab-secondary--1',
+      className: 'ps-fab-secondary',
       text: '导航目录',
       title: '按 L1 浏览并跳转全部页面',
       onClick: function (e) {
@@ -2463,34 +2775,41 @@
         else openNav();
       },
     });
+    fabMenu.appendChild(fabChangelog);
+    fabMenu.appendChild(fabNav);
+
+    var fabMain = el('button', {
+      type: 'button',
+      className: 'ps-fab',
+      text: options.fabLabel || '原型说明',
+      title: '拖动可改位置；点击打开说明',
+    });
+    fabRoot.appendChild(fabMenu);
     fabRoot.appendChild(fabMain);
-    fabRoot.appendChild(fabChangelog);
-    fabRoot.appendChild(fabNav);
-    if (options.prdUrl) {
-      fabRoot.classList.add('has-prd');
-      var fabPrd = el('a', {
-        className: 'ps-fab-secondary ps-fab-secondary--3',
-        href: options.prdUrl,
-        text: 'PRD 汇总',
-        title: '打开 PRD 汇总',
-      });
-      fabPrd.addEventListener('click', function (e) {
-        e.stopPropagation();
-      });
-      fabRoot.appendChild(fabPrd);
-    }
+    document.body.appendChild(fabEdge);
     document.body.appendChild(fabRoot);
     placeFab(fabRoot, state.anchor);
-
-    fabRoot.addEventListener('mouseenter', function () {
+    placeFabEdge(state.anchor);
+    if (fabHoldUntil) {
       fabRoot.classList.add('is-revealed');
       applyFabHide(fabRoot);
+    }
+
+    fabRoot.addEventListener('mouseenter', function () {
+      fabOverFab = true;
+      syncFabReveal();
     });
     fabRoot.addEventListener('mouseleave', function () {
-      if (!state.mode && !state.dragging) {
-        fabRoot.classList.remove('is-revealed');
-        applyFabHide(fabRoot);
-      }
+      fabOverFab = false;
+      syncFabReveal();
+    });
+    fabEdge.addEventListener('mouseenter', function () {
+      fabOverEdge = true;
+      syncFabReveal();
+    });
+    fabEdge.addEventListener('mouseleave', function () {
+      fabOverEdge = false;
+      syncFabReveal();
     });
 
     var mask = el('div', { className: 'ps-mask', id: 'psMask' });
@@ -2980,7 +3299,7 @@
       hideDrawer(navUi);
       mask.classList.remove('is-open');
       fabRoot.classList.remove('is-open');
-      applyFabHide(fabRoot);
+      syncFabReveal();
     }
 
     function openSpec() {
@@ -3622,6 +3941,7 @@
         state.anchor = anchor;
         saveStorage(STORAGE.anchor, anchor);
         placeFab(fabRoot, anchor);
+        placeFabEdge(anchor);
         if (state.mode) {
           specUi.drawer.dataset.side = sideOfAnchor(anchor);
           logUi.drawer.dataset.side = sideOfAnchor(anchor);

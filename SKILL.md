@@ -53,6 +53,8 @@ python3 scripts/init_prototype.py prototypes/<slug> --name <slug>
 
 ### 3. 实现
 
+编写或结构性修改 HTML 前，必须按 [逐页实现选型](references/page-implementation.md)完成：提取要求 → 确定页型与宿主 → 选择壳层/layout → 列区域组件 → 检查实际复用资源 → 组合、适配或新增 → 实现验收。将技术选择简记在包内 `docs/implementation-map.md`；无需新增审批，局部修复只更新相关项。
+
 按本批就绪 Spec 创建或修改 `pages/<page-id>.html`。沿用本地映射；新页 ID、文件名、Spec frontmatter 的 id、Runtime pageId 保持一致，旧包合法路径不强制重命名。
 
 已确认的业务 Spec 优先于 kit 默认表现。未指定的通用视觉用 kit；不要为满足默认组件规则增加业务能力。明确不做批量操作的表格加 `.ob-table--no-select` 或 `data-table-no-select`，防止脚本自动补复选框；明确独立的编码列保持独立；占位抽屉不补提交或 CRUD。占位替换仅按接收记录中的明确新版依据执行。
@@ -98,6 +100,7 @@ python3 scripts/check_page_prd_sync.py prototypes/<slug> --stage prototype --pag
 | 首次接收、新版输入、来源或就绪不清 | [子技能](skills/proto-spec-generator/SKILL.md)、[交接](skills/proto-spec-generator/references/handoff.md) |
 | 初始化、补资源、路径问题 | [包结构](references/package-structure.md) |
 | 编写或修正逐页说明 | [说明协议](references/proto-spec/README.md)、[逐页模板](references/proto-spec/spec-template.md) |
+| 逐页实现选型、组件复用或新增 | [实现选型流程](references/page-implementation.md) |
 | 页面结构与壳层选型 | [布局](references/layouts/README.md)、[组件目录](references/component-catalog.md)，按索引选具体页型 |
 | 表单及弹窗/抽屉 | [表单载体](references/form-carrier.md)、[控件目录](references/controls/README.md)，按控件选文档 |
 | 列表与详情字段 | [数据表](references/components/data-table.md)、[字段视觉](references/components/table-field-visual.md)、[详情](references/layouts/detail-descriptions.md) |

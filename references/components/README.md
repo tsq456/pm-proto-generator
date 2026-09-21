@@ -29,6 +29,8 @@
 | `--ob-space-600` | 24px | `.ob-content` 内边距 |
 | `--ob-radius-sm/md/lg` | 4 / 6 / 8px | 控件 / 卡 / Modal |
 
+完整执行约束见 [逐页实现选型](../page-implementation.md)。选出组件后必须检查目标包和 kit 的实际实现、行为与依赖，再确定复用、组合、适配或新增；以下仅是规范阅读顺序。
+
 ## Agent 阅读顺序
 
 1. `layouts/README.md` 选型  

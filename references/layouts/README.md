@@ -2,7 +2,7 @@
 
 > 本文为上游未指定时的 kit 默认表现。已确认页面 Spec 的布局、列序、字段、交互与能力边界优先；不据此新增业务能力。
 
-写任意业务页前，先按意图选型，再打开对应规范文件，**按骨架复制结构**，只替换业务文案与字段。
+写业务页前，按 [逐页实现选型](../page-implementation.md)确定页面职责和宿主，再选择骨架。上游未指定部分沿用骨架；允许按本页要求组合区域或局部适配，不机械复制整页。
 
 正式实现可对照 `ob-design template <name>` / `ob-design route "<意图>"`；本仓库交付仍为静态 HTML。
 
@@ -38,10 +38,4 @@
 
 ## 工作流中的位置
 
-```
-澄清范围 → 表单载体选型 form-carrier.md（若有表单）
-  → 为每个页面选型（本索引）
-  → 整页业务组合先看 components/biz-page/
-    → 打开对应 layout 骨架 + components 细则
-    → mount ProtoSpecRuntime → 同步 sitemap 导航
-```
+完整执行顺序以 [逐页实现选型](../page-implementation.md)为准。本索引负责页型到 layout 的选择；随后检查业务组合、组件及控件的实际可复用实现。表单未指定载体时读取 form-carrier；只有导航变化才同步导航。

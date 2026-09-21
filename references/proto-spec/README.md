@@ -37,4 +37,4 @@
 
 ## 旧包兼容
 
-Runtime 继续支持 `<page-id>/spec.md` 和 `meta.yaml` 配四分册；本轮不迁移旧包、不删除历史确认记录。旧模板仅维护旧包时读取：[business](business-template.md)、[fields](fields-template.md)、[flow](flow-template.md)。[interaction-template](interaction-template.md)仍可作为新扁平说明中交互节的参考。
+Runtime 继续支持 `<page-id>/spec.md` 和 `meta.yaml` 配历史分册；保留旧包读取能力，不代表继续维护两套生成规范。旧分册模板已移除，新建内容统一使用 [逐页模板](spec-template.md)，交互、字段、业务流程和状态流转均写入该文件。历史包保持原位，不批量迁移或删除确认记录。

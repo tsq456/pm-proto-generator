@@ -63,6 +63,25 @@
     return node;
   }
 
+  /**
+   * 搜索框 IME 安全绑定：组字期间不回调，避免整树重绘打断中文输入。
+   * onCommit(value, inputEl) 仅在组字结束后或非组字 input 时触发。
+   */
+  function bindImeSafeInput(input, onCommit) {
+    var composing = false;
+    input.addEventListener('compositionstart', function () {
+      composing = true;
+    });
+    input.addEventListener('compositionend', function () {
+      composing = false;
+      onCommit(input.value || '', input);
+    });
+    input.addEventListener('input', function (e) {
+      if (composing || (e && e.isComposing)) return;
+      onCommit(input.value || '', input);
+    });
+  }
+
   function toast(msg) {
     var t = $('.ps-toast');
     if (!t) {
@@ -75,6 +94,30 @@
     toast._timer = setTimeout(function () {
       t.classList.remove('is-show');
     }, 2200);
+  }
+
+  function copyPlainText(text) {
+    var value = String(text == null ? '' : text);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(value).catch(function () {
+        return legacyCopyPlain(value);
+      });
+    }
+    return Promise.resolve(legacyCopyPlain(value));
+  }
+
+  function legacyCopyPlain(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand('copy');
+    } catch (e) {}
+    document.body.removeChild(ta);
   }
 
   function loadStorage(key, fallback) {
@@ -482,55 +525,146 @@
     return table;
   }
 
+  function closeMermaidLightbox() {
+    var existing = document.querySelector('.ps-mermaid-lightbox');
+    if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+    document.removeEventListener('keydown', onMermaidLightboxKey);
+  }
+
+  function onMermaidLightboxKey(e) {
+    if (e.key === 'Escape') closeMermaidLightbox();
+  }
+
+  function openMermaidLightbox(sourceMount) {
+    var svg = sourceMount && sourceMount.querySelector('svg');
+    if (!svg) return;
+    closeMermaidLightbox();
+    var overlay = el('div', {
+      className: 'ps-mermaid-lightbox',
+      role: 'dialog',
+      'aria-modal': 'true',
+      'aria-label': '流程图放大查看',
+    });
+    var panel = el('div', { className: 'ps-mermaid-lightbox__panel' });
+    var closeBtn = el('button', {
+      type: 'button',
+      className: 'ps-mermaid-lightbox__close',
+      title: '关闭',
+      'aria-label': '关闭',
+      onClick: closeMermaidLightbox,
+    });
+    closeBtn.appendChild(strokeIcon(GLYPH.close));
+    var stage = el('div', { className: 'ps-mermaid-lightbox__stage' });
+    var clone = svg.cloneNode(true);
+    clone.removeAttribute('width');
+    clone.removeAttribute('height');
+    clone.setAttribute('class', 'ps-mermaid-lightbox__svg');
+    stage.appendChild(clone);
+    panel.appendChild(closeBtn);
+    panel.appendChild(stage);
+    overlay.appendChild(panel);
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeMermaidLightbox();
+    });
+    document.body.appendChild(overlay);
+    document.addEventListener('keydown', onMermaidLightboxKey);
+  }
+
   function renderMermaidBlock(code) {
+    var showingCode = false;
     var box = el('div', { className: 'ps-mermaid' });
-    var toolbar = el('div', { className: 'ps-mermaid__toolbar' }, [
-      el('button', {
-        type: 'button',
-        className: 'ps-icon-btn',
-        text: '查看源码',
-        onClick: function () {
-          fallback.hidden = !fallback.hidden;
-          mount.hidden = !mount.hidden;
-        },
-      }),
-    ]);
     var mount = el('div', { className: 'ps-mermaid__mount' });
     var fallback = el('pre', { className: 'ps-mermaid__fallback', text: code });
     fallback.hidden = true;
+
+    var toggleBtn = el('button', {
+      type: 'button',
+      className: 'ps-mermaid__btn',
+      text: '查看代码',
+      onClick: function () {
+        showingCode = !showingCode;
+        syncView();
+      },
+    });
+    var copyBtn = el('button', {
+      type: 'button',
+      className: 'ps-mermaid__icon-btn',
+      title: '复制代码',
+      'aria-label': '复制代码',
+      onClick: function () {
+        copyPlainText(code).then(function () {
+          toast('已复制代码');
+        });
+      },
+    });
+    copyBtn.appendChild(strokeIcon(GLYPH.copy));
+    var zoomBtn = el('button', {
+      type: 'button',
+      className: 'ps-mermaid__icon-btn',
+      title: '放大查看',
+      'aria-label': '放大查看',
+      onClick: function () {
+        openMermaidLightbox(mount);
+      },
+    });
+    zoomBtn.appendChild(strokeIcon(GLYPH.expand));
+
+    var toolbar = el('div', { className: 'ps-mermaid__toolbar' }, [toggleBtn, copyBtn, zoomBtn]);
+
+    function syncView() {
+      fallback.hidden = !showingCode;
+      mount.hidden = showingCode;
+      toggleBtn.textContent = showingCode ? '查看流程图' : '查看代码';
+      zoomBtn.hidden = showingCode;
+      box.classList.toggle('is-code', showingCode);
+    }
+
     box.appendChild(toolbar);
     box.appendChild(mount);
     box.appendChild(fallback);
+    syncView();
 
-    function draw() {
+    function draw(attempt) {
+      attempt = attempt || 0;
       if (global.mermaid && typeof global.mermaid.render === 'function') {
         var id = 'psm-' + Math.random().toString(36).slice(2);
         global.mermaid
           .render(id, code)
           .then(function (res) {
             mount.innerHTML = res.svg;
+            showingCode = false;
+            syncView();
           })
           .catch(function (err) {
             mount.innerHTML = '';
-            fallback.hidden = false;
             mount.appendChild(
               el('div', {
                 className: 'ps-error',
                 text: 'Mermaid 渲染失败，已保留源码。\n' + (err && err.message ? err.message : err),
               })
             );
+            showingCode = true;
+            syncView();
           });
+      } else if (attempt < 40) {
+        setTimeout(function () {
+          draw(attempt + 1);
+        }, 50);
       } else {
+        mount.innerHTML = '';
         mount.appendChild(
           el('div', {
             className: 'ps-empty',
             text: '未加载 Mermaid，已显示源码。可在页面引入 mermaid.min.js 后刷新。',
           })
         );
-        fallback.hidden = false;
+        showingCode = true;
+        syncView();
       }
     }
-    setTimeout(draw, 0);
+    setTimeout(function () {
+      draw(0);
+    }, 0);
     return box;
   }
 
@@ -1150,11 +1284,14 @@
     });
   }
 
-  function filterSiteTree(nodes, q) {
+  function filterSiteTree(nodes, q, opts) {
     if (!q) return nodes;
+    opts = opts || {};
     function matchText(n) {
-      var blob = [n.name, n.id, n.path, n.version, n.status, n.level].join(' ').toLowerCase();
-      return blob.indexOf(q) !== -1;
+      var blob = opts.nameOnly
+        ? [n.name, n.id].join(' ')
+        : [n.name, n.id, n.path, n.version, n.status, n.level].join(' ');
+      return blob.toLowerCase().indexOf(q) !== -1;
     }
     function filt(list) {
       var out = [];
@@ -1174,6 +1311,109 @@
       return out;
     }
     return filt(nodes);
+  }
+
+  function escapeRegExp(s) {
+    return String(s || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function highlightPlainSnippet(text, query, radius) {
+    radius = radius == null ? 36 : radius;
+    var raw = String(text || '').replace(/\s+/g, ' ').trim();
+    var q = String(query || '').trim();
+    if (!raw) return '';
+    if (!q) return raw.slice(0, radius * 2);
+    var lower = raw.toLowerCase();
+    var idx = lower.indexOf(q.toLowerCase());
+    if (idx < 0) return raw.slice(0, radius * 2);
+    var start = Math.max(0, idx - radius);
+    var end = Math.min(raw.length, idx + q.length + radius);
+    var slice = (start > 0 ? '…' : '') + raw.slice(start, end) + (end < raw.length ? '…' : '');
+    var re = new RegExp('(' + escapeRegExp(q) + ')', 'ig');
+    return escapeHtml(slice).replace(re, '<mark class="prd-hub__mark">$1</mark>');
+  }
+
+  function highlightElement(rootEl, query) {
+    if (!rootEl || !query) return;
+    var q = String(query).trim();
+    if (!q) return;
+    var re = new RegExp(escapeRegExp(q), 'gi');
+    var walker = document.createTreeWalker(rootEl, NodeFilter.SHOW_TEXT, null);
+    var nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(function (textNode) {
+      var str = textNode.nodeValue || '';
+      if (!str || !re.test(str)) return;
+      re.lastIndex = 0;
+      var frag = document.createDocumentFragment();
+      var last = 0;
+      var m;
+      while ((m = re.exec(str))) {
+        if (m.index > last) frag.appendChild(document.createTextNode(str.slice(last, m.index)));
+        var mark = document.createElement('mark');
+        mark.className = 'prd-hub__mark';
+        mark.textContent = m[0];
+        frag.appendChild(mark);
+        last = m.index + m[0].length;
+      }
+      if (last < str.length) frag.appendChild(document.createTextNode(str.slice(last)));
+      if (textNode.parentNode) textNode.parentNode.replaceChild(frag, textNode);
+    });
+  }
+
+  function strokeIcon(d) {
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('class', 'ps-glyph');
+    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', 'currentColor');
+    path.setAttribute('stroke-width', '1.5');
+    path.setAttribute('stroke-linecap', 'round');
+    path.setAttribute('stroke-linejoin', 'round');
+    path.setAttribute('d', d);
+    svg.appendChild(path);
+    return svg;
+  }
+
+  var GLYPH = {
+    close: 'M6 18 18 6M6 6l12 12',
+    expand:
+      'M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15',
+    collapse:
+      'M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25',
+    copy:
+      'M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184',
+    edit:
+      'm16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10',
+    chevron: 'm19.5 8.25-7.5 7.5-7.5-7.5',
+    arrowUp: 'M12 19.5v-15m0 0-6.75 6.75M12 4.5l6.75 6.75',
+    arrowDown: 'M12 4.5v15m0 0 6.75-6.75M12 19.5l-6.75-6.75',
+    enter: 'm7.49 12-3.75 3.75m0 0 3.75 3.75m-3.75-3.75h16.5V4.499',
+    stack:
+      'M6 6.878V6a2.25 2.25 0 0 1 2.25-2.25h7.5A2.25 2.25 0 0 1 18 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 0 0 4.5 9v.878m13.5-3A2.25 2.25 0 0 1 19.5 9v.878m0 0a2.246 2.246 0 0 0-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0 1 21 12v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6c0-.98.626-1.813 1.5-2.122',
+  };
+
+  function nodeIcon(kind) {
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('class', 'ps-node-icon');
+    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', 'currentColor');
+    path.setAttribute('stroke-width', '1.5');
+    path.setAttribute('stroke-linecap', 'round');
+    path.setAttribute('stroke-linejoin', 'round');
+    path.setAttribute(
+      'd',
+      kind === 'folder'
+        ? 'M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z'
+        : 'M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z'
+    );
+    svg.appendChild(path);
+    return svg;
   }
 
   /**
@@ -1223,7 +1463,7 @@
             renderSiteTreeTable(container, tree, Object.assign({}, options, { collapsedMap: collapsed }));
           });
           nameInner.appendChild(caret);
-          nameInner.appendChild(el('span', { className: 'ps-tree-table__icon ps-tree-table__icon--folder', 'aria-hidden': 'true' }));
+          nameInner.appendChild(nodeIcon('folder'));
           nameInner.appendChild(el('span', { className: 'ps-tree-table__label', text: n.name }));
           nameCol.appendChild(nameInner);
           row.appendChild(nameCol);
@@ -1235,7 +1475,7 @@
         }
 
         nameInner.appendChild(el('span', { className: 'ps-tree-table__spine', 'aria-hidden': 'true' }));
-        nameInner.appendChild(el('span', { className: 'ps-tree-table__icon ps-tree-table__icon--page', 'aria-hidden': 'true' }));
+        nameInner.appendChild(nodeIcon('page'));
         var href = resolvePageHref(n.page || n, packageBase);
         var st = prototypeStatusMeta(n.status);
         var canOpen = href && n.status !== 'planned';
@@ -1403,6 +1643,7 @@
         } else {
           row.appendChild(makeSpacer());
         }
+        row.appendChild(nodeIcon(n.type === 'group' ? 'folder' : 'page'));
 
         if (n.type === 'group') {
           var gLabel = el('span', {
@@ -1441,6 +1682,7 @@
             title: n.name,
           });
           a.addEventListener('click', function (e) {
+            e.preventDefault();
             e.stopPropagation();
             if (options.onNavigate) options.onNavigate(n.id);
           });
@@ -1476,6 +1718,7 @@
       var pkgRow = el('div', { className: 'ps-toc-tree__row' });
       pkgRow.style.setProperty('--ps-toc-depth', '0');
       pkgRow.appendChild(makeSpacer());
+      pkgRow.appendChild(nodeIcon('page'));
       var pkgLink = el('a', {
         className:
           'ps-toc-tree__label' + (currentPageId === packageEntry.id ? ' is-current' : ''),
@@ -1484,6 +1727,7 @@
         title: packageEntry.name || '项目概述',
       });
       pkgLink.addEventListener('click', function (e) {
+        e.preventDefault();
         e.stopPropagation();
         if (options.onNavigate) options.onNavigate(packageEntry.id);
       });
@@ -1766,6 +2010,352 @@
   }
 
   /* ---- UI shell ---- */
+  var quickFindInstalled = false;
+
+  function prdSectionUrl(prdUrl, id) {
+    if (!prdUrl) return '';
+    try {
+      var url = new URL(prdUrl, global.location.href);
+      url.hash = id === 'package' ? 'prd-package' : 'prd-page-' + id;
+      return url.href;
+    } catch (e) {
+      return prdUrl;
+    }
+  }
+
+  function installQuickFind(options) {
+    if (quickFindInstalled || !global.document) return;
+    options = options || {};
+    if (!options.sitemapUrl && !(options.inline && options.inline.sitemap != null) && !options.specBase) {
+      return;
+    }
+    quickFindInstalled = true;
+
+    var prdUrl = options.prdUrl || '';
+    var specRoot = normalizeBase(options.specBase || '../proto-spec/');
+    var pkgBase = packageBaseFromOptions(options);
+    var packagePrdUrl = options.packagePrdUrl || '';
+    if (!prdUrl && packagePrdUrl) {
+      try {
+        prdUrl = new URL('../index.html', new URL(packagePrdUrl, global.location.href)).href;
+      } catch (e1) {}
+    }
+    if (!packagePrdUrl && prdUrl) {
+      try {
+        packagePrdUrl = new URL('docs/prd.md', new URL(prdUrl, global.location.href)).href;
+      } catch (e2) {}
+    }
+
+    var corpus = null;
+    var loading = null;
+    var failed = '';
+    var query = '';
+    var active = 0;
+    var open = false;
+    var composing = false;
+    var pointer = false;
+
+    var root = el('div', { className: 'ps-quick', id: 'psQuickFind' });
+    var mask = el('div', { className: 'ps-quick__mask' });
+    var panel = el('div', {
+      className: 'ps-quick__panel',
+      role: 'dialog',
+      'aria-modal': 'true',
+      'aria-label': '搜索页面和正文',
+    });
+    var input = el('input', {
+      className: 'ps-quick__input',
+      type: 'text',
+      placeholder: '搜索页面和正文',
+      'aria-label': '搜索页面和正文',
+      autocomplete: 'off',
+    });
+    var list = el('div', { className: 'ps-quick__list', role: 'listbox' });
+    var hint = el('div', { className: 'ps-quick__hint' });
+    function mouseLeftIcon() {
+      var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('viewBox', '0 0 24 24');
+      svg.setAttribute('aria-hidden', 'true');
+      svg.setAttribute('class', 'ps-glyph');
+      function path(d, filled) {
+        var p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        p.setAttribute('d', d);
+        if (filled) {
+          p.setAttribute('fill', 'currentColor');
+          p.setAttribute('stroke', 'none');
+        } else {
+          p.setAttribute('fill', 'none');
+          p.setAttribute('stroke', 'currentColor');
+          p.setAttribute('stroke-width', '1.5');
+          p.setAttribute('stroke-linecap', 'round');
+          p.setAttribute('stroke-linejoin', 'round');
+        }
+        svg.appendChild(p);
+      }
+      path('M12 3.75a4.25 4.25 0 0 0-4.25 4.25v8a4.25 4.25 0 0 0 8.5 0v-8A4.25 4.25 0 0 0 12 3.75Z');
+      path('M12 3.75v4.75');
+      path('M7.75 8.5h8.5');
+      path('M8.9 5.9c.55-.85 1.55-1.35 2.7-1.4v3.35H8.55c.1-.75.4-1.4.35-1.95Z', true);
+      return svg;
+    }
+    function keycap(icon, name) {
+      var cap = el('span', { className: 'ps-quick__key', title: name, 'aria-hidden': 'true' });
+      cap.appendChild(typeof icon === 'string' ? strokeIcon(icon) : icon);
+      return cap;
+    }
+    function hintItem(nodes) {
+      var item = el('span', { className: 'ps-quick__hint-item' });
+      nodes.forEach(function (node) {
+        item.appendChild(node);
+      });
+      return item;
+    }
+    hint.appendChild(
+      hintItem([keycap(GLYPH.arrowUp, '上'), keycap(GLYPH.arrowDown, '下'), document.createTextNode('选择')])
+    );
+    hint.appendChild(el('span', { className: 'ps-quick__hint-sep', text: '｜' }));
+    hint.appendChild(hintItem([keycap(GLYPH.enter, '回车'), document.createTextNode('跳转原型')]));
+    hint.appendChild(el('span', { className: 'ps-quick__hint-sep', text: '｜' }));
+    hint.appendChild(hintItem([keycap(mouseLeftIcon(), '鼠标左键'), document.createTextNode('跳转 PRD 页面')]));
+    panel.appendChild(input);
+    panel.appendChild(list);
+    panel.appendChild(hint);
+    root.appendChild(mask);
+    root.appendChild(panel);
+    document.body.appendChild(root);
+
+    function loadPageMd(pageId) {
+      return fetchText(resolveUrl(specRoot, pageId + '.md'))
+        .then(function (raw) {
+          return parseFrontmatter(raw).body;
+        })
+        .catch(function () {
+          return fetchText(resolveUrl(specRoot, pageId + '/spec.md'))
+            .then(function (raw) {
+              return parseFrontmatter(raw).body;
+            })
+            .catch(function () {
+              return fetchText(resolveUrl(specRoot, pageId + '/business.md')).catch(function () {
+                return '';
+              });
+            });
+        });
+    }
+
+    function ensureCorpus() {
+      if (corpus) return Promise.resolve(corpus);
+      if (loading) return loading;
+      failed = '';
+      loading = loadSitemapDoc({
+        sitemapUrl: options.sitemapUrl,
+        inline: options.inline,
+        specBase: options.specBase,
+      })
+        .then(function (doc) {
+          var pages = flattenSitemapPages(doc.pages || []).filter(function (p) {
+            return !p.hideInPrdPageList && p.status !== 'deprecated';
+          });
+          var tasks = pages.map(function (p) {
+            return loadPageMd(p.id).then(function (md) {
+              return {
+                id: p.id,
+                name: p.name || p.id,
+                href: resolvePageHref(p, pkgBase),
+                body: md || '',
+              };
+            });
+          });
+          var intro = packagePrdUrl
+            ? fetchText(packagePrdUrl)
+                .then(function (md) {
+                  return {
+                    id: 'package',
+                    name: /全局约定|共享规则|通用规则|跨页约定/.test(md || '') ? '总体说明' : '项目概述',
+                    href: prdSectionUrl(prdUrl, 'package'),
+                    body: md || '',
+                  };
+                })
+                .catch(function () {
+                  return null;
+                })
+            : Promise.resolve(null);
+          return Promise.all([intro, Promise.all(tasks)]).then(function (pair) {
+            var items = [];
+            if (pair[0] && pair[0].body) items.push(pair[0]);
+            corpus = items.concat(pair[1]);
+            loading = null;
+            return corpus;
+          });
+        })
+        .catch(function () {
+          loading = null;
+          failed = '暂时无法检索';
+          corpus = [];
+          return corpus;
+        });
+      return loading;
+    }
+
+    function hitsFor(q) {
+      var text = String(q || '').trim();
+      if (!text || !corpus) return [];
+      var lower = text.toLowerCase();
+      var hits = [];
+      corpus.forEach(function (item) {
+        var blob = [item.name, item.id, item.body || ''].join('\n');
+        if (blob.toLowerCase().indexOf(lower) === -1) return;
+        hits.push({
+          id: item.id,
+          name: item.name,
+          protoHref: item.href || prdSectionUrl(prdUrl, item.id),
+          prdHref: prdSectionUrl(prdUrl, item.id) || item.href,
+          snippetHtml: highlightPlainSnippet(blob, text),
+        });
+      });
+      return hits;
+    }
+
+    function paint() {
+      list.innerHTML = '';
+      var q = String(query || '').trim();
+      if (failed) {
+        list.appendChild(el('div', { className: 'ps-quick__empty', text: failed }));
+        return;
+      }
+      if (!corpus) {
+        list.appendChild(el('div', { className: 'ps-quick__empty', text: '正在准备' }));
+        return;
+      }
+      if (!q) {
+        list.appendChild(el('div', { className: 'ps-quick__empty', text: '输入关键字' }));
+        return;
+      }
+      var hits = hitsFor(q);
+      if (!hits.length) {
+        list.appendChild(el('div', { className: 'ps-quick__empty', text: '无匹配内容' }));
+        return;
+      }
+      if (active >= hits.length) active = 0;
+      if (active < 0) active = hits.length - 1;
+      hits.forEach(function (hit, i) {
+        var item = el('button', {
+          type: 'button',
+          className: 'ps-quick__hit' + (i === active ? ' is-active' : ''),
+          role: 'option',
+          'aria-selected': i === active ? 'true' : 'false',
+        });
+        item.appendChild(el('div', { className: 'ps-quick__hit-title', text: hit.name }));
+        var sn = el('div', { className: 'ps-quick__hit-snippet' });
+        sn.innerHTML = hit.snippetHtml || '';
+        item.appendChild(sn);
+        item.addEventListener('mouseenter', function () {
+          if (!pointer || active === i) return;
+          pointer = false;
+          active = i;
+          var nodes = list.querySelectorAll('.ps-quick__hit');
+          for (var n = 0; n < nodes.length; n++) {
+            var on = n === i;
+            nodes[n].classList.toggle('is-active', on);
+            nodes[n].setAttribute('aria-selected', on ? 'true' : 'false');
+          }
+        });
+        item.addEventListener('click', function () {
+          jump(hit.prdHref);
+        });
+        list.appendChild(item);
+      });
+      var current = list.querySelector('.is-active');
+      if (current && current.scrollIntoView) current.scrollIntoView({ block: 'nearest' });
+    }
+
+    function jump(url) {
+      if (!url) return;
+      closeQuick();
+      global.location.href = url;
+    }
+
+    function openQuick() {
+      open = true;
+      root.classList.add('is-open');
+      query = '';
+      input.value = '';
+      active = 0;
+      paint();
+      ensureCorpus().then(function () {
+        if (open) paint();
+      });
+      setTimeout(function () {
+        input.focus();
+      }, 0);
+    }
+
+    function closeQuick() {
+      open = false;
+      root.classList.remove('is-open');
+    }
+
+    function move(step) {
+      var hits = hitsFor(query);
+      if (!hits.length) return;
+      pointer = false;
+      active = (active + step + hits.length) % hits.length;
+      paint();
+    }
+
+    list.addEventListener('mousemove', function () {
+      pointer = true;
+    });
+    mask.addEventListener('click', closeQuick);
+    input.addEventListener('compositionstart', function () {
+      composing = true;
+    });
+    input.addEventListener('compositionend', function () {
+      composing = false;
+      query = input.value || '';
+      active = 0;
+      paint();
+    });
+    input.addEventListener('input', function () {
+      if (composing) return;
+      query = input.value || '';
+      active = 0;
+      paint();
+    });
+    input.addEventListener('keydown', function (e) {
+      var key = e.key || '';
+      var up = key === 'ArrowUp' || e.keyCode === 38;
+      var down = key === 'ArrowDown' || e.keyCode === 40;
+      if (up || down) {
+        e.preventDefault();
+        e.stopPropagation();
+        move(down ? 1 : -1);
+      } else if (key === 'Enter') {
+        e.preventDefault();
+        var hits = hitsFor(query);
+        if (hits[active]) jump(hits[active].protoHref);
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        closeQuick();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      var key = e.key || '';
+      if ((e.metaKey || e.ctrlKey) && !e.altKey && !e.shiftKey && (key === 'k' || key === 'K')) {
+        if (e.repeat) return;
+        e.preventDefault();
+        if (open) closeQuick();
+        else openQuick();
+        return;
+      }
+      if (!open) return;
+      if (key === 'Escape') {
+        e.preventDefault();
+        closeQuick();
+      }
+    });
+  }
+
   function sideOfAnchor(anchor) {
     return String(anchor).indexOf('left') === 0 ? 'left' : 'right';
   }
@@ -1812,6 +2402,264 @@
     return side + '-' + vert;
   }
 
+  var REVIEW_POS_KEY = 'proto-spec.reviewToolbar';
+  var REVIEW_GROUPS = ['role', 'status', 'scenario'];
+  var REVIEW_GROUP_LABEL = { role: '角色', status: '状态', scenario: '权限场景' };
+
+  function mountReviewToolbar(options) {
+    var perspectives = Array.isArray(options.demoPerspectives) ? options.demoPerspectives : [];
+    var active = options.demoPerspectiveActive;
+    var groups = { role: [], status: [], scenario: [] };
+    perspectives.forEach(function (item) {
+      if (!item) return;
+      var group = item.group != null ? String(item.group) : 'role';
+      if (!groups[group]) group = 'role';
+      groups[group].push(item);
+    });
+    var visible = REVIEW_GROUPS.filter(function (group) {
+      return groups[group].length > 0;
+    });
+    if (!visible.length) return;
+
+    function itemKey(item, field) {
+      return item && item[field] != null ? String(item[field]) : '';
+    }
+
+    function activeKey(group) {
+      if (active && typeof active === 'object') {
+        return active[group] == null ? '' : String(active[group]);
+      }
+      return active != null ? String(active) : '';
+    }
+
+    function matches(item, group) {
+      var key = activeKey(group);
+      if (!key) return false;
+      return key === itemKey(item, 'id') || key === itemKey(item, 'role') || key === itemKey(item, 'status');
+    }
+
+    function currentItem(group) {
+      var list = groups[group];
+      for (var i = 0; i < list.length; i++) {
+        if (matches(list[i], group)) return list[i];
+      }
+      return list[0];
+    }
+
+    var bar = el('div', {
+      className: 'ps-review',
+      id: 'psReviewToolbar',
+      role: 'toolbar',
+      'aria-label': '评审工具',
+    });
+    bar.appendChild(el('span', { className: 'ps-review__brand', text: '评审工具' }));
+
+    var openSlot = null;
+
+    function closeMenus() {
+      if (!openSlot) return;
+      openSlot.classList.remove('is-open');
+      var trigger = openSlot.querySelector('.ps-review__trigger');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      openSlot = null;
+    }
+
+    function alignMenu(slot) {
+      var menu = slot.querySelector('.ps-review__menu');
+      if (!menu) return;
+      menu.classList.remove('is-up');
+      menu.style.left = '0';
+      menu.style.right = 'auto';
+      var slotRect = slot.getBoundingClientRect();
+      var menuRect = menu.getBoundingClientRect();
+      var spaceBelow = window.innerHeight - slotRect.bottom;
+      if (spaceBelow < menuRect.height + 8 && slotRect.top > menuRect.height + 8) {
+        menu.classList.add('is-up');
+      }
+      menuRect = menu.getBoundingClientRect();
+      if (menuRect.right > window.innerWidth - 8) {
+        menu.style.left = 'auto';
+        menu.style.right = '0';
+      }
+      if (menu.getBoundingClientRect().left < 8) {
+        menu.style.left = '0';
+        menu.style.right = 'auto';
+      }
+    }
+
+    visible.forEach(function (group) {
+      bar.appendChild(el('span', { className: 'ps-review__sep', 'aria-hidden': 'true' }));
+      var list = groups[group];
+      var current = currentItem(group);
+      var currentLabel = current && current.label != null ? String(current.label) : '';
+      var slot = el('div', { className: 'ps-review__slot' });
+      if (list.length < 2) {
+        slot.classList.add('is-static');
+        slot.appendChild(
+          el('span', { className: 'ps-review__static' }, [
+            el('span', { className: 'ps-review__key', text: REVIEW_GROUP_LABEL[group] + ':' }),
+            el('span', { className: 'ps-review__val', text: currentLabel }),
+          ])
+        );
+        bar.appendChild(slot);
+        return;
+      }
+      var trigger = el('button', {
+        type: 'button',
+        className: 'ps-review__trigger',
+        title: (current && current.title) || REVIEW_GROUP_LABEL[group] + '：' + currentLabel,
+        'aria-haspopup': 'menu',
+        'aria-expanded': 'false',
+      });
+      trigger.appendChild(el('span', { className: 'ps-review__key', text: REVIEW_GROUP_LABEL[group] + ':' }));
+      trigger.appendChild(el('span', { className: 'ps-review__val', text: currentLabel }));
+      trigger.appendChild(el('span', { className: 'ps-review__caret', 'aria-hidden': 'true' }));
+      var menu = el('div', { className: 'ps-review__menu', role: 'menu' });
+      list.forEach(function (item) {
+        var label = item.label != null ? String(item.label) : itemKey(item, 'id');
+        var option = el('button', {
+          type: 'button',
+          className: 'ps-review__option' + (item === current ? ' is-active' : ''),
+          role: 'menuitem',
+          title: item.title || label,
+          text: label,
+        });
+        option.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          closeMenus();
+          if (typeof options.onDemoPerspective === 'function') options.onDemoPerspective(item);
+        });
+        menu.appendChild(option);
+      });
+      slot.appendChild(trigger);
+      slot.appendChild(menu);
+      bar.appendChild(slot);
+    });
+    document.body.appendChild(bar);
+
+    function place(x, y) {
+      var maxX = Math.max(0, window.innerWidth - bar.offsetWidth);
+      var maxY = Math.max(0, window.innerHeight - bar.offsetHeight);
+      var left = Math.max(0, Math.min(maxX, x));
+      var top = Math.max(0, Math.min(maxY, y));
+      bar.style.left = left + 'px';
+      bar.style.top = top + 'px';
+      bar.style.right = 'auto';
+      bar.style.bottom = 'auto';
+      return { left: left, top: top };
+    }
+
+    var stored = loadStorage(REVIEW_POS_KEY, '');
+    var initial = null;
+    if (stored) {
+      try {
+        initial = JSON.parse(stored);
+      } catch (e) {
+        initial = null;
+      }
+    }
+    if (initial && Number.isFinite(Number(initial.left)) && Number.isFinite(Number(initial.top))) {
+      place(Number(initial.left), Number(initial.top));
+    } else {
+      place(window.innerWidth - bar.offsetWidth - 16, 16);
+    }
+
+    var drag = { active: false, moved: false, pointerId: null, startX: 0, startY: 0, origLeft: 0, origTop: 0 };
+
+    bar.addEventListener('pointerdown', function (e) {
+      if (e.button != null && e.button !== 0) return;
+      if (e.target.closest && e.target.closest('.ps-review__menu, .ps-review__option')) return;
+      var rect = bar.getBoundingClientRect();
+      drag.active = true;
+      drag.moved = false;
+      drag.pointerId = e.pointerId;
+      drag.startX = e.clientX;
+      drag.startY = e.clientY;
+      drag.origLeft = rect.left;
+      drag.origTop = rect.top;
+    });
+    bar.addEventListener('pointermove', function (e) {
+      if (!drag.active || drag.pointerId !== e.pointerId) return;
+      var dx = e.clientX - drag.startX;
+      var dy = e.clientY - drag.startY;
+      if (!drag.moved && dx * dx + dy * dy > 36) {
+        drag.moved = true;
+        bar.classList.add('is-dragging');
+        closeMenus();
+        try {
+          bar.setPointerCapture(e.pointerId);
+        } catch (err) {}
+      }
+      if (drag.moved) place(drag.origLeft + dx, drag.origTop + dy);
+    });
+    function endDrag(e) {
+      if (!drag.active || (e && drag.pointerId != null && e.pointerId !== drag.pointerId)) return;
+      var moved = drag.moved;
+      var pointerId = drag.pointerId;
+      drag.active = false;
+      drag.moved = false;
+      drag.pointerId = null;
+      bar.classList.remove('is-dragging');
+      if (moved) {
+        var rect = bar.getBoundingClientRect();
+        saveStorage(REVIEW_POS_KEY, JSON.stringify(place(rect.left, rect.top)));
+        var swallow = function (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          bar.removeEventListener('click', swallow, true);
+        };
+        bar.addEventListener('click', swallow, true);
+        setTimeout(function () {
+          bar.removeEventListener('click', swallow, true);
+        }, 0);
+      }
+      if (pointerId != null) {
+        try {
+          bar.releasePointerCapture(pointerId);
+        } catch (err) {}
+      }
+    }
+    bar.addEventListener('pointerup', endDrag);
+    bar.addEventListener('pointercancel', endDrag);
+
+    bar.addEventListener('click', function (e) {
+      var option = e.target.closest && e.target.closest('.ps-review__option');
+      if (option && bar.contains(option)) return;
+      var trigger = e.target.closest && e.target.closest('.ps-review__trigger');
+      if (!trigger || !bar.contains(trigger)) return;
+      e.preventDefault();
+      e.stopPropagation();
+      var slot = trigger.parentNode;
+      var willOpen = slot !== openSlot;
+      closeMenus();
+      if (!willOpen) return;
+      slot.classList.add('is-open');
+      trigger.setAttribute('aria-expanded', 'true');
+      openSlot = slot;
+      alignMenu(slot);
+    });
+
+    document.addEventListener('pointerdown', function (e) {
+      if (bar.contains(e.target)) return;
+      closeMenus();
+    });
+    document.addEventListener(
+      'keydown',
+      function (e) {
+        if (e.key !== 'Escape' || !openSlot) return;
+        e.stopPropagation();
+        closeMenus();
+      },
+      true
+    );
+    window.addEventListener('resize', function () {
+      var rect = bar.getBoundingClientRect();
+      saveStorage(REVIEW_POS_KEY, JSON.stringify(place(rect.left, rect.top)));
+      if (openSlot) alignMenu(openSlot);
+    });
+  }
+
   function createRuntime(options) {
     options = options || {};
     var storedWidth = Number(loadStorage(STORAGE.width, ''));
@@ -1842,14 +2690,69 @@
     };
     if (!Number.isFinite(state.width) || state.width < 640) state.width = 880;
     if (ANCHORS.indexOf(state.anchor) < 0) state.anchor = 'right-bottom';
+    installQuickFind(options);
 
     var fabRoot = el('div', { className: 'ps-fab-root', id: 'psFabRoot' });
-    var fabMain = el('button', {
-      type: 'button',
-      className: 'ps-fab',
-      text: options.fabLabel || '原型说明',
-      title: '拖动可改位置；点击打开说明',
-    });
+    var fabMenu = el('div', { className: 'ps-fab-menu' });
+    var fabEdge = el('div', { className: 'ps-fab-edge', id: 'psFabEdge' });
+    var fabRevealTimer = null;
+    var fabOverFab = false;
+    var fabOverEdge = false;
+    var FAB_HOLD_KEY = 'proto-spec.fabHold';
+    var fabHoldUntil = 0;
+    try {
+      if (sessionStorage.getItem(FAB_HOLD_KEY) === '1') {
+        sessionStorage.removeItem(FAB_HOLD_KEY);
+        fabHoldUntil = Date.now() + 600;
+      }
+    } catch (e) {}
+
+    function rememberFabHold() {
+      try {
+        sessionStorage.setItem(FAB_HOLD_KEY, '1');
+      } catch (e) {}
+    }
+
+    function setFabRevealed(on) {
+      if (on) fabRoot.classList.add('is-revealed');
+      else if (!state.mode && !state.dragging) fabRoot.classList.remove('is-revealed');
+      applyFabHide(fabRoot);
+    }
+
+    function syncFabReveal() {
+      clearTimeout(fabRevealTimer);
+      if (Date.now() < fabHoldUntil || fabOverFab || fabOverEdge || state.mode || state.dragging) {
+        setFabRevealed(true);
+        return;
+      }
+      fabRevealTimer = setTimeout(function () {
+        if (!fabOverFab && !fabOverEdge && !state.mode && !state.dragging) {
+          setFabRevealed(false);
+        }
+      }, 120);
+    }
+
+    function placeFabEdge(anchor) {
+      var side = sideOfAnchor(anchor);
+      fabEdge.dataset.side = side;
+    }
+
+    mountReviewToolbar(options);
+
+    if (options.prdUrl) {
+      fabRoot.classList.add('has-prd');
+      var fabPrd = el('a', {
+        className: 'ps-fab-secondary',
+        href: options.prdUrl,
+        text: 'PRD 汇总',
+        title: '打开 PRD 汇总',
+      });
+      fabPrd.addEventListener('click', function (e) {
+        e.stopPropagation();
+      });
+      fabMenu.appendChild(fabPrd);
+    }
+
     var fabChangelog = el('button', {
       type: 'button',
       className: 'ps-fab-secondary',
@@ -1872,21 +2775,41 @@
         else openNav();
       },
     });
+    fabMenu.appendChild(fabChangelog);
+    fabMenu.appendChild(fabNav);
+
+    var fabMain = el('button', {
+      type: 'button',
+      className: 'ps-fab',
+      text: options.fabLabel || '原型说明',
+      title: '拖动可改位置；点击打开说明',
+    });
+    fabRoot.appendChild(fabMenu);
     fabRoot.appendChild(fabMain);
-    fabRoot.appendChild(fabChangelog);
-    fabRoot.appendChild(fabNav);
+    document.body.appendChild(fabEdge);
     document.body.appendChild(fabRoot);
     placeFab(fabRoot, state.anchor);
-
-    fabRoot.addEventListener('mouseenter', function () {
+    placeFabEdge(state.anchor);
+    if (fabHoldUntil) {
       fabRoot.classList.add('is-revealed');
       applyFabHide(fabRoot);
+    }
+
+    fabRoot.addEventListener('mouseenter', function () {
+      fabOverFab = true;
+      syncFabReveal();
     });
     fabRoot.addEventListener('mouseleave', function () {
-      if (!state.mode && !state.dragging) {
-        fabRoot.classList.remove('is-revealed');
-        applyFabHide(fabRoot);
-      }
+      fabOverFab = false;
+      syncFabReveal();
+    });
+    fabEdge.addEventListener('mouseenter', function () {
+      fabOverEdge = true;
+      syncFabReveal();
+    });
+    fabEdge.addEventListener('mouseleave', function () {
+      fabOverEdge = false;
+      syncFabReveal();
     });
 
     var mask = el('div', { className: 'ps-mask', id: 'psMask' });
@@ -1953,48 +2876,276 @@
       document.body.removeChild(ta);
     }
 
-    /** 打开本页 Spec：优先 cursor:// / vscode://；并复制绝对路径（浏览器禁 file://）。 */
-    function openLocalSpecFile() {
-      var abs = resolveSpecFileAbs();
-      var rel = resolveSpecRelPath();
-      if (!abs) {
-        copyTextToClipboard(rel).then(function () {
-          toast('未配置 workspaceRoot / specFileAbs；已复制相对路径');
+    var WORKSPACE_ROOT_KEY = 'proto-spec.workspaceRoot';
+    var EDITOR_KEY = 'proto-spec.editor';
+    var EDITORS = [
+      { id: 'cursor', label: 'Cursor', scheme: 'cursor' },
+      { id: 'trae', label: 'Trae', scheme: 'trae' },
+      { id: 'vscode', label: 'VS Code', scheme: 'vscode' },
+      { id: 'text', label: '文本编辑器', scheme: '' },
+    ];
+    var rootPrompt = null;
+
+    function resolveEditorId() {
+      var id = loadStorage(EDITOR_KEY, 'cursor');
+      var known = false;
+      EDITORS.forEach(function (item) {
+        if (item.id === id) known = true;
+      });
+      return known ? id : 'cursor';
+    }
+
+    function editorById(id) {
+      var found = EDITORS[0];
+      EDITORS.forEach(function (item) {
+        if (item.id === id) found = item;
+      });
+      return found;
+    }
+
+    function normalizeWorkspaceRootInput(raw) {
+      var p = String(raw || '').trim();
+      if (
+        (p.charAt(0) === '"' && p.charAt(p.length - 1) === '"') ||
+        (p.charAt(0) === "'" && p.charAt(p.length - 1) === "'")
+      ) {
+        p = p.slice(1, -1).trim();
+      }
+      p = p.replace(/\\/g, '/').replace(/\/+$/, '');
+      var note = '';
+      if (/\/proto-spec\/[^/]+\.md$/i.test(p)) {
+        p = p.replace(/\/proto-spec\/[^/]+\.md$/i, '');
+        note = '已去掉文件名和 proto-spec，保存的是上一级文件夹。';
+      } else if (/\/proto-spec$/i.test(p)) {
+        p = p.replace(/\/proto-spec$/i, '');
+        note = '已去掉末尾的 proto-spec，保存的是上一级文件夹。';
+      }
+      return { path: p, note: note };
+    }
+
+    function isAbsolutePath(p) {
+      return p.charAt(0) === '/' || /^[A-Za-z]:\//.test(p);
+    }
+
+    function closeRootPrompt() {
+      if (!rootPrompt) return;
+      rootPrompt.mask.classList.remove('is-open');
+    }
+
+    function ensureRootPrompt() {
+      if (rootPrompt) return rootPrompt;
+      var err = el('p', { className: 'ps-root-prompt__error' });
+      var hint = el('p', { className: 'ps-root-prompt__hint' });
+      var input = el('input', {
+        className: 'ps-root-prompt__input',
+        type: 'text',
+        placeholder: '/Users/你的用户名/…/prototypes/项目名',
+        spellcheck: 'false',
+        autocomplete: 'off',
+      });
+      var appNote = el('p', { className: 'ps-root-prompt__hint' });
+      var apps = el('div', { className: 'ps-root-prompt__apps', role: 'radiogroup', 'aria-label': '用哪个应用打开' });
+      EDITORS.forEach(function (item) {
+        var radio = el('input', { type: 'radio', name: 'ps-spec-editor', value: item.id });
+        radio.addEventListener('change', function () {
+          appNote.textContent = item.id === 'text' ? '网页不能直接打开文本编辑器，将改为复制文件路径。' : '';
         });
+        apps.appendChild(el('label', { className: 'ps-root-prompt__app' }, [radio, item.label]));
+      });
+      var mask = el('div', {
+        className: 'ps-root-prompt',
+        role: 'dialog',
+        'aria-modal': 'true',
+        'aria-label': '打开说明文件',
+      });
+      var card = el('div', { className: 'ps-root-prompt__card' });
+      card.appendChild(el('h3', { className: 'ps-root-prompt__title', text: '打开说明文件' }));
+      card.appendChild(el('p', {
+        className: 'ps-root-prompt__lead',
+        text: '右键 proto-spec 的上一级文件夹，复制路径。同一地址只需填一次。',
+      }));
+      card.appendChild(el('p', {
+        className: 'ps-root-prompt__example',
+        text: '示例：/Users/zhangsan/work/prototypes/park-initiation',
+      }));
+      card.appendChild(el('p', { className: 'ps-root-prompt__label', text: '用哪个应用打开' }));
+      card.appendChild(apps);
+      card.appendChild(appNote);
+      card.appendChild(el('label', { className: 'ps-root-prompt__label', text: '原型包路径' }));
+      card.appendChild(input);
+      card.appendChild(hint);
+      card.appendChild(err);
+      card.appendChild(el('div', { className: 'ps-root-prompt__foot' }, [
+        el('button', { type: 'button', className: 'ps-icon-btn', text: '取消', onClick: closeRootPrompt }),
+        el('button', {
+          type: 'button',
+          className: 'ps-root-prompt__ok',
+          text: '保存并打开',
+          onClick: function () {
+            var parsed = normalizeWorkspaceRootInput(input.value);
+            err.textContent = '';
+            hint.textContent = parsed.note || '';
+            if (!parsed.path) {
+              err.textContent = '请先粘贴路径。';
+              input.focus();
+              return;
+            }
+            if (/^https?:\/\//i.test(parsed.path)) {
+              err.textContent = '这是网页地址，不是文件夹路径。';
+              return;
+            }
+            if (!isAbsolutePath(parsed.path)) {
+              err.textContent = '需要从 / 或盘符开头的完整路径，例如 /Users/…/prototypes/项目名。';
+              return;
+            }
+            var picked = 'cursor';
+            Array.prototype.forEach.call(apps.querySelectorAll('input'), function (radio) {
+              if (radio.checked) picked = radio.value;
+            });
+            saveStorage(WORKSPACE_ROOT_KEY, parsed.path);
+            saveStorage(EDITOR_KEY, picked);
+            closeRootPrompt();
+            openLocalSpecFile();
+          },
+        }),
+      ]));
+      mask.appendChild(card);
+      mask.addEventListener('click', function (e) {
+        if (e.target === mask) closeRootPrompt();
+      });
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeRootPrompt();
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          var ok = mask.querySelector('.ps-root-prompt__ok');
+          if (ok) ok.click();
+        }
+      });
+      document.body.appendChild(mask);
+      rootPrompt = {
+        mask: mask,
+        input: input,
+        err: err,
+        hint: hint,
+        apps: apps,
+        appNote: appNote,
+      };
+      return rootPrompt;
+    }
+
+    function openRootPrompt() {
+      var ui = ensureRootPrompt();
+      var current = resolveWorkspaceRoot();
+      var editorId = resolveEditorId();
+      ui.input.value = current || '';
+      ui.err.textContent = '';
+      ui.hint.textContent = '';
+      ui.appNote.textContent = editorId === 'text' ? '网页不能直接打开文本编辑器，将改为复制文件路径。' : '';
+      Array.prototype.forEach.call(ui.apps.querySelectorAll('input'), function (radio) {
+        radio.checked = radio.value === editorId;
+      });
+      ui.mask.classList.add('is-open');
+      setTimeout(function () {
+        ui.input.focus();
+        ui.input.select();
+      }, 0);
+    }
+
+    function launchEditor(abs) {
+      var editor = editorById(resolveEditorId());
+      copyTextToClipboard(abs);
+      if (!editor.scheme) {
+        toast('已复制路径。网页不能直接打开文本编辑器，请用文本编辑器打开该文件。');
         return;
       }
-      copyTextToClipboard(abs);
-      var cursorUri = toEditorFileUri('cursor', abs);
-      var vscodeUri = toEditorFileUri('vscode', abs);
-      var tried = false;
+      var uri = toEditorFileUri(editor.scheme, abs);
       try {
         var a = document.createElement('a');
-        a.href = cursorUri;
+        a.href = uri;
         a.rel = 'noopener';
         a.style.display = 'none';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-        tried = true;
-      } catch (e1) {}
-      if (!tried) {
+      } catch (e1) {
         try {
-          window.location.href = cursorUri;
-          tried = true;
+          window.location.href = uri;
         } catch (e2) {}
       }
-      setTimeout(function () {
-        try {
-          var b = document.createElement('a');
-          b.href = vscodeUri;
-          b.rel = 'noopener';
-          b.style.display = 'none';
-          document.body.appendChild(b);
-          b.click();
-          document.body.removeChild(b);
-        } catch (e3) {}
-      }, 350);
-      toast('已复制绝对路径；若未跳转请在 Cursor 中打开该文件');
+      toast('已复制路径，正在用 ' + editor.label + ' 打开');
+    }
+
+    /** 打开本页 Spec：只唤起已选应用，并复制绝对路径。 */
+    function openLocalSpecFile() {
+      var abs = resolveSpecFileAbs();
+      if (!abs) {
+        openRootPrompt();
+        return;
+      }
+      launchEditor(abs);
+    }
+
+    function buildLocalEditSplit() {
+      var wrap = el('div', { className: 'ps-split' });
+      var menu = el('div', { className: 'ps-split__menu', role: 'menu' });
+      function closeMenu() {
+        wrap.classList.remove('is-open');
+        caret.setAttribute('aria-expanded', 'false');
+      }
+      var main = el('button', {
+        type: 'button',
+        className: 'ps-icon-btn ps-open-spec-btn',
+        title: '用已选应用打开本页说明文件',
+        onClick: function () {
+          closeMenu();
+          openLocalSpecFile();
+        },
+      });
+      main.appendChild(strokeIcon(GLYPH.edit));
+      main.appendChild(document.createTextNode('编辑文档'));
+      var caret = el('button', {
+        type: 'button',
+        className: 'ps-split__caret',
+        'aria-label': '更多',
+        'aria-expanded': 'false',
+        'aria-haspopup': 'menu',
+      });
+      var caretIcon = strokeIcon(GLYPH.chevron);
+      caretIcon.classList.add('ps-glyph--chevron');
+      caret.appendChild(caretIcon);
+      caret.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = !wrap.classList.contains('is-open');
+        wrap.classList.toggle('is-open', open);
+        caret.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      menu.appendChild(
+        el('button', {
+          type: 'button',
+          className: 'ps-split__item',
+          role: 'menuitem',
+          text: '修改路径',
+          onClick: function (e) {
+            e.stopPropagation();
+            closeMenu();
+            openRootPrompt();
+          },
+        })
+      );
+      document.addEventListener('click', closeMenu);
+      wrap.appendChild(main);
+      wrap.appendChild(el('span', { className: 'ps-split__rule', 'aria-hidden': 'true' }));
+      wrap.appendChild(caret);
+      wrap.appendChild(menu);
+      return wrap;
+    }
+
+    function paintFullscreenBtn(btn, expanded) {
+      var label = expanded ? '退出全屏' : '全屏查看';
+      btn.setAttribute('aria-label', label);
+      btn.title = label;
+      while (btn.firstChild) btn.removeChild(btn.firstChild);
+      btn.appendChild(strokeIcon(expanded ? GLYPH.collapse : GLYPH.expand));
     }
 
     function buildDrawer(idPrefix, titleText, drawerOpts) {
@@ -2014,38 +3165,42 @@
       titleBox.appendChild(metaEl);
       var fsBtn = el('button', {
         type: 'button',
-        className: 'ps-icon-btn',
-        text: '全屏查看',
+        className: 'ps-icon-btn ps-icon-btn--solo',
         onClick: function () {
           state.fullscreen = !state.fullscreen;
           drawer.classList.toggle('is-fullscreen', state.fullscreen);
-          this.textContent = state.fullscreen ? '退出全屏' : '全屏查看';
+          paintFullscreenBtn(this, state.fullscreen);
           if (!state.fullscreen) {
             drawer.style.width = Math.min(state.width, window.innerWidth * 0.92) + 'px';
           }
         },
       });
+      paintFullscreenBtn(fsBtn, false);
+      var closeBtn = el('button', {
+        type: 'button',
+        className: 'ps-icon-btn ps-icon-btn--solo',
+        title: '关闭',
+        'aria-label': '关闭',
+        onClick: closeAll,
+      });
+      closeBtn.appendChild(strokeIcon(GLYPH.close));
       var actionKids = [];
+      if (options.prdUrl && drawerOpts.showPrdLink) {
+        var prdLink = el('a', {
+          className: 'ps-icon-btn ps-prd-link',
+          href: options.prdUrl,
+          title: 'PRD 汇总',
+        });
+        prdLink.appendChild(strokeIcon(GLYPH.stack));
+        prdLink.appendChild(document.createTextNode('PRD 汇总'));
+        actionKids.push(prdLink);
+      }
       if (drawerOpts.showOpenSpec) {
-        actionKids.push(
-          el('button', {
-            type: 'button',
-            className: 'ps-icon-btn ps-open-spec-btn',
-            text: '打开 Spec',
-            title: '在 Cursor / VS Code 中打开本页 Spec，并复制绝对路径',
-            onClick: openLocalSpecFile,
-          })
-        );
+        actionKids.push(buildLocalEditSplit());
+        actionKids.push(el('span', { className: 'ps-drawer__divider', 'aria-hidden': 'true' }));
       }
       actionKids.push(fsBtn);
-      actionKids.push(
-        el('button', {
-          type: 'button',
-          className: 'ps-icon-btn',
-          text: '关闭',
-          onClick: closeAll,
-        })
-      );
+      actionKids.push(closeBtn);
       var actions = el('div', { className: 'ps-drawer__actions' }, actionKids);
       head.appendChild(titleBox);
       head.appendChild(actions);
@@ -2106,9 +3261,9 @@
     }
 
     document.body.appendChild(mask);
-    var specUi = buildDrawer('ps', '原型说明', { showOpenSpec: true });
+    var specUi = buildDrawer('ps', '原型说明', { showOpenSpec: true, showPrdLink: true });
     var logUi = buildDrawer('psChangelog', '更新记录');
-    var navUi = buildDrawer('psNav', '导航目录');
+    var navUi = buildDrawer('psNav', '导航目录', { showPrdLink: true });
     navUi.tabsEl.style.display = 'none';
 
     logUi.panelEl.addEventListener('click', function (e) {
@@ -2126,7 +3281,8 @@
 
     function hideDrawer(ui) {
       ui.drawer.classList.remove('is-open', 'is-fullscreen');
-      ui.fsBtn.textContent = '全屏查看';
+      ui.fsBtn.title = '全屏查看';
+      paintFullscreenBtn(ui.fsBtn, false);
     }
 
     function showDrawer(ui) {
@@ -2143,7 +3299,7 @@
       hideDrawer(navUi);
       mask.classList.remove('is-open');
       fabRoot.classList.remove('is-open');
-      applyFabHide(fabRoot);
+      syncFabReveal();
     }
 
     function openSpec() {
@@ -2250,27 +3406,22 @@
         placeholder: '筛选页面 / 分组',
       });
       search.value = state.navQuery || '';
-      search.addEventListener('input', function () {
-        state.navQuery = search.value || '';
+      bindImeSafeInput(search, function (val, inputEl) {
+        var start = inputEl.selectionStart;
+        var end = inputEl.selectionEnd;
+        state.navQuery = val;
         renderNavPanel();
         var again = navUi.panelEl.querySelector('.ps-changelog-search');
         if (again) {
           again.focus();
           try {
-            again.setSelectionRange(again.value.length, again.value.length);
+            if (typeof start === 'number' && typeof end === 'number') {
+              again.setSelectionRange(start, end);
+            }
           } catch (e) {}
         }
       });
       toolbar.appendChild(search);
-
-      if (options.prdUrl) {
-        var prdLink = el('a', {
-          className: 'ob-btn ob-btn--secondary ob-btn--sm',
-          href: options.prdUrl,
-          text: 'PRD 汇总',
-        });
-        toolbar.appendChild(prdLink);
-      }
       navUi.panelEl.appendChild(toolbar);
 
       var wrap = el('div', { className: 'ps-nav-list' });
@@ -2790,6 +3941,7 @@
         state.anchor = anchor;
         saveStorage(STORAGE.anchor, anchor);
         placeFab(fabRoot, anchor);
+        placeFabEdge(anchor);
         if (state.mode) {
           specUi.drawer.dataset.side = sideOfAnchor(anchor);
           logUi.drawer.dataset.side = sideOfAnchor(anchor);
@@ -2867,43 +4019,45 @@
 
   function mountPrdHub(options) {
     options = options || {};
+    installQuickFind(options);
     var root =
       typeof options.root === 'string' ? document.querySelector(options.root) : options.root;
     if (!root) throw new Error('mountPrdHub: 未找到 root');
     var sitemapUrl = options.sitemapUrl;
     var specRoot = normalizeBase(options.specBase || '../proto-spec/');
     var packagePrdUrl = options.packagePrdUrl || null;
+    var globalSearchRoot =
+      typeof options.globalSearchRoot === 'string'
+        ? document.querySelector(options.globalSearchRoot)
+        : options.globalSearchRoot || document.querySelector('#prdGlobalSearch');
+    var tocMenuRoot =
+      typeof options.tocMenuRoot === 'string'
+        ? document.querySelector(options.tocMenuRoot)
+        : options.tocMenuRoot || document.querySelector('#prdTocMenu');
+    var COMPACT_MQ = '(max-width: 960px)';
     var state = {
-      query: '',
+      pageQuery: '',
+      contentQuery: '',
+      contentPanelOpen: false,
+      tocMenuOpen: false,
+      compact: typeof window !== 'undefined' && window.matchMedia
+        ? window.matchMedia(COMPACT_MQ).matches
+        : false,
       sections: [],
       siteTree: [],
       tocCollapsed: {},
       sitemapDoc: null,
       activeId: '',
       packageLabel: '项目概述',
-      _spyBound: false,
+      packageMd: '',
+      packageHtml: null,
+      _globalDocBound: false,
+      _tocDocBound: false,
+      _mqBound: false,
     };
 
     root.innerHTML = '';
     root.appendChild(el('div', { className: 'ps-empty', text: '正在加载 PRD 汇总…' }));
-
-    function pageBlob(sec) {
-      return [sec.name, sec.id, sec.business || '', sec.metaText || ''].join('\n').toLowerCase();
-    }
-
-    function countPages(nodes) {
-      var n = 0;
-      function walk(list) {
-        (list || []).forEach(function (node) {
-          if (node.type === 'page') {
-            n++;
-            walk(node.children);
-          } else walk(node.children);
-        });
-      }
-      walk(nodes);
-      return n;
-    }
 
     function inferPackageLabel(mdText) {
       var t = String(mdText || '');
@@ -2911,26 +4065,57 @@
       return '项目概述';
     }
 
+    function findSection(id) {
+      for (var i = 0; i < state.sections.length; i++) {
+        if (state.sections[i].id === id) return state.sections[i];
+      }
+      return null;
+    }
+
+    function syncHash(id) {
+      try {
+        var hash = id === 'package' ? '#prd-package' : id ? '#prd-page-' + id : '';
+        if (hash && location.hash !== hash && history.replaceState) {
+          history.replaceState(null, '', hash);
+        }
+      } catch (e) {}
+    }
+
     function setActiveId(id, opts) {
       opts = opts || {};
-      if (state.activeId === id && !opts.force) return;
-      state.activeId = id || '';
-      if (opts.rerenderToc !== false) {
-        refreshTocOnly();
+      if (state.activeId === id && !opts.force) {
+        if (opts.refreshBody) refreshBodyOnly();
+        return;
       }
+      state.activeId = id || '';
+      syncHash(state.activeId);
+      if (opts.rerenderToc !== false) refreshTocOnly();
+      refreshBodyOnly();
+    }
+
+    function pageNameQuery() {
+      return String(state.pageQuery || '')
+        .trim()
+        .toLowerCase();
+    }
+
+    function buildPackageEntry(q) {
+      if (!state.packageHtml) return null;
+      if (q) {
+        var blob = (state.packageLabel + ' package').toLowerCase();
+        if (blob.indexOf(q) === -1) return null;
+      }
+      return { id: 'package', name: state.packageLabel, href: '#prd-package' };
     }
 
     function refreshTocOnly() {
-      var tocTreeWrap = root.querySelector('.prd-hub__toc-tree');
+      var tocTreeWrap =
+        root.querySelector('.prd-hub__toc-tree') ||
+        (tocMenuRoot && tocMenuRoot.querySelector('.prd-hub__toc-tree'));
       if (!tocTreeWrap) return;
-      var q = String(state.query || '')
-        .trim()
-        .toLowerCase();
-      var filteredTree = filterSiteTree(state.siteTree || [], q);
-      var packageEntry =
-        state.packageHtml && !q
-          ? { id: 'package', name: state.packageLabel, href: '#prd-package' }
-          : null;
+      var q = pageNameQuery();
+      var filteredTree = filterSiteTree(state.siteTree || [], q, { nameOnly: true });
+      var packageEntry = buildPackageEntry(q);
       renderSiteTreeNav(tocTreeWrap, filteredTree, {
         mode: 'prd',
         currentPageId: state.activeId || (packageEntry ? 'package' : ''),
@@ -2940,77 +4125,68 @@
           state.tocCollapsed = map;
         },
         onNavigate: function (id) {
-          setActiveId(id === 'package' ? 'package' : id, { rerenderToc: true });
+          state.contentPanelOpen = false;
+          state.tocMenuOpen = false;
+          renderGlobalSearch();
+          state.activeId = id === 'package' ? 'package' : id;
+          syncHash(state.activeId);
+          render();
         },
       });
     }
 
-    function bindScrollSpy(bodyEl) {
-      if (!bodyEl || typeof IntersectionObserver === 'undefined') return;
-      if (state._spyObs) {
-        state._spyObs.disconnect();
-        state._spyObs = null;
-      }
-      var sections = bodyEl.querySelectorAll('.prd-hub__section[id]');
-      if (!sections.length) return;
-      state._spyObs = new IntersectionObserver(
-        function (entries) {
-          var visible = entries
-            .filter(function (en) {
-              return en.isIntersecting;
-            })
-            .sort(function (a, b) {
-              return a.boundingClientRect.top - b.boundingClientRect.top;
-            });
-          if (!visible.length) return;
-          var id = visible[0].target.id || '';
-          if (id === 'prd-package') setActiveId('package');
-          else if (id.indexOf('prd-page-') === 0) setActiveId(id.slice('prd-page-'.length));
-        },
-        { root: null, rootMargin: '-20% 0px -60% 0px', threshold: [0, 0.1, 0.5] }
-      );
-      sections.forEach(function (sec) {
-        state._spyObs.observe(sec);
-      });
-    }
-
-    function render() {
-      var q = String(state.query || '')
-        .trim()
-        .toLowerCase();
-      root.innerHTML = '';
-      var head = el('div', { className: 'prd-hub__toolbar' });
-      var search = el('input', {
-        className: 'ob-input prd-hub__search',
-        type: 'search',
-        placeholder: '检索页面名称、ID 或业务说明…',
-      });
-      search.value = state.query || '';
-      search.addEventListener('input', function () {
-        state.query = search.value || '';
+    function bindCompactMq() {
+      if (state._mqBound || typeof window === 'undefined' || !window.matchMedia) return;
+      state._mqBound = true;
+      var mq = window.matchMedia(COMPACT_MQ);
+      function onChange() {
+        var next = !!mq.matches;
+        if (next === state.compact) return;
+        state.compact = next;
+        if (!next) state.tocMenuOpen = false;
         render();
-        var again = root.querySelector('.prd-hub__search');
+      }
+      if (mq.addEventListener) mq.addEventListener('change', onChange);
+      else if (mq.addListener) mq.addListener(onChange);
+    }
+
+    function buildTocElement() {
+      var q = pageNameQuery();
+      var toc = el('nav', { className: 'prd-hub__toc', 'aria-label': '目录' });
+      var tocHead = el('div', { className: 'prd-hub__toc-head' });
+      var pageSearch = el('input', {
+        className: 'ob-input prd-hub__page-search',
+        type: 'search',
+        placeholder: '筛选页面名称…',
+        'aria-label': '筛选页面名称',
+      });
+      pageSearch.value = state.pageQuery || '';
+      bindImeSafeInput(pageSearch, function (val, inputEl) {
+        var start = inputEl.selectionStart;
+        var end = inputEl.selectionEnd;
+        state.pageQuery = val;
+        if (state.compact) state.tocMenuOpen = true;
+        render();
+        var again =
+          root.querySelector('.prd-hub__page-search') ||
+          (tocMenuRoot && tocMenuRoot.querySelector('.prd-hub__page-search'));
         if (again) {
           again.focus();
           try {
-            again.setSelectionRange(again.value.length, again.value.length);
+            if (typeof start === 'number' && typeof end === 'number') {
+              again.setSelectionRange(start, end);
+            }
           } catch (e2) {}
         }
       });
-      head.appendChild(search);
-      var count = el('span', { className: 'prd-hub__count' });
-      head.appendChild(count);
-      root.appendChild(head);
+      tocHead.appendChild(pageSearch);
+      toc.appendChild(tocHead);
 
-      var toc = el('nav', { className: 'prd-hub__toc', 'aria-label': '目录' });
-      toc.appendChild(el('div', { className: 'prd-hub__toc-title', text: '目录' }));
       var tocTreeWrap = el('div', { className: 'prd-hub__toc-tree' });
-      var filteredTree = filterSiteTree(state.siteTree || [], q);
-      var packageEntry =
-        state.packageHtml && !q
-          ? { id: 'package', name: state.packageLabel, href: '#prd-package' }
-          : null;
+      var filteredTree = filterSiteTree(state.siteTree || [], q, { nameOnly: true });
+      var packageEntry = buildPackageEntry(q);
       if (!state.activeId && packageEntry) state.activeId = 'package';
+      if (!state.activeId && state.sections.length) state.activeId = state.sections[0].id;
       renderSiteTreeNav(tocTreeWrap, filteredTree, {
         mode: 'prd',
         currentPageId: state.activeId,
@@ -3020,58 +4196,283 @@
           state.tocCollapsed = map;
         },
         onNavigate: function (id) {
-          setActiveId(id, { force: true });
+          state.contentPanelOpen = false;
+          state.tocMenuOpen = false;
+          renderGlobalSearch();
+          state.activeId = id;
+          syncHash(state.activeId);
+          render();
         },
       });
       toc.appendChild(tocTreeWrap);
-      var body = el('div', { className: 'prd-hub__body' });
+      return toc;
+    }
 
-      if (state.packageHtml) {
+    function renderTocMenu(toc) {
+      if (!tocMenuRoot) return;
+      tocMenuRoot.innerHTML = '';
+      tocMenuRoot.className = 'prd-hub__toc-menu';
+      var btn = el('button', {
+        type: 'button',
+        className: 'prd-hub__toc-menu-btn' + (state.tocMenuOpen ? ' is-open' : ''),
+        'aria-expanded': state.tocMenuOpen ? 'true' : 'false',
+        'aria-haspopup': 'true',
+        'aria-controls': 'prdTocMenuPanel',
+      });
+      btn.appendChild(el('span', { className: 'prd-hub__toc-menu-label', text: '目录' }));
+      btn.appendChild(el('span', { className: 'prd-hub__toc-menu-caret', 'aria-hidden': 'true' }));
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        state.tocMenuOpen = !state.tocMenuOpen;
+        state.contentPanelOpen = false;
+        renderGlobalSearch();
+        render();
+      });
+      var panel = el('div', {
+        className: 'prd-hub__toc-menu-panel' + (state.tocMenuOpen ? ' is-open' : ''),
+        id: 'prdTocMenuPanel',
+        role: 'dialog',
+        'aria-label': '页面目录',
+      });
+      if (state.tocMenuOpen && toc) panel.appendChild(toc);
+      tocMenuRoot.appendChild(btn);
+      tocMenuRoot.appendChild(panel);
+      if (!state._tocDocBound) {
+        state._tocDocBound = true;
+        document.addEventListener('mousedown', function (e) {
+          if (!state.tocMenuOpen || !tocMenuRoot) return;
+          if (tocMenuRoot.contains(e.target)) return;
+          state.tocMenuOpen = false;
+          var p = tocMenuRoot.querySelector('.prd-hub__toc-menu-panel');
+          var b = tocMenuRoot.querySelector('.prd-hub__toc-menu-btn');
+          if (p) p.classList.remove('is-open');
+          if (b) {
+            b.classList.remove('is-open');
+            b.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+    }
+
+    function clearTocMenu() {
+      if (!tocMenuRoot) return;
+      tocMenuRoot.innerHTML = '';
+      tocMenuRoot.className = 'prd-hub__toc-menu';
+    }
+
+    function buildActiveSectionEl() {
+      var id = state.activeId;
+      if (id === 'package' && state.packageHtml) {
         var intro = el('section', {
-          className: 'prd-hub__section prd-hub__section--package',
+          className: 'prd-hub__section prd-hub__section--package is-active',
           id: 'prd-package',
         });
         intro.appendChild(el('h2', { text: state.packageLabel }));
-        intro.appendChild(state.packageHtml);
-        body.appendChild(intro);
+        var pkgBody = state.packageHtml.cloneNode
+          ? state.packageHtml.cloneNode(true)
+          : state.packageHtml;
+        intro.appendChild(pkgBody);
+        if (state.contentQuery) highlightElement(intro, state.contentQuery);
+        return intro;
       }
-
-      var visible = 0;
-      state.sections.forEach(function (sec) {
-        if (q && pageBlob(sec).indexOf(q) === -1) return;
-        visible++;
-        var id = 'prd-page-' + sec.id;
-        var section = el('section', { className: 'prd-hub__section', id: id });
-        var h = el('div', { className: 'prd-hub__section-head' });
-        h.appendChild(el('h2', { text: sec.name || sec.id }));
-        var st = prototypeStatusMeta(sec.status);
-        var metaLine =
-          'ID: ' +
-          sec.id +
-          (sec.version ? ' · v' + String(sec.version).replace(/^v/i, '') : '') +
-          ' · ' +
-          st.label +
-          (sec.layout ? ' · ' + sec.layout : '');
-        h.appendChild(el('p', { className: 'prd-hub__meta', text: metaLine }));
-        if (sec.href) {
-          h.appendChild(el('a', { className: 'ob-link', href: sec.href, text: '打开原型页' }));
-        }
-        section.appendChild(h);
-        if (sec.businessNode) section.appendChild(sec.businessNode);
-        else section.appendChild(el('div', { className: 'ps-empty', text: '暂无页面说明（<page-id>.md）' }));
-        body.appendChild(section);
+      var sec = findSection(id);
+      if (!sec) {
+        return el('div', {
+          className: 'ps-empty',
+          text: state.sections.length ? '请选择左侧目录中的页面' : '暂无页面 PRD',
+        });
+      }
+      var section = el('section', {
+        className: 'prd-hub__section is-active',
+        id: 'prd-page-' + sec.id,
       });
-      count.textContent =
-        '显示 ' + visible + ' / ' + state.sections.length + ' 页 · 目录 ' + countPages(filteredTree) + ' 项';
-      if (!visible && !state.packageHtml) {
-        body.appendChild(el('div', { className: 'ps-empty', text: '无匹配的页面 PRD' }));
+      var h = el('div', { className: 'prd-hub__section-head' });
+      h.appendChild(el('h2', { text: sec.name || sec.id }));
+      var st = prototypeStatusMeta(sec.status);
+      var metaLine =
+        'ID: ' +
+        sec.id +
+        (sec.version ? ' · v' + String(sec.version).replace(/^v/i, '') : '') +
+        ' · ' +
+        st.label +
+        (sec.layout ? ' · ' + sec.layout : '');
+      h.appendChild(el('p', { className: 'prd-hub__meta', text: metaLine }));
+      if (sec.href) {
+        h.appendChild(el('a', { className: 'ob-link', href: sec.href, text: '打开原型页' }));
       }
-      var layout = el('div', { className: 'prd-hub__layout' });
-      layout.appendChild(toc);
-      layout.appendChild(body);
-      root.appendChild(layout);
-      bindScrollSpy(body);
+      section.appendChild(h);
+      if (sec.businessNode) {
+        section.appendChild(
+          sec.businessNode.cloneNode ? sec.businessNode.cloneNode(true) : sec.businessNode
+        );
+      } else {
+        section.appendChild(el('div', { className: 'ps-empty', text: '暂无页面说明（<page-id>.md）' }));
+      }
+      if (state.contentQuery) highlightElement(section, state.contentQuery);
+      return section;
     }
+
+    function refreshBodyOnly() {
+      var body = root.querySelector('.prd-hub__body');
+      if (!body) return;
+      body.innerHTML = '';
+      body.appendChild(buildActiveSectionEl());
+      try {
+        body.scrollTop = 0;
+        window.scrollTo(0, Math.min(window.scrollY, root.getBoundingClientRect().top + window.scrollY - 8));
+      } catch (e) {}
+    }
+
+    function collectContentHits(query) {
+      var q = String(query || '').trim();
+      if (!q) return [];
+      var qLower = q.toLowerCase();
+      var hits = [];
+      if (state.packageMd && state.packageMd.toLowerCase().indexOf(qLower) !== -1) {
+        hits.push({
+          id: 'package',
+          name: state.packageLabel,
+          snippetHtml: highlightPlainSnippet(state.packageMd, q),
+        });
+      }
+      state.sections.forEach(function (sec) {
+        var blob = [sec.name, sec.id, sec.business || ''].join('\n');
+        if (blob.toLowerCase().indexOf(qLower) === -1) return;
+        hits.push({
+          id: sec.id,
+          name: sec.name || sec.id,
+          snippetHtml: highlightPlainSnippet(blob, q),
+        });
+      });
+      return hits;
+    }
+
+    function renderGlobalSearch() {
+      if (!globalSearchRoot) return;
+      globalSearchRoot.innerHTML = '';
+      globalSearchRoot.className = 'prd-hub__global-search';
+      var wrap = el('div', { className: 'prd-hub__global-search-inner' });
+      var input = el('input', {
+        className: 'ob-input prd-hub__global-input',
+        type: 'search',
+        placeholder: '检索全文内容…',
+        'aria-label': '检索 PRD 全文',
+      });
+      input.value = state.contentQuery || '';
+      bindImeSafeInput(input, function (val, inputEl) {
+        var start = inputEl.selectionStart;
+        var end = inputEl.selectionEnd;
+        state.contentQuery = val;
+        state.contentPanelOpen = !!String(val || '').trim();
+        renderGlobalSearch();
+        refreshBodyOnly();
+        var again = globalSearchRoot.querySelector('.prd-hub__global-input');
+        if (again) {
+          again.focus();
+          try {
+            if (typeof start === 'number' && typeof end === 'number') {
+              again.setSelectionRange(start, end);
+            }
+          } catch (e) {}
+        }
+      });
+      input.addEventListener('focus', function () {
+        if (String(state.contentQuery || '').trim()) {
+          state.contentPanelOpen = true;
+          renderGlobalSearchPanel(wrap);
+        }
+      });
+      wrap.appendChild(input);
+      renderGlobalSearchPanel(wrap);
+      globalSearchRoot.appendChild(wrap);
+      if (!state._globalDocBound) {
+        state._globalDocBound = true;
+        document.addEventListener('mousedown', function (e) {
+          if (!state.contentPanelOpen || !globalSearchRoot) return;
+          if (globalSearchRoot.contains(e.target)) return;
+          state.contentPanelOpen = false;
+          var panel = globalSearchRoot.querySelector('.prd-hub__global-results');
+          if (panel) panel.remove();
+        });
+      }
+    }
+
+    function renderGlobalSearchPanel(wrap) {
+      var old = wrap.querySelector('.prd-hub__global-results');
+      if (old) old.remove();
+      var q = String(state.contentQuery || '').trim();
+      if (!state.contentPanelOpen || !q) return;
+      var hits = collectContentHits(q);
+      var panel = el('div', {
+        className: 'prd-hub__global-results',
+        role: 'listbox',
+        'aria-label': '全文检索结果',
+      });
+      if (!hits.length) {
+        panel.appendChild(el('div', { className: 'prd-hub__global-empty', text: '无匹配内容' }));
+      } else {
+        hits.forEach(function (hit) {
+          var item = el('button', {
+            type: 'button',
+            className: 'prd-hub__global-hit',
+            role: 'option',
+          });
+          item.appendChild(el('div', { className: 'prd-hub__global-hit-title', text: hit.name }));
+          var sn = el('div', { className: 'prd-hub__global-hit-snippet' });
+          sn.innerHTML = hit.snippetHtml || '';
+          item.appendChild(sn);
+          item.addEventListener('click', function () {
+            state.contentPanelOpen = false;
+            renderGlobalSearch();
+            setActiveId(hit.id, { force: true });
+          });
+          panel.appendChild(item);
+        });
+      }
+      wrap.appendChild(panel);
+    }
+
+    function render() {
+      bindCompactMq();
+      root.innerHTML = '';
+
+      var toc = buildTocElement();
+      var body = el('div', { className: 'prd-hub__body' });
+      body.appendChild(buildActiveSectionEl());
+
+      var layout = el('div', {
+        className: 'prd-hub__layout' + (state.compact ? ' is-compact' : ''),
+      });
+      if (state.compact) {
+        layout.appendChild(body);
+        renderTocMenu(state.tocMenuOpen ? toc : null);
+      } else {
+        clearTocMenu();
+        state.tocMenuOpen = false;
+        layout.appendChild(toc);
+        layout.appendChild(body);
+      }
+      root.appendChild(layout);
+      renderGlobalSearch();
+      syncHash(state.activeId);
+    }
+
+    function applyHashOnLoad() {
+      var hash = String(location.hash || '');
+      if (hash === '#prd-package' && state.packageHtml) {
+        state.activeId = 'package';
+      } else if (hash.indexOf('#prd-page-') === 0) {
+        var pid = hash.slice('#prd-page-'.length);
+        if (findSection(pid)) state.activeId = pid;
+      }
+    }
+
+    window.addEventListener('hashchange', function () {
+      var before = state.activeId;
+      applyHashOnLoad();
+      if (state.activeId && state.activeId !== before) setActiveId(state.activeId, { force: true });
+    });
 
     var pkgBase = options.packageBase
       ? normalizeBase(options.packageBase)
@@ -3126,17 +4527,21 @@
         var introTask = packagePrdUrl
           ? fetchText(packagePrdUrl)
               .then(function (md) {
+                state.packageMd = md || '';
                 state.packageLabel = inferPackageLabel(md);
                 return renderMarkdown(md);
               })
               .catch(function () {
+                state.packageMd = '';
                 return null;
               })
           : Promise.resolve(null);
         return Promise.all([introTask, Promise.all(tasks)]).then(function (pair) {
           state.packageHtml = pair[0];
           state.sections = pair[1];
+          applyHashOnLoad();
           if (!state.activeId) state.activeId = state.packageHtml ? 'package' : '';
+          if (!state.activeId && state.sections.length) state.activeId = state.sections[0].id;
           render();
         });
       })

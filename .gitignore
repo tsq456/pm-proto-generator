@@ -1,0 +1,5 @@
+
+# Local generated metadata
+.DS_Store
+__pycache__/
+*.py[cod]

@@ -8,6 +8,7 @@
 | --- | --- |
 | `docs/upstream/<批次>/` | 不改写的上游原稿/粘贴快照 |
 | `docs/spec-intake.md` | 来源、映射、范围、冲突、替换关系、就绪状态 |
+| `docs/implementation-map.md` | 主技能维护的本批页型、布局、组件复用/新增与验收记录；Spec-only 不创建 |
 | `sitemap.yaml` | 从已明确上游 IA 派生的本地页面与路由 |
 | `proto-spec/<page-id>.md` | frontmatter id/name + 逐页说明 |
 | `pages/<page-id>.html` | 本批原型业务页 |
